@@ -1,0 +1,57 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function u() { return get(/databases/$(database)/documents/users/$(request.auth.uid)).data; }
+    function role() { return signedIn() ? u().role : ''; }
+    function admin() { return role() in ['super_admin', 'admin']; }
+    function staff() { return role() in ['super_admin','admin','doctor','nurse','receptionist','pharmacist','laboratory','billing']; }
+    function doctor() { return role() in ['super_admin','admin','doctor']; }
+    function pharmacist() { return role() in ['super_admin','admin','pharmacist']; }
+    function lab() { return role() in ['super_admin','admin','laboratory','doctor']; }
+    function billing() { return role() in ['super_admin','admin','billing','receptionist']; }
+
+    match /users/{id} {
+      allow read: if signedIn() && (request.auth.uid == id || staff());
+      allow write: if signedIn() && (request.auth.uid == id || admin());
+    }
+    match /patients/{id} {
+      allow read: if staff(); allow create, update: if staff(); allow delete: if admin();
+    }
+    match /appointments/{id} {
+      allow read: if staff(); allow write: if staff();
+    }
+    match /medicalRecords/{id} {
+      allow read: if doctor() || role() == 'nurse'; allow write: if doctor() || role() == 'nurse';
+    }
+    match /consultations/{id} { allow read, write: if doctor(); }
+    match /vitalSigns/{id} { allow read: if staff(); allow write: if doctor() || role() == 'nurse'; }
+    match /diagnoses/{id} { allow read: if staff(); allow write: if doctor(); }
+    match /prescriptions/{id} { allow read: if doctor() || pharmacist() || role() == 'nurse'; allow write: if doctor() || pharmacist(); }
+    match /prescriptionItems/{id} { allow read, write: if doctor() || pharmacist(); }
+    match /medications/{id} { allow read: if staff(); allow write: if pharmacist() || admin(); }
+    match /inventory/{id} { allow read: if staff(); allow write: if pharmacist() || admin(); }
+    match /inventoryTransactions/{id} { allow read: if pharmacist() || admin(); allow create: if pharmacist() || admin(); allow update, delete: if false; }
+    match /suppliers/{id} { allow read, write: if pharmacist() || admin(); }
+    match /labOrders/{id} { allow read: if lab() || role() == 'nurse'; allow write: if lab() || doctor(); }
+    match /labResults/{id} { allow read: if lab() || role() == 'nurse'; allow write: if lab(); }
+    match /wards/{id} { allow read: if staff(); allow write: if admin() || role() == 'nurse'; }
+    match /beds/{id} { allow read: if staff(); allow write: if admin() || role() in ['nurse','receptionist']; }
+    match /admissions/{id} { allow read: if staff(); allow write: if doctor() || role() in ['nurse','receptionist'] || admin(); }
+    match /bedTransfers/{id} { allow read: if staff(); allow create: if staff(); allow update, delete: if admin(); }
+    match /invoices/{id} { allow read: if billing() || admin(); allow write: if billing() || admin(); }
+    match /invoiceItems/{id} { allow read, write: if billing() || admin(); }
+    match /payments/{id} { allow read: if billing() || admin(); allow create: if billing() || admin(); allow update, delete: if false; }
+    match /institutions/{id} { allow read: if signedIn(); allow write: if admin(); }
+    match /departments/{id} { allow read: if signedIn(); allow write: if admin(); }
+    match /notifications/{id} {
+      allow read: if signedIn() && resource.data.user_id == request.auth.uid;
+      allow create: if staff(); allow update: if signedIn() && resource.data.user_id == request.auth.uid;
+    }
+    match /auditLogs/{id} { allow read: if admin(); allow create: if signedIn(); allow update, delete: if false; }
+    match /surgeries/{id} { allow read: if staff(); allow write: if doctor() || admin(); }
+    match /emergencyRecords/{id} { allow read, write: if staff(); }
+    match /imagingOrders/{id} { allow read: if staff(); allow write: if doctor() || lab(); }
+    match /{document=**} { allow read, write: if false; }
+  }
+}
