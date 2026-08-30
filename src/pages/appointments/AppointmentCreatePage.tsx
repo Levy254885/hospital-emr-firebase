@@ -10,6 +10,9 @@ import Select from '@/components/ui/Select'
 import Button from '@/components/ui/Button'
 import { ArrowLeft, Save, Calendar } from 'lucide-react'
 import toast from 'react-hot-toast'
+import type { Patient, Appointment } from '@/types'
+
+const appointmentTypes = ['consultation', 'follow_up', 'emergency', 'procedure', 'lab', 'telemedicine'] as const
 
 const appointmentCreateSchema = z.object({
   patient_id: z.string().min(1, 'El paciente es requerido'),
@@ -17,7 +20,7 @@ const appointmentCreateSchema = z.object({
   appointment_date: z.string().min(1, 'La fecha es requerida'),
   start_time: z.string().min(1, 'La hora de inicio es requerida'),
   duration_minutes: z.string().optional(),
-  type: z.string().optional(),
+  type: z.enum(appointmentTypes).optional(),
   reason: z.string().optional(),
   notes: z.string().optional(),
 })
@@ -40,16 +43,22 @@ export default function AppointmentCreatePage() {
         doctor_id: data.doctor_id,
         scheduled_at: `${data.appointment_date}T${data.start_time}:00`,
         duration_minutes: duration,
-        type: data.type || undefined,
+        type: data.type,
         reason: data.reason || undefined,
         notes: data.notes || undefined,
       })
       toast.success('Cita creada correctamente')
       navigate('/appointments')
-    } catch (error: any) {
-      toast.error(error?.response?.data?.message || 'Error al crear la cita')
+    } catch (error: unknown) {
+      const err = error as { response?: { data?: { message?: string } } }
+      toast.error(err?.response?.data?.message || 'Error al crear la cita')
     }
   }
+
+  const patientOptions = (patientsData?.data ?? []).map((p: Patient) => ({
+    value: String(p.id),
+    label: `${p.first_name} ${p.last_name} — ${p.document_number}`,
+  }))
 
   return (
     <div className="space-y-6">
@@ -66,7 +75,7 @@ export default function AppointmentCreatePage() {
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Select label="Paciente" required placeholder="Seleccionar paciente"
-                options={patientsData?.data?.map((p) => ({ value: String(p.id), label: `${p.first_name} ${p.last_name} — ${p.document_number}` })) || []}
+                options={patientOptions}
                 {...register('patient_id')} error={errors.patient_id?.message} />
               <Input label="ID del Medico" required placeholder="Ingrese el ID del medico" {...register('doctor_id')} error={errors.doctor_id?.message} />
             </div>
