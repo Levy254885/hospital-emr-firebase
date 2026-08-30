@@ -3,6 +3,7 @@ import { useEffect, type ReactNode } from 'react'
 import { useAuth } from '@/hooks/useAuth'
 
 import AppLayout from '@/components/layout/AppLayout'
+import RouteError from '@/components/RouteError'
 import LoginPage from '@/pages/auth/LoginPage'
 import ForgotPasswordPage from '@/pages/auth/ForgotPasswordPage'
 import ResetPasswordPage from '@/pages/auth/ResetPasswordPage'
@@ -108,6 +109,7 @@ function PublicRoute({ children }: ProtectedRouteProps) {
 export const router = createBrowserRouter([
   {
     path: '/login',
+    errorElement: <RouteError />,
     element: (
       <PublicRoute>
         <LoginPage />
@@ -116,6 +118,7 @@ export const router = createBrowserRouter([
   },
   {
     path: '/forgot-password',
+    errorElement: <RouteError />,
     element: (
       <PublicRoute>
         <ForgotPasswordPage />
@@ -124,6 +127,7 @@ export const router = createBrowserRouter([
   },
   {
     path: '/reset-password',
+    errorElement: <RouteError />,
     element: (
       <PublicRoute>
         <ResetPasswordPage />
@@ -132,6 +136,7 @@ export const router = createBrowserRouter([
   },
   {
     path: '/',
+    errorElement: <RouteError />,
     element: (
       <ProtectedRoute>
         <AppLayout />
