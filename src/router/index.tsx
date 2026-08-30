@@ -1,6 +1,6 @@
-import { createBrowserRouter, Navigate } from 'react-router-dom'
+import { createBrowserRouter, Navigate, useNavigate } from 'react-router-dom'
+import { useEffect, type ReactNode } from 'react'
 import { useAuth } from '@/hooks/useAuth'
-import type { ReactNode } from 'react'
 
 import AppLayout from '@/components/layout/AppLayout'
 import LoginPage from '@/pages/auth/LoginPage'
@@ -62,56 +62,81 @@ import NotificationListPage from '@/pages/notifications/NotificationListPage'
 import AuditLogPage from '@/pages/audit/AuditLogPage'
 import PatientPortalPage from '@/pages/portal/PatientPortalPage'
 
-interface ProtectedRouteProps { children: ReactNode }
+interface ProtectedRouteProps {
+  children: ReactNode
+}
+
+function LoadingScreen() {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="text-center">
+        <div className="w-12 h-12 border-4 border-primary-600 border-t-transparent rounded-full animate-spin mx-auto" />
+        <p className="mt-4 text-sm text-gray-500">Cargando...</p>
+      </div>
+    </div>
+  )
+}
 
 function ProtectedRoute({ children }: ProtectedRouteProps) {
   const { isAuthenticated, isLoading } = useAuth()
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-center">
-          <div className="w-12 h-12 border-4 border-primary-600 border-t-transparent rounded-full animate-spin mx-auto" />
-          <p className="mt-4 text-sm text-gray-500">Cargando...</p>
-        </div>
-      </div>
-    )
-  }
-  if (!isAuthenticated) return <Navigate to="/login" replace />
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      navigate('/login', { replace: true })
+    }
+  }, [isAuthenticated, isLoading, navigate])
+
+  if (isLoading || !isAuthenticated) return <LoadingScreen />
   return <>{children}</>
 }
 
 function PublicRoute({ children }: ProtectedRouteProps) {
   const { isAuthenticated, isLoading } = useAuth()
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-center">
-          <div className="w-12 h-12 border-4 border-primary-600 border-t-transparent rounded-full animate-spin mx-auto" />
-          <p className="mt-4 text-sm text-gray-500">Cargando...</p>
-        </div>
-      </div>
-    )
-  }
-  if (isAuthenticated) return <Navigate to="/dashboard" replace />
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!isLoading && isAuthenticated) {
+      navigate('/dashboard', { replace: true })
+    }
+  }, [isAuthenticated, isLoading, navigate])
+
+  if (isLoading || isAuthenticated) return <LoadingScreen />
   return <>{children}</>
 }
 
 export const router = createBrowserRouter([
   {
     path: '/login',
-    element: <PublicRoute><LoginPage /></PublicRoute>,
+    element: (
+      <PublicRoute>
+        <LoginPage />
+      </PublicRoute>
+    ),
   },
   {
     path: '/forgot-password',
-    element: <PublicRoute><ForgotPasswordPage /></PublicRoute>,
+    element: (
+      <PublicRoute>
+        <ForgotPasswordPage />
+      </PublicRoute>
+    ),
   },
   {
     path: '/reset-password',
-    element: <PublicRoute><ResetPasswordPage /></PublicRoute>,
+    element: (
+      <PublicRoute>
+        <ResetPasswordPage />
+      </PublicRoute>
+    ),
   },
   {
     path: '/',
-    element: <ProtectedRoute><AppLayout /></ProtectedRoute>,
+    element: (
+      <ProtectedRoute>
+        <AppLayout />
+      </ProtectedRoute>
+    ),
     children: [
       { index: true, element: <Navigate to="/dashboard" replace /> },
       { path: 'dashboard', element: <DashboardPage /> },
