@@ -28,17 +28,21 @@ export function usePatients(filters: PatientFilters = {}) {
   const { user } = useAuth()
   return useQuery({
     queryKey: ['patients', filters],
-    queryFn: async () => {
-      const data = await svc.listPatients({
+    queryFn: async (): Promise<PaginatedResponse<Patient>> => {
+      const result = await svc.listPatients({
         search: filters.search,
         gender: filters.gender,
         institution_id: user?.institution_id,
-        per_page: filters.per_page,
+        per_page: filters.per_page || 50,
       })
-      let filtered = data
-      if (filters.blood_type) filtered = filtered.filter((p) => p.blood_type === filters.blood_type)
-      if (filters.is_active !== undefined) filtered = filtered.filter((p) => p.is_active === filters.is_active)
-      return toPaginated(filtered, filters.page || 1, filters.per_page || 100)
+      let items: Patient[] = result.data || []
+      if (filters.blood_type) {
+        items = items.filter((p: Patient) => p.blood_type === filters.blood_type)
+      }
+      if (filters.is_active !== undefined) {
+        items = items.filter((p: Patient) => p.is_active === filters.is_active)
+      }
+      return toPaginated(items, filters.page || 1, filters.per_page || 50)
     },
   })
 }
@@ -51,17 +55,19 @@ export function usePatient(id: string) {
   })
 }
 
+/** Always returns Patient[] for search dropdowns */
 export function usePatientSearch(search: string) {
   const { user } = useAuth()
   return useQuery({
     queryKey: ['patients', 'search', search],
-    queryFn: async () => {
-      if (!search || search.trim().length < 2) return [] as Patient[]
-      return svc.listPatients({
+    queryFn: async (): Promise<Patient[]> => {
+      if (!search || search.trim().length < 2) return []
+      const result = await svc.listPatients({
         search: search.trim(),
         institution_id: user?.institution_id,
         per_page: 20,
       })
+      return result.data || []
     },
     enabled: search.trim().length >= 2,
   })

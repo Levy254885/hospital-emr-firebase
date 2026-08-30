@@ -9,16 +9,16 @@ export function useDashboardStats() {
     queryKey: ['dashboard', user?.institution_id],
     queryFn: async (): Promise<DashboardStats> => {
       const stats = await svc.getDashboardStats(user?.institution_id)
-      if (stats) return stats as DashboardStats
+      // Service returns a flat object; map into DashboardStats shape
       return {
         summary: {
-          total_patients: 0,
-          active_hospitalizations: 0,
-          today_appointments: 0,
-          pending_lab_orders: 0,
+          total_patients: stats?.total_patients ?? 0,
+          active_hospitalizations: stats?.active_admissions ?? 0,
+          today_appointments: stats?.today_appointments ?? 0,
+          pending_lab_orders: stats?.pending_lab_orders ?? 0,
           emergency_waiting: 0,
           monthly_revenue: 0,
-          pending_payments: 0,
+          pending_payments: stats?.pending_invoices ?? 0,
         },
         recent_appointments: [],
         recent_patients: [],

@@ -15,14 +15,14 @@ export function useDashboardReport() {
     queryFn: async () => {
       const stats = await svc.getDashboardStats(user?.institution_id)
       return {
-        total_patients: stats?.summary?.total_patients ?? 0,
-        appointments_today: stats?.summary?.today_appointments ?? 0,
-        revenue_month: stats?.summary?.monthly_revenue ?? 0,
+        total_patients: stats?.total_patients ?? 0,
+        appointments_today: stats?.today_appointments ?? 0,
+        revenue_month: 0,
         bed_occupancy: 0,
-        active_hospitalizations: stats?.summary?.active_hospitalizations ?? 0,
-        pending_lab_orders: stats?.summary?.pending_lab_orders ?? 0,
-        emergency_waiting: stats?.summary?.emergency_waiting ?? 0,
-        pending_payments: stats?.summary?.pending_payments ?? 0,
+        active_hospitalizations: stats?.active_admissions ?? 0,
+        pending_lab_orders: stats?.pending_lab_orders ?? 0,
+        emergency_waiting: 0,
+        pending_payments: stats?.pending_invoices ?? 0,
       }
     },
   })
