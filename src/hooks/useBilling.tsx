@@ -16,7 +16,13 @@ function toPaginated<T>(data: T[], page = 1, perPage = 100): PaginatedResponse<T
 }
 
 export function useInvoices(
-  filters: { patient_id?: string; status?: string; page?: number; per_page?: number } = {}
+  filters: {
+    patient_id?: string
+    status?: string
+    payment_status?: string
+    page?: number
+    per_page?: number
+  } = {}
 ) {
   const { user } = useAuth()
   return useQuery({
@@ -24,7 +30,7 @@ export function useInvoices(
     queryFn: async () => {
       const data = await svc.listInvoices({
         patient_id: filters.patient_id,
-        status: filters.status,
+        status: filters.status || filters.payment_status,
         institution_id: user?.institution_id,
       })
       return toPaginated((data || []) as Invoice[], filters.page || 1, filters.per_page || 100)
@@ -82,12 +88,23 @@ export function usePayments(invoiceId?: string) {
   })
 }
 
-export function usePaymentsList(filters: { page?: number; per_page?: number } = {}) {
+export function usePaymentsList(
+  filters: { page?: number; per_page?: number; method?: string; payment_method?: string } = {}
+) {
   return useQuery({
     queryKey: ['payments', 'list', filters],
     queryFn: async () => {
-      const data = await svc.listPayments()
-      return toPaginated((data || []) as Payment[], filters.page || 1, filters.per_page || 100)
+      const data = (await svc.listPayments()) as Payment[]
+      let items = data || []
+      const method = filters.method || filters.payment_method
+      if (method) {
+        items = items.filter(
+          (p) =>
+            p.payment_method === method ||
+            (p as Payment & { method?: string }).method === method
+        )
+      }
+      return toPaginated(items, filters.page || 1, filters.per_page || 100)
     },
   })
 }
