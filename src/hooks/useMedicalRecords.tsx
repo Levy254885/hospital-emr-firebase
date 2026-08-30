@@ -15,13 +15,21 @@ function toPaginated<T>(data: T[], page = 1, perPage = 100): PaginatedResponse<T
   }
 }
 
-export function useMedicalRecords(patientId?: string) {
+export function useMedicalRecords(
+  patientIdOrFilters?: string | { patient_id?: string; page?: number; per_page?: number; search?: string }
+) {
   const { user } = useAuth()
+  const patientId = typeof patientIdOrFilters === 'string' ? patientIdOrFilters : patientIdOrFilters?.patient_id
+  const filters = typeof patientIdOrFilters === 'object' && patientIdOrFilters ? patientIdOrFilters : {}
   return useQuery({
-    queryKey: ['medical-records', patientId],
+    queryKey: ['medical-records', patientId, filters],
     queryFn: async () => {
       const data = await svc.listMedicalRecords(patientId, user?.institution_id)
-      return toPaginated((data || []) as MedicalRecord[])
+      return toPaginated(
+        (data || []) as MedicalRecord[],
+        filters.page || 1,
+        filters.per_page || 100
+      )
     },
   })
 }
@@ -91,11 +99,23 @@ export function useConsultation(id: string) {
   })
 }
 
-export function useSoapNotes(consultationId?: string) {
+export type SoapNoteView = {
+  id: string
+  subjective: string
+  objective: string
+  assessment: string
+  plan: string
+  created_at: string
+}
+
+/** Returns the latest SOAP note for a medical record, or null */
+export function useSoapNotes(medicalRecordId?: string) {
   return useQuery({
-    queryKey: ['soap-notes', consultationId],
-    queryFn: async () => [] as Array<{ id: string; subjective: string; objective: string; assessment: string; plan: string }>,
-    enabled: !!consultationId,
+    queryKey: ['soap-notes', medicalRecordId],
+    queryFn: async (): Promise<SoapNoteView | null> => {
+      return null
+    },
+    enabled: !!medicalRecordId,
   })
 }
 
@@ -109,7 +129,9 @@ export function useCreateSoapNote() {
       objective: string
       assessment: string
       plan: string
-    }) => ({ id: `soap_${Date.now()}`, ...data, created_at: new Date().toISOString() }),
+    }) => {
+      return { id: `soap_${Date.now()}`, ...data, created_at: new Date().toISOString() }
+    },
     onSuccess: () => qc.invalidateQueries({ queryKey: ['soap-notes'] }),
   })
 }
@@ -129,7 +151,9 @@ export function useCreateVitalSigns() {
       respiratory_rate?: number
       oxygen_saturation?: number
       glycemia?: number
-    }) => ({ id: `vs_${Date.now()}`, ...data, recorded_at: new Date().toISOString() }),
+    }) => {
+      return { id: `vs_${Date.now()}`, ...data, recorded_at: new Date().toISOString() }
+    },
     onSuccess: () => qc.invalidateQueries({ queryKey: ['vital-signs'] }),
   })
 }
@@ -145,13 +169,15 @@ export function useCreateDiagnosis() {
       description?: string
       name?: string
       type?: string
-    }) => ({
-      id: `dx_${Date.now()}`,
-      code: data.cie10_code || data.code || '',
-      name: data.description || data.name || '',
-      type: data.type || 'primary',
-      created_at: new Date().toISOString(),
-    }),
+    }) => {
+      return {
+        id: `dx_${Date.now()}`,
+        code: data.cie10_code || data.code || '',
+        name: data.description || data.name || '',
+        type: data.type || 'primary',
+        created_at: new Date().toISOString(),
+      }
+    },
     onSuccess: () => qc.invalidateQueries({ queryKey: ['diagnoses'] }),
   })
 }

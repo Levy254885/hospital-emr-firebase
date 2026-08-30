@@ -19,7 +19,7 @@ export function useMedications(filters: { search?: string; page?: number; per_pa
   const { user } = useAuth()
   return useQuery({
     queryKey: ['medications', filters],
-    queryFn: async () => {
+    queryFn: async (): Promise<PaginatedResponse<Medication>> => {
       const data = (await svc.listMedications(user?.institution_id)) as Medication[]
       let filtered = data || []
       if (filters.search) {
@@ -37,7 +37,7 @@ export function useMedication(id: string) {
   const { user } = useAuth()
   return useQuery({
     queryKey: ['medications', id],
-    queryFn: async () => {
+    queryFn: async (): Promise<Medication | null> => {
       const list = (await svc.listMedications(user?.institution_id)) as Medication[]
       return list.find((m) => m.id === id) || null
     },
@@ -74,7 +74,7 @@ export function useLowStockMedications() {
   const { user } = useAuth()
   return useQuery({
     queryKey: ['medications', 'low-stock'],
-    queryFn: async () => {
+    queryFn: async (): Promise<Medication[]> => {
       const list = (await svc.listMedications(user?.institution_id)) as Medication[]
       return (list || []).filter((m) => {
         const stock = m.current_stock ?? m.stock_quantity ?? 0
@@ -113,13 +113,25 @@ export function useDispenseMedication() {
   })
 }
 
+export interface Supplier {
+  id: string
+  name: string
+  contact_person?: string
+  contact_name?: string
+  phone?: string
+  email?: string
+  address?: string
+  created_at?: string
+}
+
+/** Returns Supplier[] (pages use .length / .map) */
 export function useSuppliers() {
   const { user } = useAuth()
   return useQuery({
     queryKey: ['suppliers'],
-    queryFn: async () => {
+    queryFn: async (): Promise<Supplier[]> => {
       const data = await svc.listSuppliers(user?.institution_id)
-      return toPaginated((data || []) as Array<Record<string, unknown>>)
+      return (data || []) as Supplier[]
     },
   })
 }
@@ -130,10 +142,19 @@ export function useCreateSupplier() {
     mutationFn: async (data: {
       name: string
       contact_name?: string
+      contact_person?: string
       phone?: string
       email?: string
       address?: string
-    }) => ({ id: `sup_${Date.now()}`, ...data, created_at: new Date().toISOString() }),
+    }): Promise<Supplier> => ({
+      id: `sup_${Date.now()}`,
+      name: data.name,
+      contact_person: data.contact_person || data.contact_name,
+      phone: data.phone,
+      email: data.email,
+      address: data.address,
+      created_at: new Date().toISOString(),
+    }),
     onSuccess: () => qc.invalidateQueries({ queryKey: ['suppliers'] }),
   })
 }
@@ -141,7 +162,8 @@ export function useCreateSupplier() {
 export function usePurchaseOrders(filters: { page?: number; per_page?: number } = {}) {
   return useQuery({
     queryKey: ['purchase-orders', filters],
-    queryFn: async () => toPaginated([] as Array<Record<string, unknown>>, filters.page || 1, filters.per_page || 100),
+    queryFn: async (): Promise<PaginatedResponse<Record<string, unknown>>> =>
+      toPaginated([] as Array<Record<string, unknown>>, filters.page || 1, filters.per_page || 100),
   })
 }
 
