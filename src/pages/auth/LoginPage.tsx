@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -12,13 +12,11 @@ const loginSchema = z.object({
   email: z.string().email('Correo inválido'),
   password: z.string().min(1, 'La contraseña es requerida'),
   remember_me: z.boolean().optional(),
-  institution_id: z.string().optional(),
 })
 
 type LoginFormData = z.infer<typeof loginSchema>
 
 export default function LoginPage() {
-  const navigate = useNavigate()
   const { login } = useAuth()
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -33,27 +31,27 @@ export default function LoginPage() {
   })
 
   const onSubmit = async (data: LoginFormData) => {
+    setError(null)
     try {
-      setError(null)
-      await login(data.email, data.password, data.institution_id)
-      navigate('/dashboard', { replace: true })
+      await login(data.email, data.password)
+      // PublicRoute redirects when isAuthenticated becomes true.
+      // Do not navigate here — that caused the insertBefore DOM race.
     } catch (err: unknown) {
-      const anyErr = err as {
-        code?: string
-        message?: string
-        response?: { data?: { message?: string } }
-      }
+      const anyErr = err as { code?: string; message?: string }
       let message = 'Error al iniciar sesión. Verifica tus credenciales.'
-      if (anyErr?.response?.data?.message) {
-        message = anyErr.response.data.message
-      } else if (
+      if (
         anyErr?.code === 'auth/invalid-credential' ||
         anyErr?.code === 'auth/wrong-password' ||
-        anyErr?.code === 'auth/user-not-found'
+        anyErr?.code === 'auth/user-not-found' ||
+        anyErr?.code === 'auth/invalid-email'
       ) {
         message = 'Correo o contraseña incorrectos.'
       } else if (anyErr?.code === 'auth/too-many-requests') {
         message = 'Demasiados intentos. Intenta más tarde.'
+      } else if (anyErr?.code === 'auth/network-request-failed') {
+        message = 'Error de red. Revisa tu conexión.'
+      } else if (anyErr?.message?.includes('profile')) {
+        message = 'Usuario autenticado pero sin perfil en el sistema. Contacta al administrador.'
       } else if (anyErr?.message) {
         message = anyErr.message
       }
@@ -63,12 +61,7 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-secondary-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary-100 rounded-full opacity-50 blur-3xl" />
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-secondary-100 rounded-full opacity-50 blur-3xl" />
-      </div>
-
-      <div className="relative sm:mx-auto sm:w-full sm:max-w-md">
+      <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <div className="flex justify-center">
           <div className="w-16 h-16 bg-gradient-to-br from-primary-600 to-primary-700 rounded-2xl flex items-center justify-center shadow-lg">
             <Stethoscope className="h-8 w-8 text-white" />
@@ -80,14 +73,17 @@ export default function LoginPage() {
         </p>
       </div>
 
-      <div className="relative mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow-xl sm:rounded-xl sm:px-10 border border-gray-100">
-          <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
-            {error && (
-              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+          <form className="space-y-6" onSubmit={handleSubmit(onSubmit)} noValidate>
+            {error ? (
+              <div
+                role="alert"
+                className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm"
+              >
                 {error}
               </div>
-            )}
+            ) : null}
 
             <Input
               label="Correo electrónico"
@@ -99,24 +95,26 @@ export default function LoginPage() {
               {...register('email')}
             />
 
-            <div className="relative">
-              <Input
-                label="Contraseña"
-                type={showPassword ? 'text' : 'password'}
-                autoComplete="current-password"
-                placeholder="••••••••"
-                leftIcon={<Lock className="h-4 w-4" />}
-                error={errors.password?.message}
-                {...register('password')}
-              />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-[38px] text-gray-400 hover:text-gray-600"
-              >
-                {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-              </button>
-            </div>
+            <Input
+              label="Contraseña"
+              type={showPassword ? 'text' : 'password'}
+              autoComplete="current-password"
+              placeholder="••••••••"
+              leftIcon={<Lock className="h-4 w-4" />}
+              rightIcon={
+                <button
+                  type="button"
+                  tabIndex={-1}
+                  onClick={() => setShowPassword((v) => !v)}
+                  className="text-gray-400 hover:text-gray-600"
+                  aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
+                >
+                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </button>
+              }
+              error={errors.password?.message}
+              {...register('password')}
+            />
 
             <div className="flex items-center justify-between">
               <label className="flex items-center gap-2 cursor-pointer">
