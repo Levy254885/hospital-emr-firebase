@@ -25,7 +25,7 @@ export function LoadingSpinner({ size = 'md', className, text }: LoadingSpinnerP
 export function PageLoadingSpinner() {
   return (
     <div className="flex items-center justify-center min-h-[400px]">
-      <LoadingSpinner size="lg" text="Cargando..." />
+      <LoadingSpinner size="lg" text="Loading..." />
     </div>
   )
 }
@@ -33,7 +33,7 @@ export function PageLoadingSpinner() {
 export function TableLoadingSpinner() {
   return (
     <div className="flex items-center justify-center py-12">
-      <LoadingSpinner size="md" text="Cargando datos..." />
+      <LoadingSpinner size="md" text="Loading data..." />
     </div>
   )
 }

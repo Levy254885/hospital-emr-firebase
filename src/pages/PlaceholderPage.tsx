@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card'
+import { Card, CardContent } from '@/components/ui/Card'
 import { Construction } from 'lucide-react'
 
 interface PlaceholderPageProps {
@@ -17,7 +17,7 @@ export default function PlaceholderPage({ title, description }: PlaceholderPageP
             </div>
             <h2 className="text-xl font-bold text-gray-900 mb-2">{title}</h2>
             <p className="text-sm text-gray-500 max-w-md mx-auto">
-              {description || 'Esta pagina esta en desarrollo. Proximamente estara disponible.'}
+              {description || 'This page is under development. Coming soon.'}
             </p>
           </div>
         </CardContent>

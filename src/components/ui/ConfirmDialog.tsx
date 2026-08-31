@@ -25,8 +25,8 @@ export function ConfirmDialog({
   onOpenChange,
   title,
   description,
-  confirmText = 'Confirmar',
-  cancelText = 'Cancelar',
+  confirmText = 'Confirm',
+  cancelText = 'Cancel',
   variant = 'danger',
   onConfirm,
   isLoading,
@@ -45,18 +45,10 @@ export function ConfirmDialog({
           {description && <ModalDescription>{description}</ModalDescription>}
         </ModalHeader>
         <ModalFooter>
-          <Button
-            variant="ghost"
-            onClick={() => onOpenChange(false)}
-            disabled={isLoading}
-          >
+          <Button variant="ghost" onClick={() => onOpenChange(false)} disabled={isLoading}>
             {cancelText}
           </Button>
-          <Button
-            variant={buttonVariants[variant]}
-            onClick={onConfirm}
-            isLoading={isLoading}
-          >
+          <Button variant={buttonVariants[variant]} onClick={onConfirm} isLoading={isLoading}>
             {confirmText}
           </Button>
         </ModalFooter>
