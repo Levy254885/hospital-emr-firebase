@@ -1,7 +1,7 @@
 {
-  "name": "Hospital EMR - Electronic Medical Records",
-  "short_name": "Hospital EMR",
-  "description": "Hospital Electronic Medical Records system for clinics and hospitals. Works on phones, tablets, and desktops.",
+  "name": "Elikin Medical Clinic",
+  "short_name": "Elikin Clinic",
+  "description": "Elikin Medical Clinic — The Heart of Healthcare. EMR for phones, tablets, and desktops.",
   "id": "/",
   "start_url": "/?source=pwa",
   "scope": "/",
@@ -30,14 +30,12 @@
     {
       "name": "Dashboard",
       "short_name": "Dashboard",
-      "description": "Open the main dashboard",
       "url": "/dashboard?source=pwa",
       "icons": [{ "src": "/icons/icon-96.png", "sizes": "96x96" }]
     },
     {
       "name": "Patients",
       "short_name": "Patients",
-      "description": "Patient list",
       "url": "/patients?source=pwa",
       "icons": [{ "src": "/icons/icon-96.png", "sizes": "96x96" }]
     }

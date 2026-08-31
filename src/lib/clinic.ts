@@ -1,0 +1,56 @@
+/** Elikin Medical Clinic — system branding (from clinic materials) */
+
+export const CLINIC = {
+  name: 'Elikin Medical Clinic',
+  shortName: 'Elikin',
+  tagline: 'The Heart of Healthcare',
+  email: 'Kinyuaajames@gmail.com',
+  phones: ['0743 422 599', '0757 031 192'],
+  phoneDisplay: '0743 422 599 | 0757 031 192',
+  social: '@ElikinMedicalClinic',
+  hours: '24HR Consultation',
+  currency: 'KES',
+  currencyLabel: 'KSh',
+  country: 'Kenya',
+  colors: {
+    primary: '#0d6b89',
+    primaryDark: '#0a5569',
+    secondary: '#22a06b',
+    accent: '#1380a0',
+  },
+  mission: [
+    'Provide an integrated pattern of health care services for the entire community through best medical practice that fulfills the principles of quality, efficiency, effectiveness and evidence-based medical care.',
+    'Enhance physical, psychological and social well-being of patients and society through innovative and competent services.',
+    'Foster learning and growth through highly qualified staff and application of recent technology and up-to-date medical services.',
+  ],
+  services: [
+    'Guidance & Counselling',
+    'Family Planning',
+    'Pharmacy',
+    'Consultation',
+    'Minor Surgery',
+    'Circumcision',
+    'Mental Health',
+    'Diabetes Clinic',
+    'ANC Clinic',
+    'Home Based Care',
+    'Hypertension Clinic',
+  ],
+} as const
+
+export const DEFAULT_INSTITUTION = {
+  id: 'default',
+  name: CLINIC.name,
+  short_name: CLINIC.shortName,
+  tagline: CLINIC.tagline,
+  email: CLINIC.email,
+  phone: CLINIC.phoneDisplay,
+  phones: CLINIC.phones,
+  address: 'Kenya',
+  social_handle: CLINIC.social,
+  hours: CLINIC.hours,
+  mission: CLINIC.mission.join('\n\n'),
+  services: CLINIC.services,
+  currency: 'KES',
+  logo: '/icons/elikin-logo.svg',
+}
