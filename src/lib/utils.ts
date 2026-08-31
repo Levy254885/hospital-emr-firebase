@@ -50,3 +50,29 @@ export function getInitials(first?: string, last?: string): string {
   const b = (last || '').trim().charAt(0)
   return (a + b).toUpperCase() || '?'
 }
+
+/** BMI / IMC (kg/m²). weight in kg, height in cm. */
+export function calculateIMC(weightKg: number, heightCm: number): number {
+  if (!weightKg || !heightCm || heightCm <= 0 || weightKg <= 0) return 0
+  const heightM = heightCm / 100
+  const bmi = weightKg / (heightM * heightM)
+  return Math.round(bmi * 10) / 10
+}
+
+export function getIMCCategory(imc: number): string {
+  if (!imc || imc <= 0) return '—'
+  if (imc < 18.5) return 'Underweight'
+  if (imc < 25) return 'Normal'
+  if (imc < 30) return 'Overweight'
+  if (imc < 35) return 'Obesity class I'
+  if (imc < 40) return 'Obesity class II'
+  return 'Obesity class III'
+}
+
+export function getIMCColor(imc: number): string {
+  if (!imc || imc <= 0) return 'text-gray-500'
+  if (imc < 18.5) return 'text-blue-600'
+  if (imc < 25) return 'text-green-600'
+  if (imc < 30) return 'text-yellow-600'
+  return 'text-red-600'
+}
