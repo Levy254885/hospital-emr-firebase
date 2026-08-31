@@ -1,60 +1,51 @@
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card'
-import Button from '@/components/ui/Button'
+import { Card, CardContent } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
-import { EmptyState } from '@/components/ui/EmptyState'
-import { Shield, Plus } from 'lucide-react'
+import { Shield } from 'lucide-react'
+import { ROLE_LABELS, SYSTEM_ROLES } from '@/lib/services/authService'
 
-interface Role {
-  id: string
-  name: string
-  description: string
-  permissions_count: number
-  is_system: boolean
+const ROLE_DESCRIPTIONS: Record<string, string> = {
+  super_admin: 'Full system access — manage users, roles, settings, and all modules',
+  admin: 'Hospital administrator — manage operations and most modules',
+  doctor: 'Clinical care — patients, records, prescriptions, lab orders',
+  nurse: 'Nursing care — patients, vitals, inpatient, triage',
+  receptionist: 'Front desk — registration, appointments, basic billing',
+  pharmacist: 'Pharmacy — medications, inventory, dispensation',
+  laboratory: 'Lab — orders and results entry',
+  billing: 'Finance — invoices, payments, cash register',
+  patient: 'Patient portal access only',
 }
 
 export default function RoleListPage() {
-  const roles: Role[] = []
-
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">Roles</h1>
-          <p className="text-sm text-gray-500">Gestion de roles y permisos</p>
-        </div>
-        <Button leftIcon={<Plus className="h-4 w-4" />}>
-          Nuevo Rol
-        </Button>
+      <div>
+        <h1 className="text-2xl font-bold text-gray-900">Roles</h1>
+        <p className="text-sm text-gray-500">System roles and their access levels</p>
       </div>
 
-      <Card variant="elevated">
-        <CardContent>
-          {roles.length === 0 ? (
-            <EmptyState
-              title="No hay roles"
-              description="Los roles del sistema apareceran aqui"
-              icon={<Shield className="h-8 w-8 text-gray-400" />}
-            />
-          ) : (
-            <div className="space-y-3">
-              {roles.map((role) => (
-                <div key={role.id} className="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 cursor-pointer">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <p className="font-medium text-gray-900">{role.name}</p>
-                        {role.is_system && <Badge variant="default">Sistema</Badge>}
-                      </div>
-                      <p className="text-sm text-gray-500">{role.description}</p>
+      <div className="grid gap-4">
+        {SYSTEM_ROLES.map((role) => (
+          <Card key={role} variant="elevated">
+            <CardContent className="py-4">
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex items-start gap-3">
+                  <div className="p-2 rounded-lg bg-primary-50">
+                    <Shield className="h-5 w-5 text-primary-600" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <p className="font-medium text-gray-900">{ROLE_LABELS[role]}</p>
+                      <Badge variant="default">System</Badge>
                     </div>
-                    <p className="text-sm text-gray-500">{role.permissions_count} permisos</p>
+                    <p className="text-sm text-gray-500 mt-1">{ROLE_DESCRIPTIONS[role]}</p>
+                    <p className="text-xs text-gray-400 mt-1 font-mono">{role}</p>
                   </div>
                 </div>
-              ))}
-            </div>
-          )}
-        </CardContent>
-      </Card>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
     </div>
   )
 }
