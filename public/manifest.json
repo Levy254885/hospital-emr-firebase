@@ -1,6 +1,6 @@
 {
-  "name": "Elikin Medical Clinic",
-  "short_name": "Elikin Clinic",
+  "name": "Elikin Medical Clinic Management System",
+  "short_name": "Elikin EMR",
   "description": "Elikin Medical Clinic — The Heart of Healthcare. EMR for phones, tablets, and desktops.",
   "id": "/",
   "start_url": "/?source=pwa",
