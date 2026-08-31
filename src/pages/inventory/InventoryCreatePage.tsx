@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
-import { createInventoryItem } from '@/lib/services'
+import { createInventoryItem } from '@/lib/services/inventoryService'
 import { useAuth } from '@/hooks/useAuth'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card'
 import Input from '@/components/ui/Input'
@@ -81,12 +81,7 @@ export default function InventoryCreatePage() {
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <Input
-              label="Name"
-              required
-              value={formData.name}
-              onChange={(e) => updateField('name', e.target.value)}
-            />
+            <Input label="Name" required value={formData.name} onChange={(e) => updateField('name', e.target.value)} />
             <Select
               label="Category"
               options={[
@@ -99,51 +94,19 @@ export default function InventoryCreatePage() {
               value={formData.category}
               onChange={(e) => updateField('category', e.target.value)}
             />
-            <Input
-              label="Quantity"
-              type="number"
-              value={formData.quantity}
-              onChange={(e) => updateField('quantity', parseFloat(e.target.value) || 0)}
-            />
-            <Input
-              label="Minimum quantity"
-              type="number"
-              value={formData.min_quantity}
-              onChange={(e) => updateField('min_quantity', parseFloat(e.target.value) || 0)}
-            />
-            <Input
-              label="Unit"
-              value={formData.unit}
-              onChange={(e) => updateField('unit', e.target.value)}
-              placeholder="units, boxes, ml..."
-            />
-            <Input
-              label="Location"
-              value={formData.location}
-              onChange={(e) => updateField('location', e.target.value)}
-            />
-            <Input
-              label="Supplier"
-              value={formData.supplier}
-              onChange={(e) => updateField('supplier', e.target.value)}
-            />
-            <Input
-              label="Unit cost (KSh)"
-              type="number"
-              value={formData.cost}
-              onChange={(e) => updateField('cost', parseFloat(e.target.value) || 0)}
-            />
+            <Input label="Quantity" type="number" value={formData.quantity} onChange={(e) => updateField('quantity', parseFloat(e.target.value) || 0)} />
+            <Input label="Minimum quantity" type="number" value={formData.min_quantity} onChange={(e) => updateField('min_quantity', parseFloat(e.target.value) || 0)} />
+            <Input label="Unit" value={formData.unit} onChange={(e) => updateField('unit', e.target.value)} placeholder="units, boxes, ml..." />
+            <Input label="Location" value={formData.location} onChange={(e) => updateField('location', e.target.value)} />
+            <Input label="Supplier" value={formData.supplier} onChange={(e) => updateField('supplier', e.target.value)} />
+            <Input label="Unit cost (KSh)" type="number" value={formData.cost} onChange={(e) => updateField('cost', parseFloat(e.target.value) || 0)} />
           </div>
         </CardContent>
       </Card>
 
       <div className="flex justify-end gap-3">
-        <Button variant="outline" onClick={() => navigate(-1)}>
-          Cancel
-        </Button>
-        <Button leftIcon={<Save className="h-4 w-4" />} onClick={handleSave} isLoading={saving}>
-          Save Item
-        </Button>
+        <Button variant="outline" onClick={() => navigate(-1)}>Cancel</Button>
+        <Button leftIcon={<Save className="h-4 w-4" />} onClick={handleSave} isLoading={saving}>Save Item</Button>
       </div>
     </div>
   )

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
-import { listInventoryItems } from '@/lib/services'
+import { listInventoryItems } from '@/lib/services/inventoryService'
 import { useAuth } from '@/hooks/useAuth'
 import { Card, CardContent } from '@/components/ui/Card'
 import Button from '@/components/ui/Button'
