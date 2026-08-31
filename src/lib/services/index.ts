@@ -139,24 +139,89 @@ export async function listInvoices(f: { patient_id?: string; status?: string; in
   if (f.status) c.unshift(where('status', '==', f.status))
   return listDocuments(COLLECTIONS.invoices, c)
 }
-export const getInvoice = (id: string) => getDocument(COLLECTIONS.invoices, id)
+
+export async function getInvoice(id: string) {
+  const inv = await getDocument<Record<string, unknown>>(COLLECTIONS.invoices, id)
+  if (!inv) return null
+  let items = (inv.items as unknown[]) || []
+  if (!items.length) {
+    try {
+      items = await listDocuments(COLLECTIONS.invoiceItems, [
+        where('invoice_id', '==', id),
+        limit(100),
+      ])
+    } catch {
+      items = []
+    }
+  }
+  let patient = null
+  if (inv.patient_id) {
+    patient = await getDocument(COLLECTIONS.patients, inv.patient_id as string)
+  }
+  let payments: unknown[] = []
+  try {
+    payments = await listDocuments(COLLECTIONS.payments, [
+      where('invoice_id', '==', id),
+      limit(50),
+    ])
+  } catch {
+    payments = []
+  }
+  const total = Number(inv.total ?? inv.total_amount ?? 0)
+  const amount_paid = Number(inv.amount_paid ?? 0)
+  return {
+    ...inv,
+    items,
+    patient,
+    payments,
+    total_amount: total,
+    tax_amount: Number(inv.tax ?? inv.tax_amount ?? 0),
+    discount: Number(inv.discount ?? 0),
+    amount_paid,
+    balance: Number(inv.balance ?? total - amount_paid),
+    invoice_date: inv.invoice_date || inv.created_at,
+  }
+}
+
 export async function createInvoice(data: {
   patient_id: string; items: { description: string; quantity: number; unit_price: number }[]
   tax?: number; discount?: number; notes?: string; institution_id?: string
 }, userId: string) {
   const subtotal = data.items.reduce((s, i) => s + i.quantity * i.unit_price, 0)
   const tax = data.tax||0, discount = data.discount||0, total = subtotal + tax - discount
+  const lineItems = data.items.map((item) => ({
+    description: item.description,
+    quantity: item.quantity,
+    unit_price: item.unit_price,
+    subtotal: item.quantity * item.unit_price,
+  }))
   const inv = await createDocument(COLLECTIONS.invoices, {
-    invoice_number: `INV-${new Date().getFullYear()}-${Date.now().toString(36).toUpperCase()}`,
-    patient_id: data.patient_id, status: 'pending', subtotal, tax, discount, total,
-    amount_paid: 0, balance: total, notes: data.notes||'', institution_id: data.institution_id||'', created_by: userId,
+    invoice_number: `INV-EMC-${new Date().getFullYear()}-${Date.now().toString(36).toUpperCase()}`,
+    patient_id: data.patient_id,
+    status: 'pending',
+    payment_status: 'pending',
+    subtotal,
+    tax,
+    tax_amount: tax,
+    discount,
+    total,
+    total_amount: total,
+    amount_paid: 0,
+    balance: total,
+    notes: data.notes || '',
+    institution_id: data.institution_id || 'default',
+    created_by: userId,
+    items: lineItems,
+    invoice_date: new Date().toISOString(),
+    clinic_name: 'Elikin Medical Clinic',
   })
-  for (const item of data.items) {
-    await createDocument(COLLECTIONS.invoiceItems, { invoice_id: inv.id, ...item, total: item.quantity * item.unit_price })
+  for (const item of lineItems) {
+    await createDocument(COLLECTIONS.invoiceItems, { invoice_id: inv.id, ...item })
   }
   await writeAuditLog({ action: 'invoice.create', entity_type: 'invoice', entity_id: inv.id, user_id: userId, details: { total } })
   return inv
 }
+
 export async function listPayments(invoiceId?: string) {
   const c: QueryConstraint[] = [orderBy('created_at', 'desc'), limit(100)]
   if (invoiceId) c.unshift(where('invoice_id', '==', invoiceId))
@@ -168,14 +233,17 @@ export async function recordPayment(data: {
   if (data.method === 'mpesa') throw new Error('Use initiateMpesaPayment for M-Pesa')
   const inv = await getInvoice(data.invoice_id) as any
   if (!inv) throw new Error('Invoice not found')
-  if (data.amount > inv.balance) throw new Error('Amount exceeds balance')
+  const bal = Number(inv.balance ?? (Number(inv.total ?? inv.total_amount ?? 0) - Number(inv.amount_paid ?? 0)))
+  if (data.amount > bal) throw new Error('Amount exceeds balance')
   const payment = await createDocument(COLLECTIONS.payments, {
     ...data, status: 'completed', received_by: userId, institution_id: data.institution_id || inv.institution_id,
   })
-  const newPaid = inv.amount_paid + data.amount
-  const newBalance = inv.total - newPaid
+  const newPaid = Number(inv.amount_paid ?? 0) + data.amount
+  const total = Number(inv.total ?? inv.total_amount ?? 0)
+  const newBalance = total - newPaid
   await updateDocument(COLLECTIONS.invoices, data.invoice_id, {
     amount_paid: newPaid, balance: newBalance, status: newBalance <= 0 ? 'paid' : 'partial',
+    payment_status: newBalance <= 0 ? 'paid' : 'partial',
   })
   await writeAuditLog({ action: 'payment.create', entity_type: 'payment', entity_id: payment.id, user_id: userId, details: { amount: data.amount } })
   return payment
