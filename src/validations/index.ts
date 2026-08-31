@@ -105,7 +105,7 @@ export const labOrderSchema = z.object({
   priority: z.enum(['routine', 'urgent', 'stat'], { message: 'Priority is required' }),
   clinical_info: z.string().optional(),
   items: z
-    .array(z.object({ test_id: z.string().min(1, 'Test is required' })))
+    .array(z.object({ test_id: z.string().min(1, 'Test is required') }))
     .min(1, 'Add at least one test'),
 })
 export type LabOrderFormData = z.infer<typeof labOrderSchema>
