@@ -4,9 +4,27 @@ import { cn } from '@/lib/utils'
 import { useAuth } from '@/hooks/useAuth'
 import { canSeeMenuSection, canSeeMenuPath } from '@/lib/rbac'
 import {
-  LayoutDashboard, Users, FileText, Calendar, Pill, FlaskConical, CreditCard,
-  BarChart3, Settings, Shield, Bell, ChevronDown, ChevronLeft, ChevronRight,
-  Heart, Stethoscope, BedDouble, AlertTriangle, Package, Scissors, UserCog, Building2,
+  LayoutDashboard,
+  Users,
+  FileText,
+  Calendar,
+  Pill,
+  FlaskConical,
+  CreditCard,
+  BarChart3,
+  Settings,
+  Shield,
+  Bell,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  Heart,
+  BedDouble,
+  AlertTriangle,
+  Package,
+  Scissors,
+  UserCog,
+  Building2,
 } from 'lucide-react'
 
 interface SidebarProps {
@@ -22,7 +40,10 @@ interface NavItem {
 }
 
 const navigation: { label: string; items: NavItem[] }[] = [
-  { label: 'Main', items: [{ label: 'Dashboard', path: '/dashboard', icon: <LayoutDashboard className="h-5 w-5" /> }] },
+  {
+    label: 'Main',
+    items: [{ label: 'Dashboard', path: '/dashboard', icon: <LayoutDashboard className="h-5 w-5" /> }],
+  },
   {
     label: 'Patients',
     items: [
@@ -110,13 +131,16 @@ export default function Sidebar({ collapsed = false, onToggle, onNavigate }: Sid
       )}
     >
       <div className="flex items-center gap-3 px-4 h-16 border-b border-primary-700/50">
-        <div className="flex-shrink-0 w-10 h-10 bg-white rounded-xl flex items-center justify-center">
-          <Stethoscope className="h-6 w-6 text-primary-700" />
+        <div className="flex-shrink-0 w-10 h-10 bg-white rounded-xl flex items-center justify-center overflow-hidden">
+          <img src="/icons/elikin-logo.svg" alt="" className="w-8 h-8 object-contain" />
         </div>
         {!collapsed && (
           <div className="overflow-hidden">
-            <h1 className="text-lg font-bold text-white truncate">Hospital EMR</h1>
-            <p className="text-xs text-primary-200 truncate capitalize">{roleName?.replace(/_/g, ' ') || 'Staff'}</p>
+            <h1 className="text-sm font-bold text-white truncate leading-tight">Elikin Medical Clinic</h1>
+            <p className="text-[10px] text-primary-200 truncate italic">The Heart of Healthcare</p>
+            <p className="text-xs text-primary-300 truncate capitalize">
+              {roleName?.replace(/_/g, ' ') || 'Staff'}
+            </p>
           </div>
         )}
       </div>
@@ -131,7 +155,12 @@ export default function Sidebar({ collapsed = false, onToggle, onNavigate }: Sid
                 className="flex items-center justify-between w-full px-3 py-2 text-xs font-semibold text-primary-300 uppercase tracking-wider"
               >
                 <span>{section.label}</span>
-                <ChevronDown className={cn('h-4 w-4 transition-transform', !expandedSections.includes(section.label) && '-rotate-90')} />
+                <ChevronDown
+                  className={cn(
+                    'h-4 w-4 transition-transform',
+                    !expandedSections.includes(section.label) && '-rotate-90'
+                  )}
+                />
               </button>
             )}
             <div className={cn('space-y-1', collapsed && 'mt-2')}>
@@ -143,7 +172,9 @@ export default function Sidebar({ collapsed = false, onToggle, onNavigate }: Sid
                       onClick={() => onNavigate?.()}
                       className={cn(
                         'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200',
-                        isActive(item.path) ? 'bg-white/15 text-white shadow-sm' : 'text-primary-100 hover:bg-white/10 hover:text-white',
+                        isActive(item.path)
+                          ? 'bg-white/15 text-white shadow-sm'
+                          : 'text-primary-100 hover:bg-white/10 hover:text-white',
                         collapsed && 'justify-center px-2'
                       )}
                       title={collapsed ? item.label : undefined}
@@ -159,8 +190,19 @@ export default function Sidebar({ collapsed = false, onToggle, onNavigate }: Sid
       </nav>
 
       <div className="p-2 border-t border-primary-700/50 hidden lg:block">
-        <button type="button" onClick={onToggle} className="flex items-center justify-center w-full px-3 py-2 rounded-lg text-primary-200 hover:bg-white/10 hover:text-white transition-colors">
-          {collapsed ? <ChevronRight className="h-5 w-5" /> : (<><ChevronLeft className="h-5 w-5 mr-2" /><span className="text-sm">Collapse</span></>)}
+        <button
+          type="button"
+          onClick={onToggle}
+          className="flex items-center justify-center w-full px-3 py-2 rounded-lg text-primary-200 hover:bg-white/10 hover:text-white transition-colors"
+        >
+          {collapsed ? (
+            <ChevronRight className="h-5 w-5" />
+          ) : (
+            <>
+              <ChevronLeft className="h-5 w-5 mr-2" />
+              <span className="text-sm">Collapse</span>
+            </>
+          )}
         </button>
       </div>
     </aside>
