@@ -306,34 +306,42 @@ export interface Invoice {
   id: string
   invoice_number: string
   patient_id: string
-  patient?: Patient
+  patient?: Patient | null
   appointment_id?: string
   appointment?: Appointment
   subtotal: number
   tax_amount: number
+  tax?: number
   discount: number
   total_amount: number
+  /** Alias used by some Firestore docs */
+  total?: number
+  amount_paid?: number
+  balance?: number
   payment_status: 'pending' | 'paid' | 'partial' | 'cancelled'
+  status?: 'pending' | 'paid' | 'partial' | 'cancelled'
   invoice_date: string
   due_date?: string
   notes?: string
   items: InvoiceItem[]
-  payments: Payment[]
+  payments?: Payment[]
   institution_id: string
-  created_by: string
-  created_at: string
-  updated_at: string
+  created_by?: string
+  created_at?: string
+  updated_at?: string
+  clinic_name?: string
 }
 
 export interface InvoiceItem {
-  id: string
-  invoice_id: string
+  id?: string
+  invoice_id?: string
   service_catalog_id?: number
   description: string
   quantity: number
   unit_price: number
-  discount: number
-  subtotal: number
+  discount?: number
+  subtotal?: number
+  total?: number
 }
 
 export interface Payment {
