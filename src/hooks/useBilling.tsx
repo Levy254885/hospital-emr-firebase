@@ -41,7 +41,7 @@ export function useInvoices(
 export function useInvoice(id: string) {
   return useQuery({
     queryKey: ['invoices', id],
-    queryFn: async () => (await svc.getInvoice(id)) as Invoice | null,
+    queryFn: async () => await svc.getInvoice(id),
     enabled: !!id,
   })
 }
@@ -121,7 +121,7 @@ export function useRecordPayment() {
       notes?: string
       patient_id?: string
     }) => {
-      const inv = (await svc.getInvoice(data.invoice_id)) as Invoice | null
+      const inv = await svc.getInvoice(data.invoice_id)
       return svc.recordPayment(
         {
           invoice_id: data.invoice_id,
