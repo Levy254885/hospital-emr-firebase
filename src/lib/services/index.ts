@@ -3,7 +3,7 @@ import {
   writeAuditLog, decrementInventoryStock, listenCollection, where, orderBy, limit,
 } from '../firestore'
 import type { QueryConstraint, Unsubscribe } from 'firebase/firestore'
-import type { Patient, Appointment, MedicalRecord, Prescription } from '@/types'
+import type { Patient, Appointment, MedicalRecord, Prescription, Invoice } from '@/types'
 import { httpsCallable } from 'firebase/functions'
 import { functions } from '../firebase'
 
@@ -140,46 +140,55 @@ export async function listInvoices(f: { patient_id?: string; status?: string; in
   return listDocuments(COLLECTIONS.invoices, c)
 }
 
-export async function getInvoice(id: string) {
+export async function getInvoice(id: string): Promise<Invoice | null> {
   const inv = await getDocument<Record<string, unknown>>(COLLECTIONS.invoices, id)
   if (!inv) return null
-  let items = (inv.items as unknown[]) || []
+  let items = (inv.items as Invoice['items']) || []
   if (!items.length) {
     try {
-      items = await listDocuments(COLLECTIONS.invoiceItems, [
+      items = (await listDocuments(COLLECTIONS.invoiceItems, [
         where('invoice_id', '==', id),
         limit(100),
-      ])
+      ])) as Invoice['items']
     } catch {
       items = []
     }
   }
-  let patient = null
+  let patient: Invoice['patient'] = null
   if (inv.patient_id) {
-    patient = await getDocument(COLLECTIONS.patients, inv.patient_id as string)
+    patient = (await getDocument(COLLECTIONS.patients, inv.patient_id as string)) as Invoice['patient']
   }
-  let payments: unknown[] = []
+  let payments: Invoice['payments'] = []
   try {
-    payments = await listDocuments(COLLECTIONS.payments, [
+    payments = (await listDocuments(COLLECTIONS.payments, [
       where('invoice_id', '==', id),
       limit(50),
-    ])
+    ])) as Invoice['payments']
   } catch {
     payments = []
   }
   const total = Number(inv.total ?? inv.total_amount ?? 0)
   const amount_paid = Number(inv.amount_paid ?? 0)
   return {
-    ...inv,
+    ...(inv as unknown as Invoice),
+    id: String(inv.id ?? id),
+    invoice_number: String(inv.invoice_number ?? ''),
+    patient_id: String(inv.patient_id ?? ''),
+    subtotal: Number(inv.subtotal ?? 0),
     items,
     patient,
-    payments,
+    payments: payments || [],
     total_amount: total,
+    total,
     tax_amount: Number(inv.tax ?? inv.tax_amount ?? 0),
+    tax: Number(inv.tax ?? inv.tax_amount ?? 0),
     discount: Number(inv.discount ?? 0),
     amount_paid,
     balance: Number(inv.balance ?? total - amount_paid),
-    invoice_date: inv.invoice_date || inv.created_at,
+    payment_status: (inv.payment_status || inv.status || 'pending') as Invoice['payment_status'],
+    status: (inv.status || inv.payment_status || 'pending') as Invoice['status'],
+    invoice_date: String(inv.invoice_date || inv.created_at || new Date().toISOString()),
+    institution_id: String(inv.institution_id ?? ''),
   }
 }
 
@@ -231,7 +240,7 @@ export async function recordPayment(data: {
   invoice_id: string; patient_id: string; amount: number; method: string; reference?: string; institution_id?: string
 }, userId: string) {
   if (data.method === 'mpesa') throw new Error('Use initiateMpesaPayment for M-Pesa')
-  const inv = await getInvoice(data.invoice_id) as any
+  const inv = await getInvoice(data.invoice_id)
   if (!inv) throw new Error('Invoice not found')
   const bal = Number(inv.balance ?? (Number(inv.total ?? inv.total_amount ?? 0) - Number(inv.amount_paid ?? 0)))
   if (data.amount > bal) throw new Error('Amount exceeds balance')
