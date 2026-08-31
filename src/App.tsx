@@ -4,6 +4,7 @@ import { Toaster } from 'react-hot-toast'
 import { AuthProvider } from '@/hooks/useAuth'
 import { router } from '@/router'
 import { RouterProvider } from 'react-router-dom'
+import InstallPrompt from '@/components/InstallPrompt'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -27,6 +28,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <RouterProvider router={router} />
+        <InstallPrompt />
       </AuthProvider>
       {showToaster ? (
         <Toaster
