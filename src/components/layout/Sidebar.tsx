@@ -29,6 +29,7 @@ import {
 interface SidebarProps {
   collapsed?: boolean
   onToggle?: () => void
+  onNavigate?: () => void
 }
 
 interface NavItem {
@@ -94,7 +95,7 @@ const navigation: { label: string; items: NavItem[] }[] = [
   },
 ]
 
-export default function Sidebar({ collapsed = false, onToggle }: SidebarProps) {
+export default function Sidebar({ collapsed = false, onToggle, onNavigate }: SidebarProps) {
   const location = useLocation()
   const [expandedSections, setExpandedSections] = useState<string[]>(
     navigation.map((section) => section.label)
@@ -114,7 +115,7 @@ export default function Sidebar({ collapsed = false, onToggle }: SidebarProps) {
   return (
     <aside
       className={cn(
-        'fixed left-0 top-0 z-40 h-screen bg-gradient-to-b from-primary-900 via-primary-800 to-primary-900 text-white transition-all duration-300 flex flex-col',
+        'h-screen bg-gradient-to-b from-primary-900 via-primary-800 to-primary-900 text-white flex flex-col shadow-xl',
         collapsed ? 'w-[72px]' : 'w-64'
       )}
     >
@@ -154,6 +155,7 @@ export default function Sidebar({ collapsed = false, onToggle }: SidebarProps) {
                     <Link
                       key={item.path}
                       to={item.path}
+                      onClick={() => onNavigate?.()}
                       className={cn(
                         'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200',
                         isActive(item.path)
@@ -173,7 +175,7 @@ export default function Sidebar({ collapsed = false, onToggle }: SidebarProps) {
         ))}
       </nav>
 
-      <div className="p-2 border-t border-primary-700/50">
+      <div className="p-2 border-t border-primary-700/50 hidden lg:block">
         <button
           type="button"
           onClick={onToggle}
