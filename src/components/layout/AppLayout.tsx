@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import Sidebar from './Sidebar'
 import Header from './Header'
+import RoleGuard from '@/components/RoleGuard'
 import { cn } from '@/lib/utils'
 
 export default function AppLayout() {
@@ -56,7 +57,9 @@ export default function AppLayout() {
       >
         <Header onMenuClick={() => setMobileMenuOpen((o) => !o)} />
         <main className="p-4 lg:p-6 min-h-[calc(100vh-64px)]">
-          <Outlet />
+          <RoleGuard>
+            <Outlet />
+          </RoleGuard>
         </main>
       </div>
     </div>
