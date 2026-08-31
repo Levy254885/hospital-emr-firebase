@@ -1,187 +1,180 @@
-import { useState, useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import {
-  useDashboardReport, usePatientReport, useAppointmentReport, useRevenueReport,
-  useLabReport, usePharmacyReport, useHospitalizationReport, useDiagnosisReport,
-  type ReportFilters,
-} from '@/hooks/useReports'
+  Chart as ChartJS, ArcElement, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend,
+} from 'chart.js'
+import { Pie, Bar } from 'react-chartjs-2'
+import { useQuery } from '@tanstack/react-query'
+import { listPatients } from '@/lib/services'
+import { listInventoryItems } from '@/lib/services/inventoryService'
+import { useAuth } from '@/hooks/useAuth'
+import { normalizeRole } from '@/lib/rbac'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card'
-import Button from '@/components/ui/Button'
 import { PageLoadingSpinner } from '@/components/ui/LoadingSpinner'
 import { formatCurrency } from '@/lib/utils'
-import {
-  Download, BarChart3, TrendingUp, Users, DollarSign, Calendar,
-  Activity, Stethoscope, Pill, Building,
-} from 'lucide-react'
+import { BarChart3, PieChart, Package, Users } from 'lucide-react'
+
+ChartJS.register(ArcElement, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 export default function ReportsPage() {
-  const [dateFrom, setDateFrom] = useState('')
-  const [dateTo, setDateTo] = useState('')
-  const [reportType, setReportType] = useState<string>('general')
+  const { user } = useAuth()
+  const role = normalizeRole(user?.role?.name)
+  const [tab, setTab] = useState<'overview' | 'inventory' | 'pharmacy'>('overview')
 
-  const filters: ReportFilters = useMemo(
-    () => ({ date_from: dateFrom || undefined, date_to: dateTo || undefined }),
-    [dateFrom, dateTo]
-  )
+  const { data: patients, isLoading: pLoading } = useQuery({
+    queryKey: ['report-patients', user?.institution_id],
+    queryFn: async () => {
+      const res = await listPatients({ institution_id: user?.institution_id, per_page: 500 })
+      return res.data || []
+    },
+    enabled: role !== 'pharmacist',
+  })
 
-  const { data: dashboardData, isLoading: dashboardLoading } = useDashboardReport()
-  const { data: patientData, isLoading: patientsLoading } = usePatientReport(filters)
-  const { data: appointmentData, isLoading: appointmentsLoading } = useAppointmentReport(filters)
-  const { data: revenueData, isLoading: revenueLoading } = useRevenueReport(filters)
-  const { data: labData, isLoading: labLoading } = useLabReport(filters)
-  const { data: pharmacyData, isLoading: pharmacyLoading } = usePharmacyReport(filters)
-  const { data: hospitalizationData, isLoading: hospitalizationLoading } = useHospitalizationReport(filters)
-  const { data: diagnosisData, isLoading: diagnosesLoading } = useDiagnosisReport(filters)
+  const { data: inventory = [], isLoading: iLoading } = useQuery({
+    queryKey: ['report-inventory', user?.institution_id],
+    queryFn: () => listInventoryItems(user?.institution_id),
+  })
 
-  const isLoadingMap: Record<string, boolean> = {
-    general: dashboardLoading, patients: patientsLoading, appointments: appointmentsLoading,
-    revenue: revenueLoading, lab: labLoading, pharmacy: pharmacyLoading,
-    hospitalization: hospitalizationLoading, diagnoses: diagnosesLoading,
-  }
+  const isLoading = (role !== 'pharmacist' && pLoading) || iLoading
 
-  const reportTabs = [
-    { key: 'general', label: 'General', icon: <BarChart3 className="h-4 w-4" /> },
-    { key: 'patients', label: 'Pacientes', icon: <Users className="h-4 w-4" /> },
-    { key: 'appointments', label: 'Citas', icon: <Calendar className="h-4 w-4" /> },
-    { key: 'revenue', label: 'Ingresos', icon: <DollarSign className="h-4 w-4" /> },
-    { key: 'lab', label: 'Laboratorio', icon: <Activity className="h-4 w-4" /> },
-    { key: 'pharmacy', label: 'Farmacia', icon: <Pill className="h-4 w-4" /> },
-    { key: 'hospitalization', label: 'Hospitalizacion', icon: <Building className="h-4 w-4" /> },
-    { key: 'diagnoses', label: 'Diagnosticos', icon: <Stethoscope className="h-4 w-4" /> },
-  ]
+  const genderPie = useMemo(() => {
+    const list = patients || []
+    const counts: Record<string, number> = { Male: 0, Female: 0, Other: 0 }
+    list.forEach((p) => {
+      const g = (p.gender || 'O').toUpperCase()
+      if (g === 'M' || g === 'MALE') counts.Male++
+      else if (g === 'F' || g === 'FEMALE') counts.Female++
+      else counts.Other++
+    })
+    return {
+      labels: Object.keys(counts),
+      datasets: [{ data: Object.values(counts), backgroundColor: ['#0d6b89', '#e11d48', '#94a3b8'], borderWidth: 0 }],
+    }
+  }, [patients])
 
-  const isLoading = isLoadingMap[reportType]
+  const inventoryByCategory = useMemo(() => {
+    const map: Record<string, number> = {}
+    inventory.forEach((i) => {
+      const c = i.category || 'general'
+      map[c] = (map[c] || 0) + 1
+    })
+    return {
+      labels: Object.keys(map).map((k) => k.charAt(0).toUpperCase() + k.slice(1)),
+      datasets: [{ label: 'Items', data: Object.values(map), backgroundColor: ['#0d6b89', '#059669', '#d97706', '#7c3aed', '#dc2626'] }],
+    }
+  }, [inventory])
+
+  const stockBar = useMemo(() => {
+    const top = [...inventory].sort((a, b) => (b.quantity || 0) - (a.quantity || 0)).slice(0, 8)
+    return {
+      labels: top.map((i) => i.name?.slice(0, 16) || 'Item'),
+      datasets: [{ label: 'Quantity', data: top.map((i) => i.quantity || 0), backgroundColor: '#0d6b89' }],
+    }
+  }, [inventory])
+
+  const inventoryValue = inventory.reduce((s, i) => s + (i.cost || 0) * (i.quantity || 0), 0)
+  const lowStock = inventory.filter((i) => (i.quantity || 0) <= (i.min_quantity || 0)).length
+
+  if (isLoading) return <PageLoadingSpinner />
+
+  const tabs =
+    role === 'pharmacist'
+      ? [{ id: 'pharmacy' as const, label: 'Pharmacy' }, { id: 'inventory' as const, label: 'Inventory' }]
+      : [
+          { id: 'overview' as const, label: 'Overview' },
+          { id: 'inventory' as const, label: 'Inventory' },
+          { id: 'pharmacy' as const, label: 'Pharmacy' },
+        ]
+
+  const activeTab = role === 'pharmacist' && tab === 'overview' ? 'pharmacy' : tab
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">Reportes e Indicadores</h1>
-          <p className="text-sm text-gray-500">Estadisticas y analisis del hospital</p>
+      <div>
+        <h1 className="text-2xl font-bold text-gray-900">Reports</h1>
+        <p className="text-sm text-gray-500">Analytics and charts (currency: KSh)</p>
+      </div>
+
+      <div className="flex flex-wrap gap-2">
+        {tabs.map((t) => (
+          <button
+            key={t.id}
+            type="button"
+            onClick={() => setTab(t.id)}
+            className={`px-4 py-2 rounded-lg text-sm font-medium ${
+              activeTab === t.id ? 'bg-primary-600 text-white' : 'bg-white border border-gray-200 text-gray-700 hover:bg-gray-50'
+            }`}
+          >
+            {t.label}
+          </button>
+        ))}
+      </div>
+
+      {activeTab === 'overview' && role !== 'pharmacist' && (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <Card variant="elevated">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2"><Users className="h-5 w-5" /> Patients by gender</CardTitle>
+            </CardHeader>
+            <CardContent className="h-72 flex items-center justify-center">
+              {(patients || []).length === 0 ? (
+                <p className="text-sm text-gray-500">No patient data yet</p>
+              ) : (
+                <Pie data={genderPie} options={{ responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }} />
+              )}
+            </CardContent>
+          </Card>
+          <Card variant="elevated">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2"><BarChart3 className="h-5 w-5" /> Inventory by category</CardTitle>
+            </CardHeader>
+            <CardContent className="h-72 flex items-center justify-center">
+              {inventory.length === 0 ? (
+                <p className="text-sm text-gray-500">No inventory data yet</p>
+              ) : (
+                <Bar data={inventoryByCategory} options={{ responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } } }} />
+              )}
+            </CardContent>
+          </Card>
         </div>
-        <Button leftIcon={<Download className="h-4 w-4" />} variant="outline">Exportar</Button>
-      </div>
+      )}
 
-      <Card variant="elevated">
-        <CardContent className="py-4">
-          <div className="flex flex-col sm:flex-row gap-4 items-end">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Desde</label>
-              <input type="date" value={dateFrom} onChange={(e) => setDateFrom(e.target.value)}
-                className="block rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Hasta</label>
-              <input type="date" value={dateTo} onChange={(e) => setDateTo(e.target.value)}
-                className="block rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20" />
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      <div className="border-b border-gray-200">
-        <nav className="flex overflow-x-auto -mb-px gap-1">
-          {reportTabs.map((tab) => (
-            <button key={tab.key} onClick={() => setReportType(tab.key)}
-              className={`flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
-                reportType === tab.key ? 'border-primary-600 text-primary-600' : 'border-transparent text-gray-500 hover:text-gray-700'
-              }`}>{tab.icon}{tab.label}</button>
-          ))}
-        </nav>
-      </div>
-
-      {isLoading ? (
-        <PageLoadingSpinner />
-      ) : (
+      {(activeTab === 'inventory' || activeTab === 'pharmacy') && (
         <>
-          {reportType === 'general' && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              <StatCard title="Pacientes" value={String(dashboardData?.total_patients ?? 0)} icon={<Users className="h-6 w-6 text-blue-600" />} />
-              <StatCard title="Citas Hoy" value={String(dashboardData?.appointments_today ?? 0)} icon={<Calendar className="h-6 w-6 text-green-600" />} />
-              <StatCard title="Ingresos del Mes" value={formatCurrency(dashboardData?.revenue_month ?? 0)} icon={<DollarSign className="h-6 w-6 text-yellow-600" />} />
-              <StatCard title="Ocupacion Camas" value={`${dashboardData?.bed_occupancy ?? 0}%`} icon={<Building className="h-6 w-6 text-purple-600" />} />
-            </div>
-          )}
-          {reportType === 'patients' && (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <StatCard title="Total Pacientes" value={String(patientData?.total ?? 0)} icon={<Users className="h-6 w-6 text-blue-600" />} />
-              <StatCard title="Nuevos" value={String(patientData?.new_patients ?? 0)} icon={<TrendingUp className="h-6 w-6 text-green-600" />} />
-              <StatCard title="Activos" value={String(patientData?.active ?? 0)} icon={<Activity className="h-6 w-6 text-primary-600" />} />
-            </div>
-          )}
-          {reportType === 'appointments' && (
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <StatCard title="Total" value={String(appointmentData?.total ?? 0)} icon={<Calendar className="h-6 w-6 text-blue-600" />} />
-              <StatCard title="Completadas" value={String(appointmentData?.completed ?? 0)} icon={<Activity className="h-6 w-6 text-green-600" />} />
-              <StatCard title="Canceladas" value={String(appointmentData?.cancelled ?? 0)} icon={<Activity className="h-6 w-6 text-red-600" />} />
-              <StatCard title="No Show" value={String(appointmentData?.no_show ?? 0)} icon={<Activity className="h-6 w-6 text-yellow-600" />} />
-            </div>
-          )}
-          {reportType === 'revenue' && (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <StatCard title="Ingresos Totales" value={formatCurrency(revenueData?.total ?? 0)} icon={<DollarSign className="h-6 w-6 text-green-600" />} />
-              <StatCard title="Pendiente" value={formatCurrency(revenueData?.pending ?? 0)} icon={<DollarSign className="h-6 w-6 text-yellow-600" />} />
-              <StatCard title="Facturas" value={String(revenueData?.invoice_count ?? 0)} icon={<BarChart3 className="h-6 w-6 text-blue-600" />} />
-            </div>
-          )}
-          {reportType === 'lab' && (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <StatCard title="Ordenes" value={String(labData?.total_orders ?? 0)} icon={<Activity className="h-6 w-6 text-blue-600" />} />
-              <StatCard title="Completadas" value={String(labData?.completed ?? 0)} icon={<Activity className="h-6 w-6 text-green-600" />} />
-              <StatCard title="Pendientes" value={String(labData?.pending ?? 0)} icon={<Activity className="h-6 w-6 text-yellow-600" />} />
-            </div>
-          )}
-          {reportType === 'pharmacy' && (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <StatCard title="Dispensaciones" value={String(pharmacyData?.dispensations ?? 0)} icon={<Pill className="h-6 w-6 text-blue-600" />} />
-              <StatCard title="Stock Bajo" value={String(pharmacyData?.low_stock ?? 0)} icon={<Pill className="h-6 w-6 text-red-600" />} />
-              <StatCard title="Medicamentos" value={String(pharmacyData?.total_medications ?? 0)} icon={<Pill className="h-6 w-6 text-green-600" />} />
-            </div>
-          )}
-          {reportType === 'hospitalization' && (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <StatCard title="Ocupadas" value={String(hospitalizationData?.occupied_beds ?? 0)} icon={<Building className="h-6 w-6 text-red-600" />} />
-              <StatCard title="Disponibles" value={String(hospitalizationData?.available_beds ?? 0)} icon={<Building className="h-6 w-6 text-green-600" />} />
-              <StatCard title="Admisiones" value={String(hospitalizationData?.admissions ?? 0)} icon={<Building className="h-6 w-6 text-blue-600" />} />
-            </div>
-          )}
-          {reportType === 'diagnoses' && (
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <Card variant="elevated"><CardContent className="py-4"><p className="text-sm text-gray-500">Total items</p><p className="text-2xl font-bold text-gray-900">{inventory.length}</p></CardContent></Card>
+            <Card variant="elevated"><CardContent className="py-4"><p className="text-sm text-gray-500">Low stock</p><p className="text-2xl font-bold text-red-600">{lowStock}</p></CardContent></Card>
+            <Card variant="elevated"><CardContent className="py-4"><p className="text-sm text-gray-500">Stock value</p><p className="text-2xl font-bold text-primary-600">{formatCurrency(inventoryValue)}</p></CardContent></Card>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <Card variant="elevated">
-              <CardHeader><CardTitle>Diagnosticos Frecuentes</CardTitle></CardHeader>
-              <CardContent>
-                {(diagnosisData?.top_diagnoses || []).length > 0 ? (
-                  <div className="space-y-2">
-                    {(diagnosisData?.top_diagnoses || []).map((d: any, i: number) => (
-                      <div key={i} className="flex justify-between p-3 bg-gray-50 rounded-lg">
-                        <span className="font-mono text-primary-700">{d.code}</span>
-                        <span className="text-gray-900">{d.name}</span>
-                        <span className="font-medium">{d.count}</span>
-                      </div>
-                    ))}
-                  </div>
+              <CardHeader><CardTitle className="flex items-center gap-2"><PieChart className="h-5 w-5" /> Items by category</CardTitle></CardHeader>
+              <CardContent className="h-72 flex items-center justify-center">
+                {inventory.length === 0 ? (
+                  <p className="text-sm text-gray-500">Add inventory items to see charts</p>
                 ) : (
-                  <p className="text-sm text-gray-500 text-center py-8">Sin datos de diagnosticos en el periodo</p>
+                  <Pie
+                    data={{
+                      ...inventoryByCategory,
+                      datasets: [{ data: inventoryByCategory.datasets[0].data, backgroundColor: ['#0d6b89', '#059669', '#d97706', '#7c3aed', '#dc2626'], borderWidth: 0 }],
+                    }}
+                    options={{ responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }}
+                  />
                 )}
               </CardContent>
             </Card>
-          )}
+            <Card variant="elevated">
+              <CardHeader><CardTitle className="flex items-center gap-2"><Package className="h-5 w-5" /> Top stock quantities</CardTitle></CardHeader>
+              <CardContent className="h-72 flex items-center justify-center">
+                {inventory.length === 0 ? (
+                  <p className="text-sm text-gray-500">No stock data</p>
+                ) : (
+                  <Bar data={stockBar} options={{ responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }} />
+                )}
+              </CardContent>
+            </Card>
+          </div>
         </>
       )}
     </div>
-  )
-}
-
-function StatCard({ title, value, icon }: { title: string; value: string; icon: React.ReactNode }) {
-  return (
-    <Card variant="elevated">
-      <CardContent className="py-6">
-        <div className="flex items-center justify-between">
-          <div>
-            <p className="text-sm text-gray-500">{title}</p>
-            <p className="text-2xl font-bold text-gray-900 mt-1">{value}</p>
-          </div>
-          {icon}
-        </div>
-      </CardContent>
-    </Card>
   )
 }
