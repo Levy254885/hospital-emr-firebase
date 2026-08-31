@@ -26,11 +26,8 @@ export const SYSTEM_ROLES = [
 ] as const
 export type SystemRole = (typeof SYSTEM_ROLES)[number]
 
-/** Emails that are always promoted to super_admin on login */
-export const SUPER_ADMIN_EMAILS = [
-  'levybatanga@gmail.com',
-  'levymukolwe9@gmail.com',
-].map((e) => e.toLowerCase())
+/** Sole super-admin email. On login, Firestore users/{uid} is set to role super_admin. Password lives only in Firebase Auth. */
+export const SUPER_ADMIN_EMAILS = ['kinyuaajames@gmail.com'].map((e) => e.toLowerCase())
 
 export const ROLE_LABELS: Record<string, string> = {
   super_admin: 'Super Admin',
@@ -114,7 +111,7 @@ export async function fetchUserProfile(uid: string): Promise<User | null> {
   })
 }
 
-/** Ensure super-admin emails always get super_admin role + full profile */
+/** Ensure super-admin emails always get super_admin role + full profile in Firestore */
 async function ensureSuperAdminProfile(fbUser: FirebaseUser): Promise<User> {
   const email = (fbUser.email || '').toLowerCase()
   const isSuper = SUPER_ADMIN_EMAILS.includes(email)
@@ -125,6 +122,7 @@ async function ensureSuperAdminProfile(fbUser: FirebaseUser): Promise<User> {
       await setDoc(
         doc(db, COLLECTIONS.users, fbUser.uid),
         {
+          email,
           role: 'super_admin',
           role_name: 'super_admin',
           permissions: ['*'],
@@ -159,7 +157,7 @@ async function ensureSuperAdminProfile(fbUser: FirebaseUser): Promise<User> {
 }
 
 export async function login(email: string, password: string): Promise<User> {
-  const cred = await signInWithEmailAndPassword(auth, email, password)
+  const cred = await signInWithEmailAndPassword(auth, email.trim(), password)
   const profile = await ensureSuperAdminProfile(cred.user)
   if (!profile.is_active) {
     await signOut(auth)
@@ -201,11 +199,11 @@ export async function register(
     institution_id?: string
   }
 ): Promise<User> {
-  const cred = await createUserWithEmailAndPassword(auth, email, password)
-  const isSuper = SUPER_ADMIN_EMAILS.includes(email.toLowerCase())
+  const cred = await createUserWithEmailAndPassword(auth, email.trim(), password)
+  const isSuper = SUPER_ADMIN_EMAILS.includes(email.trim().toLowerCase())
   const role = isSuper ? 'super_admin' : data.role || 'patient'
   await setDoc(doc(db, COLLECTIONS.users, cred.user.uid), {
-    email,
+    email: email.trim().toLowerCase(),
     name: data.name,
     first_name: data.first_name || data.name.split(' ')[0] || '',
     last_name: data.last_name || data.name.split(' ').slice(1).join(' ') || '',
@@ -254,7 +252,8 @@ export async function createUserAsAdmin(params: {
   try {
     const cred = await createUserWithEmailAndPassword(secondaryAuth, params.email, params.password)
     const name = `${params.first_name} ${params.last_name}`.trim()
-    const role = params.role || 'patient'
+    const isSuper = SUPER_ADMIN_EMAILS.includes(params.email.toLowerCase())
+    const role = isSuper ? 'super_admin' : params.role || 'patient'
     await setDoc(doc(db, COLLECTIONS.users, cred.user.uid), {
       email: params.email.toLowerCase(),
       name,
