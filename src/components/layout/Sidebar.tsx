@@ -2,10 +2,28 @@ import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { cn } from '@/lib/utils'
 import {
-  LayoutDashboard, Users, FileText, Calendar, Pill, FlaskConical, Building2,
-  Activity, Scissors, CreditCard, BarChart3, Settings, Shield, Bell,
-  ChevronDown, ChevronLeft, ChevronRight, Heart, Stethoscope, BedDouble,
-  AlertTriangle, TestTube, Package, ClipboardList, UserCog, Building,
+  LayoutDashboard,
+  Users,
+  FileText,
+  Calendar,
+  Pill,
+  FlaskConical,
+  CreditCard,
+  BarChart3,
+  Settings,
+  Shield,
+  Bell,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  Heart,
+  Stethoscope,
+  BedDouble,
+  AlertTriangle,
+  Package,
+  Scissors,
+  UserCog,
+  Building2,
 } from 'lucide-react'
 
 interface SidebarProps {
@@ -17,56 +35,61 @@ interface NavItem {
   label: string
   path: string
   icon: React.ReactNode
-  children?: NavItem[]
 }
 
 const navigation: { label: string; items: NavItem[] }[] = [
   {
-    label: 'Principal',
+    label: 'Main',
     items: [
       { label: 'Dashboard', path: '/dashboard', icon: <LayoutDashboard className="h-5 w-5" /> },
     ],
   },
   {
-    label: 'Pacientes',
+    label: 'Patients',
     items: [
-      { label: 'Pacientes', path: '/patients', icon: <Users className="h-5 w-5" /> },
-      { label: 'Hospitalizacion', path: '/hospitalization', icon: <BedDouble className="h-5 w-5" /> },
+      { label: 'Patients', path: '/patients', icon: <Users className="h-5 w-5" /> },
+      { label: 'Inpatient', path: '/hospitalization', icon: <BedDouble className="h-5 w-5" /> },
+      { label: 'Emergency', path: '/emergency', icon: <AlertTriangle className="h-5 w-5" /> },
     ],
   },
   {
-    label: 'Clinica',
+    label: 'Clinical',
     items: [
-      { label: 'Historiales', path: '/clinical/records', icon: <FileText className="h-5 w-5" /> },
-      { label: 'Citas', path: '/appointments', icon: <Calendar className="h-5 w-5" /> },
-      { label: 'Recetas', path: '/prescriptions', icon: <Pill className="h-5 w-5" /> },
-      { label: 'Laboratorio', path: '/lab/orders', icon: <FlaskConical className="h-5 w-5" /> },
-      { label: 'Emergencia', path: '/emergency', icon: <AlertTriangle className="h-5 w-5" /> },
-      { label: 'Cirugias', path: '/surgery', icon: <Scissors className="h-5 w-5" /> },
+      { label: 'Medical Records', path: '/clinical/records', icon: <FileText className="h-5 w-5" /> },
+      { label: 'Appointments', path: '/appointments', icon: <Calendar className="h-5 w-5" /> },
+      { label: 'Prescriptions', path: '/prescriptions', icon: <Pill className="h-5 w-5" /> },
+      { label: 'Laboratory', path: '/lab/orders', icon: <FlaskConical className="h-5 w-5" /> },
+      { label: 'Surgery', path: '/surgery', icon: <Scissors className="h-5 w-5" /> },
+      { label: 'Radiology', path: '/radiology', icon: <Heart className="h-5 w-5" /> },
     ],
   },
   {
-    label: 'Farmacia',
+    label: 'Pharmacy',
     items: [
-      { label: 'Medicamentos', path: '/pharmacy/medications', icon: <Heart className="h-5 w-5" /> },
-      { label: 'Inventario', path: '/inventory', icon: <Package className="h-5 w-5" /> },
+      { label: 'Medications', path: '/pharmacy/medications', icon: <Pill className="h-5 w-5" /> },
+      { label: 'Inventory', path: '/inventory', icon: <Package className="h-5 w-5" /> },
+      { label: 'Dispensation', path: '/pharmacy/dispensation', icon: <Package className="h-5 w-5" /> },
+      { label: 'Suppliers', path: '/pharmacy/suppliers', icon: <Building2 className="h-5 w-5" /> },
     ],
   },
   {
-    label: 'Finanzas',
+    label: 'Finance',
     items: [
-      { label: 'Facturacion', path: '/billing/invoices', icon: <CreditCard className="h-5 w-5" /> },
-      { label: 'Pagos', path: '/billing/payments', icon: <CreditCard className="h-5 w-5" /> },
-      { label: 'Caja', path: '/billing/cash-register', icon: <CreditCard className="h-5 w-5" /> },
+      { label: 'Invoices', path: '/billing/invoices', icon: <CreditCard className="h-5 w-5" /> },
+      { label: 'Payments', path: '/billing/payments', icon: <CreditCard className="h-5 w-5" /> },
+      { label: 'Cash Register', path: '/billing/cash-register', icon: <CreditCard className="h-5 w-5" /> },
     ],
   },
   {
-    label: 'Sistema',
+    label: 'Administration',
     items: [
-      { label: 'Reportes', path: '/reports', icon: <BarChart3 className="h-5 w-5" /> },
-      { label: 'Configuracion', path: '/settings', icon: <Settings className="h-5 w-5" /> },
-      { label: 'Auditoria', path: '/audit', icon: <Shield className="h-5 w-5" /> },
-      { label: 'Notificaciones', path: '/notifications', icon: <Bell className="h-5 w-5" /> },
+      { label: 'Users', path: '/settings/users', icon: <UserCog className="h-5 w-5" /> },
+      { label: 'Roles', path: '/settings/roles', icon: <Shield className="h-5 w-5" /> },
+      { label: 'Institution', path: '/settings/institution', icon: <Building2 className="h-5 w-5" /> },
+      { label: 'Settings', path: '/settings', icon: <Settings className="h-5 w-5" /> },
+      { label: 'Reports', path: '/reports', icon: <BarChart3 className="h-5 w-5" /> },
+      { label: 'Audit Log', path: '/audit', icon: <Shield className="h-5 w-5" /> },
+      { label: 'Notifications', path: '/notifications', icon: <Bell className="h-5 w-5" /> },
     ],
   },
 ]
@@ -79,13 +102,12 @@ export default function Sidebar({ collapsed = false, onToggle }: SidebarProps) {
 
   const toggleSection = (label: string) => {
     setExpandedSections((current) =>
-      current.includes(label)
-        ? current.filter((s) => s !== label)
-        : [...current, label]
+      current.includes(label) ? current.filter((s) => s !== label) : [...current, label]
     )
   }
 
   const isActive = (path: string) => {
+    if (path === '/dashboard') return location.pathname === '/dashboard'
     return location.pathname === path || location.pathname.startsWith(path + '/')
   }
 
@@ -103,7 +125,7 @@ export default function Sidebar({ collapsed = false, onToggle }: SidebarProps) {
         {!collapsed && (
           <div className="overflow-hidden">
             <h1 className="text-lg font-bold text-white truncate">Hospital EMR</h1>
-            <p className="text-xs text-primary-200 truncate">Sistema Medico</p>
+            <p className="text-xs text-primary-200 truncate">Medical System</p>
           </div>
         )}
       </div>
@@ -113,6 +135,7 @@ export default function Sidebar({ collapsed = false, onToggle }: SidebarProps) {
           <div key={section.label} className="mb-4">
             {!collapsed && (
               <button
+                type="button"
                 onClick={() => toggleSection(section.label)}
                 className="flex items-center justify-between w-full px-3 py-2 text-xs font-semibold text-primary-300 uppercase tracking-wider"
               >
@@ -152,6 +175,7 @@ export default function Sidebar({ collapsed = false, onToggle }: SidebarProps) {
 
       <div className="p-2 border-t border-primary-700/50">
         <button
+          type="button"
           onClick={onToggle}
           className="flex items-center justify-center w-full px-3 py-2 rounded-lg text-primary-200 hover:bg-white/10 hover:text-white transition-colors"
         >
@@ -160,7 +184,7 @@ export default function Sidebar({ collapsed = false, onToggle }: SidebarProps) {
           ) : (
             <>
               <ChevronLeft className="h-5 w-5 mr-2" />
-              <span className="text-sm">Colapsar</span>
+              <span className="text-sm">Collapse</span>
             </>
           )}
         </button>

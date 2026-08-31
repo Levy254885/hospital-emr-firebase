@@ -9,8 +9,8 @@ import Button from '@/components/ui/Button'
 import { Stethoscope, Mail, Lock, Eye, EyeOff } from 'lucide-react'
 
 const loginSchema = z.object({
-  email: z.string().email('Correo inválido'),
-  password: z.string().min(1, 'La contraseña es requerida'),
+  email: z.string().email('Invalid email'),
+  password: z.string().min(1, 'Password is required'),
   remember_me: z.boolean().optional(),
 })
 
@@ -34,24 +34,22 @@ export default function LoginPage() {
     setError(null)
     try {
       await login(data.email, data.password)
-      // PublicRoute redirects when isAuthenticated becomes true.
-      // Do not navigate here — that caused the insertBefore DOM race.
     } catch (err: unknown) {
       const anyErr = err as { code?: string; message?: string }
-      let message = 'Error al iniciar sesión. Verifica tus credenciales.'
+      let message = 'Login failed. Check your credentials.'
       if (
         anyErr?.code === 'auth/invalid-credential' ||
         anyErr?.code === 'auth/wrong-password' ||
         anyErr?.code === 'auth/user-not-found' ||
         anyErr?.code === 'auth/invalid-email'
       ) {
-        message = 'Correo o contraseña incorrectos.'
+        message = 'Incorrect email or password.'
       } else if (anyErr?.code === 'auth/too-many-requests') {
-        message = 'Demasiados intentos. Intenta más tarde.'
+        message = 'Too many attempts. Try again later.'
       } else if (anyErr?.code === 'auth/network-request-failed') {
-        message = 'Error de red. Revisa tu conexión.'
-      } else if (anyErr?.message?.includes('profile')) {
-        message = 'Usuario autenticado pero sin perfil en el sistema. Contacta al administrador.'
+        message = 'Network error. Check your connection.'
+      } else if (anyErr?.message?.includes('profile') || anyErr?.message?.includes('deactivated')) {
+        message = anyErr.message
       } else if (anyErr?.message) {
         message = anyErr.message
       }
@@ -68,35 +66,30 @@ export default function LoginPage() {
           </div>
         </div>
         <h2 className="mt-6 text-center text-3xl font-bold text-gray-900">Hospital EMR</h2>
-        <p className="mt-2 text-center text-sm text-gray-600">
-          Sistema de Registros Médicos Electrónicos
-        </p>
+        <p className="mt-2 text-center text-sm text-gray-600">Electronic Medical Records System</p>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow-xl sm:rounded-xl sm:px-10 border border-gray-100">
           <form className="space-y-6" onSubmit={handleSubmit(onSubmit)} noValidate>
             {error ? (
-              <div
-                role="alert"
-                className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm"
-              >
+              <div role="alert" className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
                 {error}
               </div>
             ) : null}
 
             <Input
-              label="Correo electrónico"
+              label="Email"
               type="email"
               autoComplete="email"
-              placeholder="tu@hospital.com"
+              placeholder="you@hospital.com"
               leftIcon={<Mail className="h-4 w-4" />}
               error={errors.email?.message}
               {...register('email')}
             />
 
             <Input
-              label="Contraseña"
+              label="Password"
               type={showPassword ? 'text' : 'password'}
               autoComplete="current-password"
               placeholder="••••••••"
@@ -107,7 +100,7 @@ export default function LoginPage() {
                   tabIndex={-1}
                   onClick={() => setShowPassword((v) => !v)}
                   className="text-gray-400 hover:text-gray-600"
-                  aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
                 >
                   {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
@@ -123,18 +116,15 @@ export default function LoginPage() {
                   className="w-4 h-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500"
                   {...register('remember_me')}
                 />
-                <span className="text-sm text-gray-600">Recordarme</span>
+                <span className="text-sm text-gray-600">Remember me</span>
               </label>
-              <Link
-                to="/forgot-password"
-                className="text-sm font-medium text-primary-600 hover:text-primary-700"
-              >
-                ¿Olvidaste tu contraseña?
+              <Link to="/forgot-password" className="text-sm font-medium text-primary-600 hover:text-primary-700">
+                Forgot password?
               </Link>
             </div>
 
             <Button type="submit" className="w-full" size="lg" isLoading={isSubmitting}>
-              Iniciar Sesión
+              Sign In
             </Button>
           </form>
         </div>
