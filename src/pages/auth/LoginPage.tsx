@@ -6,29 +6,23 @@ import { z } from 'zod'
 import { useAuth } from '@/hooks/useAuth'
 import Input from '@/components/ui/Input'
 import Button from '@/components/ui/Button'
-import { Stethoscope, Mail, Lock, Eye, EyeOff } from 'lucide-react'
+import { Mail, Lock } from 'lucide-react'
+import { CLINIC } from '@/lib/clinic'
 
-const loginSchema = z.object({
+const schema = z.object({
   email: z.string().email('Invalid email'),
   password: z.string().min(1, 'Password is required'),
-  remember_me: z.boolean().optional(),
 })
-
-type LoginFormData = z.infer<typeof loginSchema>
+type LoginFormData = z.infer<typeof schema>
 
 export default function LoginPage() {
   const { login } = useAuth()
-  const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState<string | null>(null)
-
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<LoginFormData>({
-    resolver: zodResolver(loginSchema),
-    defaultValues: { remember_me: false },
-  })
+  } = useForm<LoginFormData>({ resolver: zodResolver(schema) })
 
   const onSubmit = async (data: LoginFormData) => {
     setError(null)
@@ -48,8 +42,6 @@ export default function LoginPage() {
         message = 'Too many attempts. Try again later.'
       } else if (anyErr?.code === 'auth/network-request-failed') {
         message = 'Network error. Check your connection.'
-      } else if (anyErr?.message?.includes('profile') || anyErr?.message?.includes('deactivated')) {
-        message = anyErr.message
       } else if (anyErr?.message) {
         message = anyErr.message
       }
@@ -58,15 +50,27 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-secondary-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-emerald-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <div className="flex justify-center">
-          <div className="w-16 h-16 bg-gradient-to-br from-primary-600 to-primary-700 rounded-2xl flex items-center justify-center shadow-lg">
-            <Stethoscope className="h-8 w-8 text-white" />
-          </div>
+          <img
+            src="/icons/elikin-logo.svg"
+            alt={CLINIC.name}
+            className="w-20 h-20 object-contain drop-shadow-md"
+          />
         </div>
-        <h2 className="mt-6 text-center text-3xl font-bold text-gray-900">Hospital EMR</h2>
-        <p className="mt-2 text-center text-sm text-gray-600">Electronic Medical Records System</p>
+        <h2 className="mt-4 text-center text-3xl font-bold tracking-tight">
+          <span className="text-emerald-600">ELIKIN</span>{' '}
+          <span className="text-primary-700">MEDICAL</span>
+        </h2>
+        <p className="text-center text-2xl font-bold text-primary-600 -mt-1">CLINIC</p>
+        <p className="mt-1 text-center text-sm italic text-primary-500">{CLINIC.tagline}</p>
+        <p className="mt-1 text-center text-xs font-semibold tracking-wide text-primary-700 uppercase">
+          Clinic Management System
+        </p>
+        <p className="mt-3 text-center text-xs text-gray-500">
+          {CLINIC.hours} · {CLINIC.phoneDisplay}
+        </p>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
@@ -82,7 +86,6 @@ export default function LoginPage() {
               label="Email"
               type="email"
               autoComplete="email"
-              placeholder="you@hospital.com"
               leftIcon={<Mail className="h-4 w-4" />}
               error={errors.email?.message}
               {...register('email')}
@@ -90,44 +93,27 @@ export default function LoginPage() {
 
             <Input
               label="Password"
-              type={showPassword ? 'text' : 'password'}
+              type="password"
               autoComplete="current-password"
-              placeholder="••••••••"
               leftIcon={<Lock className="h-4 w-4" />}
-              rightIcon={
-                <button
-                  type="button"
-                  tabIndex={-1}
-                  onClick={() => setShowPassword((v) => !v)}
-                  className="text-gray-400 hover:text-gray-600"
-                  aria-label={showPassword ? 'Hide password' : 'Show password'}
-                >
-                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                </button>
-              }
               error={errors.password?.message}
               {...register('password')}
             />
 
-            <div className="flex items-center justify-between">
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  className="w-4 h-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500"
-                  {...register('remember_me')}
-                />
-                <span className="text-sm text-gray-600">Remember me</span>
-              </label>
-              <Link to="/forgot-password" className="text-sm font-medium text-primary-600 hover:text-primary-700">
+            <div className="flex items-center justify-between text-sm">
+              <Link to="/forgot-password" className="text-primary-600 hover:text-primary-700 font-medium">
                 Forgot password?
               </Link>
             </div>
 
-            <Button type="submit" className="w-full" size="lg" isLoading={isSubmitting}>
-              Sign In
+            <Button type="submit" className="w-full" isLoading={isSubmitting}>
+              Sign in
             </Button>
           </form>
         </div>
+        <p className="mt-6 text-center text-xs text-gray-400">
+          {CLINIC.email} · {CLINIC.social}
+        </p>
       </div>
     </div>
   )
