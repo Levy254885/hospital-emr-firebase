@@ -8,7 +8,7 @@ import Select from '@/components/ui/Select'
 import { Badge, StatusBadge } from '@/components/ui/Badge'
 import { PageLoadingSpinner } from '@/components/ui/LoadingSpinner'
 import { EmptyState } from '@/components/ui/EmptyState'
-import { Plus, UserCog } from 'lucide-react'
+import { Plus, UserCog, RefreshCw } from 'lucide-react'
 import toast from 'react-hot-toast'
 import type { User } from '@/types'
 
@@ -23,9 +23,11 @@ export default function UserListPage() {
   const qc = useQueryClient()
   const canManage = hasRole('super_admin', 'admin')
 
-  const { data: users, isLoading } = useQuery({
+  const { data: users, isLoading, isFetching, error, refetch } = useQuery({
     queryKey: ['users'],
     queryFn: () => authService.listUsers(),
+    staleTime: 0,
+    refetchOnMount: 'always',
   })
 
   const updateRole = useMutation({
@@ -57,21 +59,41 @@ export default function UserListPage() {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Users</h1>
-          <p className="text-sm text-gray-500">Manage system users and roles</p>
+          <p className="text-sm text-gray-500">
+            Manage system users and roles ({list.length} total)
+          </p>
         </div>
-        {canManage && (
-          <Button leftIcon={<Plus className="h-4 w-4" />} onClick={() => navigate('/settings/users/create')}>
-            Add User
+        <div className="flex gap-2">
+          <Button
+            variant="outline"
+            leftIcon={<RefreshCw className={`h-4 w-4 ${isFetching ? 'animate-spin' : ''}`} />}
+            onClick={() => refetch()}
+          >
+            Refresh
           </Button>
-        )}
+          {canManage && (
+            <Button leftIcon={<Plus className="h-4 w-4" />} onClick={() => navigate('/settings/users/create')}>
+              Add User
+            </Button>
+          )}
+        </div>
       </div>
+
+      {error && (
+        <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+          Failed to load users: {(error as Error).message}
+          <button type="button" className="ml-2 underline" onClick={() => refetch()}>
+            Retry
+          </button>
+        </div>
+      )}
 
       <Card variant="elevated">
         <CardContent className="pt-6">
           {list.length === 0 ? (
             <EmptyState
               title="No users found"
-              description="Create the first user to get started"
+              description="Create the first user to get started. If you already created users, check Firestore rules and click Refresh."
               icon={<UserCog className="h-8 w-8 text-gray-400" />}
               action={
                 canManage ? (

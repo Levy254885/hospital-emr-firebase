@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useQueryClient } from '@tanstack/react-query'
 import * as authService from '@/lib/services/authService'
 import { useAuth } from '@/hooks/useAuth'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card'
@@ -11,6 +12,7 @@ import toast from 'react-hot-toast'
 
 export default function UserCreatePage() {
   const navigate = useNavigate()
+  const qc = useQueryClient()
   const { user, hasRole } = useAuth()
   const [saving, setSaving] = useState(false)
   const [formData, setFormData] = useState({
@@ -57,12 +59,15 @@ export default function UserCreatePage() {
         institution_id: user?.institution_id || 'default',
         created_by: user?.id,
       })
+      await qc.invalidateQueries({ queryKey: ['users'] })
       toast.success('User created successfully')
       navigate('/settings/users')
     } catch (err: unknown) {
       const e = err as { code?: string; message?: string }
       if (e.code === 'auth/email-already-in-use') {
         toast.error('Email is already registered')
+      } else if (e.message?.includes('permission') || e.code === 'permission-denied') {
+        toast.error('Permission denied writing user profile. Check Firestore rules.')
       } else {
         toast.error(e.message || 'Failed to create user')
       }
