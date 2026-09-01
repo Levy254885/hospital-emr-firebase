@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Card, CardContent } from '@/components/ui/Card'
-import { Settings, Building2, Users, Shield, Bell, Palette } from 'lucide-react'
+import { Building2, Users, Shield, Bell } from 'lucide-react'
 
 const settingsSections = [
   {
