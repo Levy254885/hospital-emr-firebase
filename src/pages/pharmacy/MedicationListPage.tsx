@@ -19,7 +19,7 @@ export default function MedicationListPage() {
   const columns = [
     {
       key: 'name',
-      header: 'Nombre',
+      header: 'Name',
       sortable: true,
       render: (item: Medication) => (
         <div>
@@ -30,17 +30,17 @@ export default function MedicationListPage() {
     },
     {
       key: 'category',
-      header: 'Categoria',
+      header: 'Category',
       render: (item: Medication) => <Badge variant="primary">{item.category || 'N/A'}</Badge>,
     },
     {
       key: 'pharmaceutical_form',
-      header: 'Forma',
+      header: 'Form',
       render: (item: Medication) => item.pharmaceutical_form || item.presentation || 'N/A',
     },
     {
       key: 'concentration',
-      header: 'Concentracion',
+      header: 'Strength',
       render: (item: Medication) => item.concentration,
     },
     {
@@ -60,12 +60,12 @@ export default function MedicationListPage() {
     },
     {
       key: 'unit_price',
-      header: 'Precio',
+      header: 'Price',
       render: (item: Medication) => formatCurrency(item.unit_price),
     },
     {
       key: 'is_active',
-      header: 'Estado',
+      header: 'Status',
       render: (item: Medication) => <StatusBadge status={item.is_active ? 'active' : 'inactive'} />,
     },
   ]
@@ -76,16 +76,16 @@ export default function MedicationListPage() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Medicamentos</h1>
-          <p className="text-sm text-gray-500">Inventario de medicamentos</p>
+          <h1 className="text-2xl font-bold text-gray-900">Medications</h1>
+          <p className="text-sm text-gray-500">Medication inventory</p>
         </div>
         <div className="flex gap-2">
           <Button variant="outline" onClick={() => navigate('/pharmacy/dispensation')}>
             <Package className="h-4 w-4 mr-2" />
-            Despacho
+            Dispensation
           </Button>
           <Button leftIcon={<Plus className="h-4 w-4" />} onClick={() => navigate('/pharmacy/medications/create')}>
-            Nuevo Medicamento
+            New medication
           </Button>
         </div>
       </div>
@@ -95,18 +95,18 @@ export default function MedicationListPage() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-yellow-800">
               <AlertTriangle className="h-5 w-5" />
-              Stock Bajo ({lowStockList.length})
+              Low stock ({lowStockList.length})
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex flex-wrap gap-2">
               {lowStockList.slice(0, 5).map((med) => (
                 <Badge key={med.id} variant="warning">
-                  {med.name}: {med.current_stock ?? med.stock_quantity ?? 0} unidades
+                  {med.name}: {med.current_stock ?? med.stock_quantity ?? 0} units
                 </Badge>
               ))}
               {lowStockList.length > 5 && (
-                <Badge variant="warning">+{lowStockList.length - 5} mas</Badge>
+                <Badge variant="warning">+{lowStockList.length - 5} more</Badge>
               )}
             </div>
           </CardContent>
@@ -119,7 +119,7 @@ export default function MedicationListPage() {
             <div className="flex-1">
               <input
                 type="text"
-                placeholder="Buscar medicamento..."
+                placeholder="Search medication..."
                 value={search}
                 onChange={(e) => {
                   setSearch(e.target.value)
@@ -146,8 +146,8 @@ export default function MedicationListPage() {
                 }
               : undefined
           }
-          emptyTitle="No hay medicamentos"
-          emptyDescription="No se encontraron medicamentos en el inventario"
+          emptyTitle="No medications"
+          emptyDescription="No medications found in inventory"
         />
       </Card>
     </div>
