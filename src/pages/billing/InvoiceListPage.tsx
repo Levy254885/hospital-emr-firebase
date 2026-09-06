@@ -8,7 +8,7 @@ import { DataTable } from '@/components/ui/DataTable'
 import { StatusBadge } from '@/components/ui/Badge'
 import { PageLoadingSpinner } from '@/components/ui/LoadingSpinner'
 import { EmptyState } from '@/components/ui/EmptyState'
-import { Plus, Search, FileText } from 'lucide-react'
+import { Plus, Search } from 'lucide-react'
 import { formatCurrency, formatDate } from '@/lib/utils'
 import type { Invoice } from '@/types'
 
