@@ -1,26 +1,26 @@
-import { useState, useMemo } from 'react'
-import { cn } from '@/lib/utils'
+import { useState } from 'react'
 import { ChevronUp, ChevronDown, ChevronLeft, ChevronRight, Search } from 'lucide-react'
+import { cn } from '@/lib/utils'
 import Button from './Button'
-import Input from './Input'
 import { EmptyState } from './EmptyState'
 import { TableLoadingSpinner } from './LoadingSpinner'
 
-interface Column<T> {
+export interface Column<T> {
   key: string
   header: string
   sortable?: boolean
-  render?: (item: T) => React.ReactNode
   className?: string
+  render?: (item: T) => React.ReactNode
 }
 
 interface DataTableProps<T> {
   columns: Column<T>[]
   data: T[]
   isLoading?: boolean
+  onRowClick?: (item: T) => void
+  keyExtractor?: (item: T) => string
   searchPlaceholder?: string
-  searchValue?: string
-  onSearch?: (value: string) => void
+  searchable?: boolean
   pagination?: {
     current_page: number
     last_page: number
@@ -30,51 +30,73 @@ interface DataTableProps<T> {
   }
   emptyTitle?: string
   emptyDescription?: string
-  onRowClick?: (item: T) => void
-  className?: string
 }
 
-export function DataTable<T>({
-  columns, data, isLoading, searchPlaceholder, searchValue, onSearch, pagination,
-  emptyTitle = 'No hay datos', emptyDescription = 'No se encontraron registros',
-  onRowClick, className,
+export function DataTable<T extends Record<string, unknown>>({
+  columns,
+  data,
+  isLoading,
+  onRowClick,
+  keyExtractor,
+  searchPlaceholder,
+  searchable = false,
+  pagination,
+  emptyTitle = 'No data',
+  emptyDescription = 'No records found',
 }: DataTableProps<T>) {
+  const [search, setSearch] = useState('')
   const [sortConfig, setSortConfig] = useState<{ key: string; direction: 'asc' | 'desc' } | null>(null)
 
   const handleSort = (key: string) => {
     setSortConfig((current) => {
-      if (current?.key === key) return { key, direction: current.direction === 'asc' ? 'desc' : 'asc' }
+      if (current?.key === key) {
+        return { key, direction: current.direction === 'asc' ? 'desc' : 'asc' }
+      }
       return { key, direction: 'asc' }
     })
   }
 
-  const sortedData = useMemo(() => {
-    if (!sortConfig) return data
-    return [...data].sort((a, b) => {
-      const aRecord = a as Record<string, unknown>
-      const bRecord = b as Record<string, unknown>
-      const aVal = aRecord[sortConfig.key] as string | number
-      const bVal = bRecord[sortConfig.key] as string | number
-      if (aVal < bVal) return sortConfig.direction === 'asc' ? -1 : 1
-      if (aVal > bVal) return sortConfig.direction === 'asc' ? 1 : -1
-      return 0
-    })
-  }, [data, sortConfig])
+  let displayData = [...data]
 
-  if (isLoading) return <TableLoadingSpinner />
+  if (search && searchable) {
+    const q = search.toLowerCase()
+    displayData = displayData.filter((item) =>
+      Object.values(item).some((v) => String(v ?? '').toLowerCase().includes(q))
+    )
+  }
+
+  if (sortConfig) {
+    displayData.sort((a, b) => {
+      const aVal = a[sortConfig.key]
+      const bVal = b[sortConfig.key]
+      if (aVal === bVal) return 0
+      if (aVal == null) return 1
+      if (bVal == null) return -1
+      const cmp = aVal < bVal ? -1 : 1
+      return sortConfig.direction === 'asc' ? cmp : -cmp
+    })
+  }
+
+  if (isLoading) {
+    return <TableLoadingSpinner />
+  }
 
   return (
-    <div className={cn('space-y-4', className)}>
-      {onSearch && (
-        <div className="flex items-center gap-2">
-          <div className="relative flex-1 max-w-sm">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-            <input type="text" placeholder={searchPlaceholder || 'Buscar...'} value={searchValue || ''} onChange={(e) => onSearch(e.target.value)}
-              className="block w-full rounded-lg border border-gray-300 bg-white pl-10 pr-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20" />
-          </div>
+    <div className="space-y-4">
+      {searchable && (
+        <div className="relative max-w-sm">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+          <input
+            type="text"
+            placeholder={searchPlaceholder || 'Search...'}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="block w-full rounded-lg border border-gray-300 bg-white pl-10 pr-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20"
+          />
         </div>
       )}
-      {data.length === 0 ? (
+
+      {displayData.length === 0 ? (
         <EmptyState title={emptyTitle} description={emptyDescription} />
       ) : (
         <div className="overflow-hidden rounded-lg border border-gray-200">
@@ -83,21 +105,44 @@ export function DataTable<T>({
               <thead className="bg-gray-50">
                 <tr>
                   {columns.map((column) => (
-                    <th key={column.key} className={cn('px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider', column.sortable && 'cursor-pointer select-none hover:text-gray-700', column.className)} onClick={() => column.sortable && handleSort(column.key)}>
+                    <th
+                      key={column.key}
+                      className={cn(
+                        'px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider',
+                        column.sortable && 'cursor-pointer select-none hover:text-gray-700',
+                        column.className
+                      )}
+                      onClick={() => column.sortable && handleSort(column.key)}
+                    >
                       <div className="flex items-center gap-1">
                         {column.header}
-                        {column.sortable && sortConfig?.key === column.key && (sortConfig.direction === 'asc' ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />)}
+                        {column.sortable && sortConfig?.key === column.key && (
+                          sortConfig.direction === 'asc' ? (
+                            <ChevronUp className="h-3.5 w-3.5" />
+                          ) : (
+                            <ChevronDown className="h-3.5 w-3.5" />
+                          )
+                        )}
                       </div>
                     </th>
                   ))}
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {sortedData.map((item, index) => (
-                  <tr key={index} className={cn('hover:bg-gray-50 transition-colors', onRowClick && 'cursor-pointer')} onClick={() => onRowClick?.(item)}>
+                {displayData.map((item, index) => (
+                  <tr
+                    key={keyExtractor ? keyExtractor(item) : String(index)}
+                    onClick={() => onRowClick?.(item)}
+                    className={cn(
+                      'transition-colors',
+                      onRowClick && 'cursor-pointer hover:bg-gray-50'
+                    )}
+                  >
                     {columns.map((column) => (
-                      <td key={column.key} className={cn('px-4 py-3 text-sm text-gray-900', column.className)}>
-                        {column.render ? column.render(item) : String((item as Record<string, unknown>)[column.key] || '-')}
+                      <td key={column.key} className={cn('px-4 py-3 whitespace-nowrap', column.className)}>
+                        {column.render
+                          ? column.render(item)
+                          : (item[column.key] as React.ReactNode) ?? '—'}
                       </td>
                     ))}
                   </tr>
@@ -107,13 +152,34 @@ export function DataTable<T>({
           </div>
         </div>
       )}
+
       {pagination && pagination.last_page > 1 && (
         <div className="flex items-center justify-between">
-          <p className="text-sm text-gray-500">Mostrando {(pagination.current_page - 1) * pagination.per_page + 1} a {Math.min(pagination.current_page * pagination.per_page, pagination.total)} de {pagination.total} resultados</p>
+          <p className="text-sm text-gray-500">
+            Showing {(pagination.current_page - 1) * pagination.per_page + 1} to{' '}
+            {Math.min(pagination.current_page * pagination.per_page, pagination.total)} of{' '}
+            {pagination.total} results
+          </p>
           <div className="flex items-center gap-2">
-            <Button variant="outline" size="sm" onClick={() => pagination.onPageChange(pagination.current_page - 1)} disabled={pagination.current_page === 1}><ChevronLeft className="h-4 w-4" /></Button>
-            <span className="text-sm text-gray-700">Pagina {pagination.current_page} de {pagination.last_page}</span>
-            <Button variant="outline" size="sm" onClick={() => pagination.onPageChange(pagination.current_page + 1)} disabled={pagination.current_page === pagination.last_page}><ChevronRight className="h-4 w-4" /></Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => pagination.onPageChange(pagination.current_page - 1)}
+              disabled={pagination.current_page === 1}
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </Button>
+            <span className="text-sm text-gray-700">
+              Page {pagination.current_page} of {pagination.last_page}
+            </span>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => pagination.onPageChange(pagination.current_page + 1)}
+              disabled={pagination.current_page === pagination.last_page}
+            >
+              <ChevronRight className="h-4 w-4" />
+            </Button>
           </div>
         </div>
       )}
