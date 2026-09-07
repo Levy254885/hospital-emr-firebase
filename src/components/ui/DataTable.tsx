@@ -32,7 +32,11 @@ interface DataTableProps<T> {
   emptyDescription?: string
 }
 
-export function DataTable<T extends Record<string, unknown>>({
+function asRecord(item: object): Record<string, unknown> {
+  return item as Record<string, unknown>
+}
+
+export function DataTable<T extends object>({
   columns,
   data,
   isLoading,
@@ -61,14 +65,14 @@ export function DataTable<T extends Record<string, unknown>>({
   if (search && searchable) {
     const q = search.toLowerCase()
     displayData = displayData.filter((item) =>
-      Object.values(item).some((v) => String(v ?? '').toLowerCase().includes(q))
+      Object.values(asRecord(item)).some((v) => String(v ?? '').toLowerCase().includes(q))
     )
   }
 
   if (sortConfig) {
     displayData.sort((a, b) => {
-      const aVal = a[sortConfig.key]
-      const bVal = b[sortConfig.key]
+      const aVal = asRecord(a)[sortConfig.key]
+      const bVal = asRecord(b)[sortConfig.key]
       if (aVal === bVal) return 0
       if (aVal == null) return 1
       if (bVal == null) return -1
@@ -142,7 +146,7 @@ export function DataTable<T extends Record<string, unknown>>({
                       <td key={column.key} className={cn('px-4 py-3 whitespace-nowrap', column.className)}>
                         {column.render
                           ? column.render(item)
-                          : (item[column.key] as React.ReactNode) ?? '—'}
+                          : ((asRecord(item)[column.key] as React.ReactNode) ?? '—')}
                       </td>
                     ))}
                   </tr>
