@@ -4,7 +4,7 @@ import { useMedicalRecords } from '@/hooks/useMedicalRecords'
 import { DataTable } from '@/components/ui/DataTable'
 import { StatusBadge } from '@/components/ui/Badge'
 import Button from '@/components/ui/Button'
-import { Card, CardHeader } from '@/components/ui/Card'
+import { Card } from '@/components/ui/Card'
 import { formatDate } from '@/lib/utils'
 import { Plus } from 'lucide-react'
 import type { MedicalRecord } from '@/types'
@@ -62,28 +62,29 @@ export default function MedicalRecordListPage() {
       </div>
 
       <Card variant="elevated">
-        <CardHeader className="pb-0" />
-        <DataTable
-          columns={columns}
-          data={data?.data || []}
-          isLoading={isLoading}
-          searchable
-          searchPlaceholder="Search by number or patient..."
-          onRowClick={(item) => navigate(`/clinical/records/${item.id}`)}
-          pagination={
-            data?.meta
-              ? {
-                  current_page: data.meta.current_page,
-                  last_page: data.meta.last_page,
-                  per_page: data.meta.per_page,
-                  total: data.meta.total,
-                  onPageChange: setPage,
-                }
-              : undefined
-          }
-          emptyTitle="No medical records"
-          emptyDescription="No clinical records found"
-        />
+        <div className="p-4">
+          <DataTable
+            columns={columns}
+            data={data?.data || []}
+            isLoading={isLoading}
+            searchable
+            searchPlaceholder="Search by number or patient..."
+            onRowClick={(item) => navigate(`/clinical/records/${item.id}`)}
+            pagination={
+              data?.meta
+                ? {
+                    current_page: data.meta.current_page,
+                    last_page: data.meta.last_page,
+                    per_page: data.meta.per_page,
+                    total: data.meta.total,
+                    onPageChange: setPage,
+                  }
+                : undefined
+            }
+            emptyTitle="No medical records"
+            emptyDescription="No clinical records found"
+          />
+        </div>
       </Card>
     </div>
   )
