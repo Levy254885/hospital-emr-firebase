@@ -4,14 +4,13 @@ import { useMedicalRecords } from '@/hooks/useMedicalRecords'
 import { DataTable } from '@/components/ui/DataTable'
 import { StatusBadge } from '@/components/ui/Badge'
 import Button from '@/components/ui/Button'
-import { Card, CardHeader, CardTitle } from '@/components/ui/Card'
+import { Card, CardHeader } from '@/components/ui/Card'
 import { formatDate } from '@/lib/utils'
-import { Plus, FileText } from 'lucide-react'
+import { Plus } from 'lucide-react'
 import type { MedicalRecord } from '@/types'
 
 export default function MedicalRecordListPage() {
   const navigate = useNavigate()
-  const [search, setSearch] = useState('')
   const [page, setPage] = useState(1)
 
   const { data, isLoading } = useMedicalRecords({ page, per_page: 15 })
@@ -19,7 +18,7 @@ export default function MedicalRecordListPage() {
   const columns = [
     {
       key: 'record_number',
-      header: 'N Registro',
+      header: 'Record No.',
       sortable: true,
       render: (item: MedicalRecord) => (
         <span className="font-mono text-primary-700">{item.record_number}</span>
@@ -27,7 +26,7 @@ export default function MedicalRecordListPage() {
     },
     {
       key: 'patient',
-      header: 'Paciente',
+      header: 'Patient',
       render: (item: MedicalRecord) => (
         <div>
           <p className="font-medium text-gray-900">
@@ -39,12 +38,12 @@ export default function MedicalRecordListPage() {
     },
     {
       key: 'status',
-      header: 'Estado',
+      header: 'Status',
       render: (item: MedicalRecord) => <StatusBadge status={item.status} />,
     },
     {
       key: 'created_at',
-      header: 'Fecha Creacion',
+      header: 'Created',
       sortable: true,
       render: (item: MedicalRecord) => formatDate(item.created_at),
     },
@@ -54,32 +53,36 @@ export default function MedicalRecordListPage() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Historiales Clinicos</h1>
-          <p className="text-sm text-gray-500">Gestion de historiales clinicos de pacientes</p>
+          <h1 className="text-2xl font-bold text-gray-900">Medical records</h1>
+          <p className="text-sm text-gray-500">Patient clinical history management</p>
         </div>
         <Button leftIcon={<Plus className="h-4 w-4" />} onClick={() => navigate('/clinical/records/create')}>
-          Nuevo Historial
+          New record
         </Button>
       </div>
 
       <Card variant="elevated">
+        <CardHeader className="pb-0" />
         <DataTable
           columns={columns}
           data={data?.data || []}
           isLoading={isLoading}
-          searchPlaceholder="Buscar por numero o paciente..."
-          searchValue={search}
-          onSearch={setSearch}
+          searchable
+          searchPlaceholder="Search by number or patient..."
           onRowClick={(item) => navigate(`/clinical/records/${item.id}`)}
-          pagination={data?.meta ? {
-            current_page: data.meta.current_page,
-            last_page: data.meta.last_page,
-            per_page: data.meta.per_page,
-            total: data.meta.total,
-            onPageChange: setPage,
-          } : undefined}
-          emptyTitle="No hay historiales"
-          emptyDescription="No se encontraron historiales clinicos"
+          pagination={
+            data?.meta
+              ? {
+                  current_page: data.meta.current_page,
+                  last_page: data.meta.last_page,
+                  per_page: data.meta.per_page,
+                  total: data.meta.total,
+                  onPageChange: setPage,
+                }
+              : undefined
+          }
+          emptyTitle="No medical records"
+          emptyDescription="No clinical records found"
         />
       </Card>
     </div>
