@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact | Executive Interior Design — Get a Quote in Kenya</title>
+<meta name="description" content="Contact Executive Interior Design. Call +254 781 038 041, email executiveinteriordesign@gmail.com, or send us your project details for a consultation.">
+<meta name="keywords" content="contact interior designer Kenya, interior design quote Kenya, executive interior design contact">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+/* ==================== CONTACT PAGE ==================== */
+
+.contact-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:70px;align-items:start}
+
+/* INFO SIDE */
+.info-intro h2{font-family:'Playfair Display',serif}
+.info-list{display:grid;gap:16px;margin-top:36px}
+.info-item{
+  display:flex;gap:18px;align-items:flex-start;
+  background:#fff;border:1px solid var(--line);border-radius:14px;
+  padding:22px 24px;transition:all .4s var(--ease);
+}
+.info-item:hover{border-color:var(--navy);transform:translateY(-4px);
+  box-shadow:0 20px 40px -24px rgba(11,42,91,.4)}
+.info-icon{
+  width:48px;height:48px;border-radius:12px;flex-shrink:0;
+  background:var(--soft);color:var(--red);display:grid;place-items:center;
+  transition:all .35s var(--ease);
+}
+.info-item:hover .info-icon{background:var(--red);color:#fff}
+.info-icon svg{width:20px;height:20px}
+.info-text strong{
+  display:block;font-size:11.5px;font-weight:800;letter-spacing:2.5px;
+  text-transform:uppercase;color:var(--muted);margin-bottom:5px;
+}
+.info-text a,.info-text span{color:var(--navy);font-size:16px;font-weight:600;
+  transition:color .25s;line-height:1.4}
+.info-text a:hover{color:var(--red)}
+
+/* HOURS CARD */
+.hours-card{
+  margin-top:26px;background:var(--navy);color:#fff;border-radius:16px;
+  padding:32px 30px;position:relative;overflow:hidden;
+}
+.hours-card::before{content:'';position:absolute;top:-50%;right:-30%;
+  width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle,rgba(243,156,18,.22),transparent 70%)}
+.hours-card > *{position:relative;z-index:1}
+.hours-card h4{color:var(--orange);font-size:12px;letter-spacing:3px;
+  text-transform:uppercase;margin-bottom:18px;font-weight:800}
+.hours-row{display:flex;justify-content:space-between;padding:11px 0;
+  border-bottom:1px solid rgba(255,255,255,.1);font-size:14.4px}
+.hours-row:last-child{border-bottom:none}
+.hours-row span:first-child{color:rgba(255,255,255,.72)}
+.hours-row span:last-child{color:#fff;font-weight:600}
+
+/* FORM CARD */
+.form-card{
+  background:#fff;border:1px solid var(--line);border-radius:18px;
+  padding:44px 40px;box-shadow:0 30px 60px -40px rgba(11,42,91,.35);
+}
+.form-card h3{font-family:'Playfair Display',serif;font-size:26px;
+  color:var(--navy);margin-bottom:8px}
+.form-card > p{color:var(--muted);font-size:14.6px;margin-bottom:30px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.form-grid .full{grid-column:1/-1}
+.form-grid label{display:block;font-size:12px;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;color:var(--navy);
+  margin-bottom:7px}
+.form-grid input,.form-grid select,.form-grid textarea{
+  width:100%;padding:14px 16px;border:1px solid var(--line);
+  border-radius:10px;font-family:inherit;font-size:15px;background:#fbfbfc;
+  transition:all .25s var(--ease);color:var(--ink);
+}
+.form-grid input:focus,.form-grid select:focus,.form-grid textarea:focus{
+  outline:none;border-color:var(--navy);background:#fff;
+  box-shadow:0 0 0 4px rgba(11,42,91,.08);
+}
+.form-grid textarea{min-height:140px;resize:vertical}
+.form-submit{margin-top:26px;display:flex;align-items:center;
+  justify-content:space-between;gap:20px;flex-wrap:wrap}
+.form-note{font-size:12.5px;color:var(--muted);line-height:1.5}
+
+/* SUCCESS */
+.form-success{
+  display:none;margin-top:22px;padding:20px 24px;border-radius:12px;
+  background:#e9f7ef;border:1px solid #b9e5c9;color:#14532d;
+  font-size:14.5px;font-weight:500;
+}
+.form-success.show{display:block;animation:slideIn .4s ease}
+@keyframes slideIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+
+/* MAP */
+.map-wrap{margin-top:56px;border-radius:18px;overflow:hidden;
+  border:1px solid var(--line);height:420px;position:relative}
+.map-wrap iframe{width:100%;height:100%;border:none;display:block;filter:grayscale(20%)}
+
+/* QUICK CARDS */
+.quick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+.quick-card{
+  background:#fff;border:1px solid var(--line);border-radius:16px;
+  padding:34px 28px;transition:all .4s var(--ease);text-align:center;
+}
+.quick-card:hover{transform:translateY(-6px);border-color:var(--navy);
+  box-shadow:0 28px 56px -32px rgba(11,42,91,.4)}
+.quick-icon{
+  width:56px;height:56px;border-radius:50%;margin:0 auto 18px;
+  background:var(--soft);color:var(--red);display:grid;place-items:center;
+  transition:all .35s var(--ease);
+}
+.quick-card:hover .quick-icon{background:var(--red);color:#fff;transform:scale(1.08)}
+.quick-icon svg{width:22px;height:22px}
+.quick-card h4{color:var(--navy);font-size:16.5px;font-weight:800;margin-bottom:10px}
+.quick-card p{color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:16px}
+.quick-card .link{color:var(--red);font-weight:700;font-size:13px;
+  letter-spacing:1.5px;text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:8px;transition:gap .3s var(--ease)}
+.quick-card .link:hover{gap:14px}
+
+/* CTA */
+.cta-section{padding:0 22px 96px}
+.cta-band{max-width:var(--max);margin:0 auto;border-radius:20px;
+  background:linear-gradient(115deg,var(--navy) 0%,var(--red) 100%);
+  color:#fff;text-align:center;padding:80px 34px;position:relative;overflow:hidden}
+.cta-band::before{content:'';position:absolute;inset:0;opacity:.1;
+  background:url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1600&q=80') center/cover;
+  mix-blend-mode:overlay}
+.cta-band > *{position:relative;z-index:1}
+.cta-band h2{color:#fff;font-family:'Playfair Display',serif;margin-bottom:14px}
+.cta-band p{color:rgba(255,255,255,.88);max-width:600px;margin:0 auto 34px;font-size:16.5px}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .contact-grid{grid-template-columns:1fr;gap:44px}
+  .quick-grid{grid-template-columns:1fr}
+  .form-card{padding:34px 26px}
+}
+@media(max-width:640px){
+  .form-grid{grid-template-columns:1fr}
+  .map-wrap{height:320px}
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== HEADER ==================== -->
+<header id="site-header">
+  <div class="wrap header-inner">
+    <a href="index.html" class="logo-link" aria-label="Executive Interior Design Home">
+      <img src="logo.png" alt="Executive Interior Design — Beauty in Style" class="logo-img">
+    </a>
+    <nav aria-label="Main navigation">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a href="tel:+254781038041" class="header-phone">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span>+254 781 038 041</span>
+      </a>
+      <a href="contact.html" class="btn">Get a Quote</a>
+      <button class="menu-toggle" aria-label="Open menu" id="menuToggle">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ==================== MOBILE MENU ==================== -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose" aria-label="Close menu">×</button>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="mobile-contact">
+    <p><strong>Office:</strong> <a href="tel:+254781038041">+254 781 038 041</a></p>
+    <p><strong>Email:</strong> <a href="mailto:executiveinteriordesign@gmail.com">executiveinteriordesign@gmail.com</a></p>
+  </div>
+</div>
+
+<!-- ==================== PAGE HERO ==================== -->
+<section class="page-hero">
+  <div class="wrap">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a><span>/</span><span>Contact</span>
+    </div>
+    <h1>Let's create beautiful spaces.</h1>
+    <p>Whether you are planning a new home, refreshing an existing space, fitting out a commercial environment or selecting interior finishes — we are ready to discuss your project.</p>
+  </div>
+</section>
+
+<!-- ==================== CONTACT GRID ==================== -->
+<section>
+  <div class="wrap contact-grid">
+
+    <!-- LEFT: INFO -->
+    <div class="info-intro">
+      <span class="eyebrow reveal">Get In Touch</span>
+      <h2 class="reveal reveal-d1">We would love to hear about your space.</h2>
+      <p class="lead reveal reveal-d2">
+        Reach out by phone, email, or the form — whichever is easiest. We respond
+        to every enquiry and will recommend the right next step for your project.
+      </p>
+
+      <div class="info-list">
+        <div class="info-item reveal reveal-d2">
+          <div class="info-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div class="info-text">
+            <strong>Chief Executive</strong>
+            <span>Daniel Owiro</span>
+          </div>
+        </div>
+
+        <div class="info-item reveal reveal-d3">
+          <div class="info-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div class="info-text">
+            <strong>Office</strong>
+            <a href="tel:+254781038041">+254 781 038 041</a>
+          </div>
+        </div>
+
+        <div class="info-item reveal reveal-d4">
+          <div class="info-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div class="info-text">
+            <strong>Email</strong>
+            <a href="mailto:executiveinteriordesign@gmail.com">executiveinteriordesign@gmail.com</a>
+          </div>
+        </div>
+
+        <div class="info-item reveal reveal-d4">
+          <div class="info-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="info-text">
+            <strong>Location</strong>
+            <span>Kenya</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hours-card reveal reveal-d4">
+        <h4>Response Hours</h4>
+        <div class="hours-row"><span>Monday — Friday</span><span>8:00 — 18:00</span></div>
+        <div class="hours-row"><span>Saturday</span><span>9:00 — 15:00</span></div>
+        <div class="hours-row"><span>Sunday</span><span>By appointment</span></div>
+      </div>
+    </div>
+
+    <!-- RIGHT: FORM -->
+    <div class="form-card reveal reveal-d1">
+      <h3>Tell us about your project.</h3>
+      <p>Fill in the form below and we will get back to you within one business day.</p>
+
+      <form id="contactForm" action="https://formspree.io/f/your-form-id" method="POST">
+        <div class="form-grid">
+          <div>
+            <label for="name">Full Name *</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required>
+          </div>
+          <div>
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required>
+          </div>
+          <div>
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="+254 ...">
+          </div>
+          <div>
+            <label for="location">Project Location</label>
+            <input type="text" id="location" name="location" placeholder="City / area">
+          </div>
+          <div class="full">
+            <label for="service">Service of Interest *</label>
+            <select id="service" name="service" required>
+              <option value="">Select a service</option>
+              <option>Interior Design &amp; Space Planning</option>
+              <option>Residential Interiors</option>
+              <option>Commercial Interiors</option>
+              <option>Tiling</option>
+              <option>Wall-to-Wall Carpet</option>
+              <option>Blinds</option>
+              <option>Kitchen &amp; Bathroom Solutions</option>
+              <option>Wall &amp; Ceiling Finishes</option>
+              <option>Full Interior Package</option>
+              <option>Not Sure — Need Advice</option>
+            </select>
+          </div>
+          <div class="full">
+            <label for="message">Project Details *</label>
+            <textarea id="message" name="message" placeholder="Tell us about your space, scope, timeline and budget range..." required></textarea>
+          </div>
+        </div>
+
+        <div class="form-submit">
+          <p class="form-note">By submitting you agree to be contacted about your enquiry. We do not share your details.</p>
+          <button type="submit" class="btn">Send Message</button>
+        </div>
+        <div class="form-success" id="formSuccess">
+          Thank you — your message has been received. We will respond within one business day.
+        </div>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<!-- ==================== MAP ==================== -->
+<section class="section-soft" style="padding-top:0">
+  <div class="wrap">
+    <div class="reveal" style="padding-top:80px;text-align:center;max-width:720px;margin:0 auto">
+      <span class="eyebrow">Find Us</span>
+      <h2>Based in Kenya, serving clients nationwide.</h2>
+    </div>
+    <div class="map-wrap reveal reveal-d1">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.819!2d36.8219!3d-1.2921!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sNairobi%2C%20Kenya!5e0!3m2!1sen!2ske!4v1700000000000"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Executive Interior Design location — Kenya">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== QUICK CARDS ==================== -->
+<section>
+  <div class="wrap">
+    <div class="reveal" style="text-align:center;max-width:720px;margin:0 auto">
+      <span class="eyebrow">Prefer Another Way?</span>
+      <h2>Reach us directly.</h2>
+    </div>
+
+    <div class="quick-grid">
+      <div class="quick-card reveal">
+        <div class="quick-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <h4>Call Us</h4>
+        <p>Speak directly with our team during business hours.</p>
+        <a href="tel:+254781038041" class="link">+254 781 038 041</a>
+      </div>
+
+      <div class="quick-card reveal reveal-d1">
+        <div class="quick-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <h4>Email Us</h4>
+        <p>Send project details or references — we will reply promptly.</p>
+        <a href="mailto:executiveinteriordesign@gmail.com" class="link">Send an Email</a>
+      </div>
+
+      <div class="quick-card reveal reveal-d2">
+        <div class="quick-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <h4>Request a Visit</h4>
+        <p>For larger projects, ask about an on-site consultation.</p>
+        <a href="mailto:executiveinteriordesign@gmail.com?subject=Site%20Visit%20Request" class="link">Book a Visit</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CTA ==================== -->
+<section class="cta-section">
+  <div class="cta-band reveal">
+    <h2>Beauty in Style.</h2>
+    <p>A commitment to creating interiors where aesthetics and everyday functionality work together.</p>
+    <a href="mailto:executiveinteriordesign@gmail.com" class="btn btn-orange">Email Us Today</a>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div class="foot-brand-col">
+        <img src="logo.png" alt="Executive Interior Design" class="foot-logo">
+        <p>Kenya-based interior design and finishing brand creating refined, functional and distinctive spaces for homes, businesses and hospitality.</p>
+        <p class="foot-tagline">&ldquo;Beauty in Style&rdquo;</p>
+      </div>
+      <div>
+        <h4>PAGES</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>SERVICES</h4>
+        <ul>
+          <li><a href="services.html">Interior Design</a></li>
+          <li><a href="services.html">Residential Interiors</a></li>
+          <li><a href="services.html">Commercial Interiors</a></li>
+          <li><a href="services.html">Tiling &amp; Carpet</a></li>
+          <li><a href="services.html">Wall &amp; Ceiling Finishes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>CONTACT</h4>
+        <ul>
+          <li>Daniel Owiro — CEO</li>
+          <li><a href="tel:+254781038041">+254 781 038 041</a></li>
+          <li><a href="mailto:executiveinteriordesign@gmail.com">executiveinteriordesign@gmail.com</a></li>
+          <li>Kenya</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">
+      © <span id="yr"></span> Executive Interior Design. All rights reserved. &middot; Beauty in Style
+    </div>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+/* CONTACT FORM HANDLING
+   Replace "https://formspree.io/f/your-form-id" in the form's action attribute
+   with your real Formspree endpoint to receive submissions by email.
+   The JS below shows the success message after a successful (or demo) submit. */
+(function(){
+  const form = document.getElementById('contactForm');
+  const success = document.getElementById('formSuccess');
+  if(!form) return;
+  form.addEventListener('submit', async (e)=>{
+    const endpoint = form.getAttribute('action');
+    /* If placeholder endpoint is still in place, just show success (demo mode) */
+    if(!endpoint || endpoint.includes('your-form-id')){
+      e.preventDefault();
+      success.classList.add('show');
+      form.reset();
+      window.scrollTo({top:success.getBoundingClientRect().top + window.scrollY - 160, behavior:'smooth'});
+      return;
+    }
+    e.preventDefault();
+    const data = new FormData(form);
+    try{
+      const res = await fetch(endpoint,{method:'POST',body:data,headers:{'Accept':'application/json'}});
+      if(res.ok){
+        success.classList.add('show');
+        form.reset();
+        window.scrollTo({top:success.getBoundingClientRect().top + window.scrollY - 160, behavior:'smooth'});
+      } else {
+        alert('Something went wrong. Please email us directly at executiveinteriordesign@gmail.com');
+      }
+    }catch(err){
+      alert('Network error. Please email us directly at executiveinteriordesign@gmail.com');
+    }
+  });
+})();
+</script>
+<script src="shared.js"></script>
+</body>
+</html>
