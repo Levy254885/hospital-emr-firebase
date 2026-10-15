@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About Us | Executive Interior Design — Kenya Interior Designers</title>
-<meta name="description" content="Learn about Executive Interior Design — a Kenya-based interior design and finishing brand led by CEO Daniel Owiro. Vision, mission, core values and why partner with EID.">
-<meta name="keywords" content="about executive interior design, interior design company Kenya, Daniel Owiro, interior design values">
+<meta name="description" content="Executive Interior Design is a Kenya-based interior design and finishing brand. Vision, mission, core values and why partner with EID.">
+<meta name="keywords" content="about executive interior design, interior design company Kenya, interior design values">
 <meta property="og:title" content="About Executive Interior Design">
-<meta property="og:description" content="Vision, mission, values and leadership behind Kenya's design-first interior brand.">
+<meta property="og:description" content="Vision, mission and values behind Kenya's design-first interior brand.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -18,123 +18,78 @@
 /* STORY SPLIT */
 .story{display:grid;grid-template-columns:1.05fr 1fr;gap:70px;align-items:center}
 .story-media{position:relative}
-.story-media img{width:100%;border-radius:18px;aspect-ratio:4/5;object-fit:cover;
-  box-shadow:0 44px 80px -44px rgba(11,42,91,.55)}
-.story-media::after{content:'';position:absolute;top:-24px;left:-24px;
-  width:160px;height:160px;border:2px solid var(--orange);border-radius:18px;z-index:-1}
-.story-media .badge{
-  position:absolute;bottom:26px;right:-22px;background:var(--navy);color:#fff;
-  padding:20px 26px;border-radius:14px;font-weight:800;letter-spacing:2px;
-  font-size:11px;text-transform:uppercase;box-shadow:0 20px 40px -18px rgba(11,42,91,.6);
-}
-.story-media .badge strong{display:block;font-family:'Playfair Display',serif;
-  font-size:30px;letter-spacing:0;margin-bottom:3px}
-
-/* TIMELINE */
-.timeline{margin-top:70px;position:relative;padding-left:40px}
-.timeline::before{
-  content:'';position:absolute;left:14px;top:8px;bottom:8px;width:2px;
-  background:linear-gradient(to bottom,var(--red) 0%,var(--orange) 50%,var(--navy) 100%);
-  border-radius:2px;
-}
-.tl-item{position:relative;padding:0 0 46px 34px}
-.tl-item:last-child{padding-bottom:0}
-.tl-item::before{
-  content:'';position:absolute;left:-32px;top:6px;width:14px;height:14px;
-  border-radius:50%;background:#fff;border:3px solid var(--red);
-  box-shadow:0 0 0 4px rgba(200,16,46,.1);transition:all .35s var(--ease);
-}
-.tl-item:hover::before{background:var(--red);box-shadow:0 0 0 6px rgba(200,16,46,.18)}
-.tl-item .yr{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;
-  color:var(--orange);margin-bottom:6px;display:block}
-.tl-item h4{color:var(--navy);font-size:17px;font-weight:800;margin-bottom:6px}
-.tl-item p{color:var(--muted);font-size:14.4px;line-height:1.65}
+.story-media img{width:100%;border-radius:18px;aspect-ratio:4/5;object-fit:cover;box-shadow:0 44px 80px -44px rgba(11,42,91,.55)}
+.story-media::after{content:'';position:absolute;top:-24px;left:-24px;width:160px;height:160px;border:2px solid var(--orange);border-radius:18px;z-index:-1}
+.story-media .badge{position:absolute;bottom:26px;right:-22px;background:var(--navy);color:#fff;padding:20px 26px;border-radius:14px;font-weight:800;letter-spacing:2px;font-size:11px;text-transform:uppercase;box-shadow:0 20px 40px -18px rgba(11,42,91,.6)}
+.story-media .badge strong{display:block;font-family:'Playfair Display',serif;font-size:30px;letter-spacing:0;margin-bottom:3px}
 
 /* VISION MISSION */
 .vm{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:56px}
-.vm-card{position:relative;padding:44px 36px;border-radius:18px;overflow:hidden;
-  color:#fff;transition:transform .45s var(--ease)}
+.vm-card{position:relative;padding:44px 36px;border-radius:18px;overflow:hidden;color:#fff;transition:transform .45s var(--ease)}
 .vm-card:hover{transform:translateY(-6px)}
-.vm-card::before{content:'';position:absolute;inset:0;z-index:0;opacity:.18;
-  background-size:cover;background-position:center;transition:transform .8s var(--ease-out)}
+.vm-card::before{content:'';position:absolute;inset:0;z-index:0;opacity:.18;background-size:cover;background-position:center;transition:transform .8s var(--ease-out)}
 .vm-card:hover::before{transform:scale(1.08)}
 .vm-card.vision{background:var(--navy)}
-.vm-card.vision::before{background-image:url('https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=1000&q=80')}
+.vm-card.vision::before{background-image:url('service-wall.jpg')}
 .vm-card.mission{background:var(--red)}
-.vm-card.mission::before{background-image:url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1000&q=80')}
+.vm-card.mission::before{background-image:url('service-kitchen.jpg')}
 .vm-card > *{position:relative;z-index:1}
-.vm-label{font-size:11.5px;font-weight:800;letter-spacing:3.5px;
-  text-transform:uppercase;color:var(--orange);margin-bottom:14px;display:block}
-.vm-card h3{color:#fff;font-family:'Playfair Display',serif;font-size:26px;
-  font-weight:700;margin-bottom:14px}
+.vm-label{font-size:11.5px;font-weight:800;letter-spacing:3.5px;text-transform:uppercase;color:var(--orange);margin-bottom:14px;display:block}
+.vm-card h3{color:#fff;font-family:'Playfair Display',serif;font-size:26px;font-weight:700;margin-bottom:14px}
 .vm-card p{color:rgba(255,255,255,.88);font-size:15.4px;line-height:1.7}
 
-/* VALUES DEEP */
-.values-list{display:grid;grid-template-columns:repeat(5,1fr);gap:0;
-  margin-top:56px;background:#fff;border:1px solid var(--line);
-  border-radius:18px;overflow:hidden}
-.value-item{padding:38px 26px;border-right:1px solid var(--line);
-  transition:background .35s var(--ease);position:relative}
+/* VALUES */
+.values-list{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:56px;background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.value-item{padding:38px 26px;border-right:1px solid var(--line);transition:background .35s var(--ease);position:relative}
 .value-item:last-child{border-right:none}
 .value-item:hover{background:linear-gradient(180deg,#fff,#fdf3ea)}
-.v-num{font-family:'Playfair Display',serif;font-size:40px;font-weight:700;
-  color:var(--orange);line-height:1;margin-bottom:16px;display:block}
+.v-num{font-family:'Playfair Display',serif;font-size:40px;font-weight:700;color:var(--orange);line-height:1;margin-bottom:16px;display:block}
 .value-item h4{color:var(--navy);font-size:15.5px;font-weight:800;margin-bottom:10px}
 .value-item p{color:var(--muted);font-size:13.4px;line-height:1.6}
 
-/* LEADERSHIP */
-.leader{display:grid;grid-template-columns:1fr 1.4fr;gap:70px;align-items:center}
-.leader-media{position:relative}
-.leader-media img{width:100%;border-radius:18px;aspect-ratio:4/5;object-fit:cover;
-  box-shadow:0 44px 80px -44px rgba(11,42,91,.55)}
-.leader-card{position:absolute;bottom:24px;left:24px;right:24px;
-  background:rgba(255,255,255,.96);backdrop-filter:blur(10px);
-  padding:22px 26px;border-radius:14px;box-shadow:0 20px 44px -20px rgba(11,42,91,.4)}
-.leader-card strong{display:block;color:var(--navy);font-size:19px;font-weight:800;margin-bottom:2px}
-.leader-card span{color:var(--red);font-size:12px;font-weight:700;
-  letter-spacing:2.5px;text-transform:uppercase}
+/* LEADERSHIP (text-only, no photo, no name) */
+.leader-text{max-width:860px;margin:0 auto;text-align:left}
+.leader-text h2{font-family:'Playfair Display',serif}
 .why-list{display:grid;gap:16px;margin-top:30px}
-.why-list li{display:flex;gap:16px;align-items:flex-start;
-  color:var(--muted);font-size:15.2px;line-height:1.65;
-  padding:16px 18px;background:#fff;border:1px solid var(--line);
-  border-radius:12px;transition:all .35s var(--ease)}
-.why-list li:hover{border-color:var(--navy);transform:translateX(6px);
-  box-shadow:0 12px 26px -18px rgba(11,42,91,.4)}
-.why-list li::before{
-  content:'✓';flex-shrink:0;width:26px;height:26px;border-radius:50%;
-  background:var(--red);color:#fff;display:grid;place-items:center;
-  font-size:13px;font-weight:900;margin-top:1px;
-}
+.why-list li{display:flex;gap:16px;align-items:flex-start;color:var(--muted);font-size:15.2px;line-height:1.65;padding:16px 18px;background:#fff;border:1px solid var(--line);border-radius:12px;transition:all .35s var(--ease)}
+.why-list li:hover{border-color:var(--navy);transform:translateX(6px);box-shadow:0 12px 26px -18px rgba(11,42,91,.4)}
+.why-list li::before{content:'✓';flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:900;margin-top:1px}
+.leader-contact{margin-top:44px;padding:34px 38px;background:#fff;border:1px solid var(--line);border-radius:16px;border-left:4px solid var(--red)}
+.leader-contact h4{color:var(--navy);font-size:13px;letter-spacing:2.5px;text-transform:uppercase;font-weight:800;margin-bottom:18px}
+.leader-contact p{color:var(--muted);font-size:15.6px;line-height:2.1}
+.leader-contact a{color:var(--navy);font-weight:600;transition:color .25s}
+.leader-contact a:hover{color:var(--red)}
 
-/* APPROACH DEEP */
-.approach-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:22px;
-  margin-top:56px;position:relative}
-.approach-step{background:#fff;border:1px solid var(--line);
-  border-radius:16px;padding:32px 22px;position:relative;
-  transition:all .4s var(--ease);overflow:hidden}
-.approach-step:hover{transform:translateY(-6px);border-color:transparent;
-  box-shadow:0 24px 48px -28px rgba(11,42,91,.42)}
-.approach-step .n{font-family:'Playfair Display',serif;font-size:44px;
-  font-weight:700;color:var(--orange);line-height:1;margin-bottom:14px;display:block}
+/* TIMELINE */
+.timeline{margin-top:70px;position:relative;padding-left:40px}
+.timeline::before{content:'';position:absolute;left:14px;top:8px;bottom:8px;width:2px;background:linear-gradient(to bottom,var(--red) 0%,var(--orange) 50%,var(--navy) 100%);border-radius:2px}
+.tl-item{position:relative;padding:0 0 46px 34px}
+.tl-item:last-child{padding-bottom:0}
+.tl-item::before{content:'';position:absolute;left:-32px;top:6px;width:14px;height:14px;border-radius:50%;background:#fff;border:3px solid var(--red);box-shadow:0 0 0 4px rgba(200,16,46,.1);transition:all .35s var(--ease)}
+.tl-item:hover::before{background:var(--red);box-shadow:0 0 0 6px rgba(200,16,46,.18)}
+.tl-item .yr{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--orange);margin-bottom:6px;display:block}
+.tl-item h4{color:var(--navy);font-size:17px;font-weight:800;margin-bottom:6px}
+.tl-item p{color:var(--muted);font-size:14.4px;line-height:1.65}
+
+/* APPROACH */
+.approach-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:22px;margin-top:56px;position:relative}
+.approach-step{background:#fff;border:1px solid var(--line);border-radius:16px;padding:32px 22px;position:relative;transition:all .4s var(--ease);overflow:hidden}
+.approach-step:hover{transform:translateY(-6px);border-color:transparent;box-shadow:0 24px 48px -28px rgba(11,42,91,.42)}
+.approach-step .n{font-family:'Playfair Display',serif;font-size:44px;font-weight:700;color:var(--orange);line-height:1;margin-bottom:14px;display:block}
 .approach-step h4{color:var(--navy);font-size:16px;font-weight:800;margin-bottom:8px}
 .approach-step p{color:var(--muted);font-size:13.4px;line-height:1.6}
 
 /* CTA */
 .cta-section{padding:0 22px 96px}
-.cta-band{max-width:var(--max);margin:0 auto;border-radius:20px;
-  background:linear-gradient(115deg,var(--red) 0%,var(--navy) 100%);
-  color:#fff;text-align:center;padding:80px 34px;position:relative;overflow:hidden}
-.cta-band::before{content:'';position:absolute;inset:0;opacity:.1;
-  background:url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1600&q=80') center/cover;
-  mix-blend-mode:overlay}
+.cta-band{max-width:var(--max);margin:0 auto;border-radius:20px;background:linear-gradient(115deg,var(--red) 0%,var(--navy) 100%);color:#fff;text-align:center;padding:80px 34px;position:relative;overflow:hidden}
+.cta-band::before{content:'';position:absolute;inset:0;opacity:.12;background:url('service-residential.jpg') center/cover;mix-blend-mode:overlay}
 .cta-band > *{position:relative;z-index:1}
 .cta-band h2{color:#fff;font-family:'Playfair Display',serif;margin-bottom:14px}
 .cta-band p{color:rgba(255,255,255,.88);max-width:600px;margin:0 auto 34px;font-size:16.5px}
 
-/* RESPONSIVE */
 @media(max-width:1024px){
-  .story,.leader{grid-template-columns:1fr;gap:48px}
-  .story-media img,.leader-media img{aspect-ratio:16/11}
+  .story{grid-template-columns:1fr;gap:48px}
+  .story-media img{aspect-ratio:16/11}
   .vm{grid-template-columns:1fr}
   .values-list{grid-template-columns:repeat(2,1fr)}
   .value-item:nth-child(2n){border-right:none}
@@ -144,15 +99,13 @@
 @media(max-width:640px){
   .values-list,.approach-grid{grid-template-columns:1fr}
   .value-item{border-right:none}
-  .leader-card{position:static;margin-top:-40px;
-    margin-left:16px;margin-right:16px;border-radius:14px}
   .story-media .badge{right:14px;bottom:14px}
+  .leader-contact{padding:26px 24px}
 }
 </style>
 </head>
 <body>
 
-<!-- ==================== HEADER ==================== -->
 <header id="site-header">
   <div class="wrap header-inner">
     <a href="index.html" class="logo-link" aria-label="Executive Interior Design Home">
@@ -180,7 +133,6 @@
   </div>
 </header>
 
-<!-- ==================== MOBILE MENU ==================== -->
 <div class="mobile-menu" id="mobileMenu">
   <button class="mobile-close" id="mobileClose" aria-label="Close menu">×</button>
   <nav>
@@ -198,7 +150,6 @@
   </div>
 </div>
 
-<!-- ==================== PAGE HERO ==================== -->
 <section class="page-hero">
   <div class="wrap">
     <div class="breadcrumb">
@@ -209,33 +160,18 @@
   </div>
 </section>
 
-<!-- ==================== STORY ==================== -->
 <section>
   <div class="wrap story">
     <div class="story-media reveal">
-      <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=900&q=85&auto=format&fit=crop" alt="Warm modern residential interior with layered lighting">
-      <div class="badge"><strong>EID</strong>Established in Kenya</div>
+      <img src="service-residential.jpg" alt="Warm residential sitting room designed by Executive Interior Design">
+      <div class="badge"><strong>EID</strong>Based in Kenya</div>
     </div>
     <div>
       <span class="eyebrow reveal">Our Story</span>
       <h2 class="reveal reveal-d1">Interiors that reflect the people who use them.</h2>
-      <p class="lead reveal reveal-d2">
-        Executive Interior Design (EID) is a Kenya-based interior design brand
-        dedicated to transforming residential, commercial and hospitality
-        environments into beautiful, practical and memorable spaces.
-      </p>
-      <p class="lead reveal reveal-d2" style="margin-top:16px">
-        Our approach combines creative design thinking, careful material
-        selection and professional project coordination — because we believe
-        an exceptional interior should do more than look good. It should
-        reflect the personality of its users, support the way people live
-        and work, and deliver lasting value.
-      </p>
-      <p class="lead reveal reveal-d3" style="margin-top:16px">
-        From concept development to finishing details, we aim to bring style,
-        functionality and attention to detail into every project — under the
-        promise captured in our tagline: <em style="color:var(--red);font-style:italic">Beauty in Style</em>.
-      </p>
+      <p class="lead reveal reveal-d2">Executive Interior Design (EID) is a Kenya-based interior design brand dedicated to transforming residential, commercial and hospitality environments into beautiful, practical and memorable spaces.</p>
+      <p class="lead reveal reveal-d2" style="margin-top:16px">Our approach combines creative design thinking, careful material selection and professional project coordination — because we believe an exceptional interior should do more than look good. It should reflect the personality of its users, support the way people live and work, and deliver lasting value.</p>
+      <p class="lead reveal reveal-d3" style="margin-top:16px">From concept development to finishing details — flooring, tiling, blinds, wall finishes, kitchens and roofing — we bring style, functionality and attention to detail into every project under the promise captured in our tagline: <em style="color:var(--red);font-style:italic">Beauty in Style</em>.</p>
       <div class="reveal reveal-d3" style="margin-top:38px;display:flex;gap:14px;flex-wrap:wrap">
         <a href="services.html" class="btn">Our Services</a>
         <a href="projects.html" class="btn btn-outline">See Projects</a>
@@ -244,16 +180,12 @@
   </div>
 </section>
 
-<!-- ==================== VISION & MISSION ==================== -->
 <section class="section-soft">
   <div class="wrap">
     <div class="reveal" style="text-align:center;max-width:720px;margin:0 auto">
       <span class="eyebrow">Vision, Mission &amp; Values</span>
       <h2>What drives Executive Interior Design</h2>
-      <p class="lead" style="margin:0 auto">
-        A clear direction and set of principles shape every decision we make —
-        from the first client meeting to the final handover.
-      </p>
+      <p class="lead" style="margin:0 auto">A clear direction and set of principles shape every decision we make — from the first client meeting to the final handover.</p>
     </div>
 
     <div class="vm">
@@ -271,7 +203,6 @@
   </div>
 </section>
 
-<!-- ==================== CORE VALUES ==================== -->
 <section>
   <div class="wrap">
     <div class="reveal" style="text-align:center;max-width:720px;margin:0 auto">
@@ -309,44 +240,34 @@
   </div>
 </section>
 
-<!-- ==================== LEADERSHIP ==================== -->
 <section class="section-soft">
   <div class="wrap">
     <span class="eyebrow reveal">Leadership</span>
-    <div class="leader">
-      <div class="leader-media reveal">
-        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=900&q=85&auto=format&fit=crop" alt="Portrait of CEO Daniel Owiro">
-        <div class="leader-card">
-          <strong>Daniel Owiro</strong>
-          <span>CEO — Executive Interior Design</span>
-        </div>
-      </div>
-      <div>
-        <h2 class="reveal reveal-d1">Led with vision, delivered with care.</h2>
-        <p class="lead reveal reveal-d2">
-          Daniel Owiro leads Executive Interior Design with a focus on building
-          a strong customer-oriented brand and delivering stylish, functional
-          interior solutions. Under his leadership, the company is positioned
-          to serve clients seeking quality design, coordinated finishes and
-          professional service in Kenya.
-        </p>
+    <div class="leader-text">
+      <h2 class="reveal reveal-d1">Led with vision, delivered with care.</h2>
+      <p class="lead reveal reveal-d2">Executive Interior Design is led with a focus on building a strong customer-oriented brand and delivering stylish, functional interior solutions. The company is positioned to serve clients seeking quality design, coordinated finishes and professional service in Kenya.</p>
 
-        <h3 class="reveal reveal-d2" style="margin-top:36px;font-size:19px;color:var(--navy)">
-          Why Partner With EID?
-        </h3>
-        <ul class="why-list">
-          <li class="reveal reveal-d3">A design-first approach that keeps aesthetics and functionality in balance.</li>
-          <li class="reveal reveal-d3">Solutions tailored to the unique requirements of every space and client.</li>
-          <li class="reveal reveal-d3">Attention to material coordination, finishes and the finer details of an interior.</li>
-          <li class="reveal reveal-d4">Professional communication throughout the design and delivery process.</li>
-          <li class="reveal reveal-d4">A strong ambition to build lasting client relationships through dependable service.</li>
-        </ul>
+      <h3 class="reveal reveal-d2" style="margin-top:40px;font-size:19px;color:var(--navy)">Why Partner With EID?</h3>
+      <ul class="why-list">
+        <li class="reveal reveal-d3">A design-first approach that keeps aesthetics and functionality in balance.</li>
+        <li class="reveal reveal-d3">Solutions tailored to the unique requirements of every space and client.</li>
+        <li class="reveal reveal-d3">Attention to material coordination, finishes and the finer details of an interior.</li>
+        <li class="reveal reveal-d4">Professional communication throughout the design and delivery process.</li>
+        <li class="reveal reveal-d4">A strong ambition to build lasting client relationships through dependable service.</li>
+      </ul>
+
+      <div class="leader-contact reveal reveal-d4">
+        <h4>Contact the Office</h4>
+        <p>
+          <strong>Phone:</strong> <a href="tel:+254781038041">+254 781 038 041</a><br>
+          <strong>Email:</strong> <a href="mailto:executiveinteriordesign@gmail.com">executiveinteriordesign@gmail.com</a><br>
+          <strong>Location:</strong> Kenya
+        </p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ==================== JOURNEY TIMELINE ==================== -->
 <section>
   <div class="wrap">
     <div class="reveal" style="max-width:720px">
@@ -369,7 +290,7 @@
       <div class="tl-item reveal reveal-d2">
         <span class="yr">Coordinated Delivery</span>
         <h4>Finishing solutions under one roof</h4>
-        <p>Tiling, wall-to-wall carpet, blinds, kitchen and bathroom coordination and wall &amp; ceiling finishes are integrated into a single, coherent offer.</p>
+        <p>Flooring, blinds and window treatments, tiling, wall finishes, kitchen design and roofing solutions are integrated into a single, coherent offer.</p>
       </div>
       <div class="tl-item reveal reveal-d3">
         <span class="yr">Today &amp; Beyond</span>
@@ -380,7 +301,6 @@
   </div>
 </section>
 
-<!-- ==================== OUR APPROACH ==================== -->
 <section class="section-soft">
   <div class="wrap">
     <div class="reveal" style="text-align:center;max-width:720px;margin:0 auto">
@@ -390,36 +310,15 @@
     </div>
 
     <div class="approach-grid">
-      <div class="approach-step reveal">
-        <span class="n">01</span>
-        <h4>Consultation</h4>
-        <p>We understand the client's needs, taste, budget and intended use of the space.</p>
-      </div>
-      <div class="approach-step reveal reveal-d1">
-        <span class="n">02</span>
-        <h4>Concept</h4>
-        <p>We develop the design direction, colour palette, materials and overall visual language.</p>
-      </div>
-      <div class="approach-step reveal reveal-d2">
-        <span class="n">03</span>
-        <h4>Specification</h4>
-        <p>We coordinate finishes, products and design details to support the approved concept.</p>
-      </div>
-      <div class="approach-step reveal reveal-d3">
-        <span class="n">04</span>
-        <h4>Execution</h4>
-        <p>We coordinate implementation and finishing with attention to quality and detail.</p>
-      </div>
-      <div class="approach-step reveal reveal-d4">
-        <span class="n">05</span>
-        <h4>Handover</h4>
-        <p>We review the completed work and ensure the space achieves the agreed design intent.</p>
-      </div>
+      <div class="approach-step reveal"><span class="n">01</span><h4>Consultation</h4><p>We understand the client's needs, taste, budget and intended use of the space.</p></div>
+      <div class="approach-step reveal reveal-d1"><span class="n">02</span><h4>Concept</h4><p>We develop the design direction, colour palette, materials and overall visual language.</p></div>
+      <div class="approach-step reveal reveal-d2"><span class="n">03</span><h4>Specification</h4><p>We coordinate finishes, products and design details to support the approved concept.</p></div>
+      <div class="approach-step reveal reveal-d3"><span class="n">04</span><h4>Execution</h4><p>We coordinate implementation and finishing with attention to quality and detail.</p></div>
+      <div class="approach-step reveal reveal-d4"><span class="n">05</span><h4>Handover</h4><p>We review the completed work and ensure the space achieves the agreed design intent.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ==================== CTA ==================== -->
 <section class="cta-section">
   <div class="cta-band reveal">
     <h2>Let's create beautiful spaces together.</h2>
@@ -428,7 +327,6 @@
   </div>
 </section>
 
-<!-- ==================== FOOTER ==================== -->
 <footer>
   <div class="wrap">
     <div class="foot">
@@ -450,26 +348,25 @@
       <div>
         <h4>SERVICES</h4>
         <ul>
-          <li><a href="services.html">Interior Design</a></li>
-          <li><a href="services.html">Residential Interiors</a></li>
-          <li><a href="services.html">Commercial Interiors</a></li>
-          <li><a href="services.html">Tiling &amp; Carpet</a></li>
-          <li><a href="services.html">Wall &amp; Ceiling Finishes</a></li>
+          <li><a href="services.html">Flooring Solutions</a></li>
+          <li><a href="services.html">Blinds &amp; Window Treatments</a></li>
+          <li><a href="services.html">Tiling &amp; Surface Finishes</a></li>
+          <li><a href="services.html">Wall Finishes</a></li>
+          <li><a href="services.html">Kitchen Design</a></li>
+          <li><a href="services.html">Roofing Solutions</a></li>
         </ul>
       </div>
       <div>
         <h4>CONTACT</h4>
         <ul>
-          <li>Daniel Owiro — CEO</li>
+          <li>Executive Interior Design — Kenya</li>
           <li><a href="tel:+254781038041">+254 781 038 041</a></li>
           <li><a href="mailto:executiveinteriordesign@gmail.com">executiveinteriordesign@gmail.com</a></li>
           <li>Kenya</li>
         </ul>
       </div>
     </div>
-    <div class="copy">
-      © <span id="yr"></span> Executive Interior Design. All rights reserved. &middot; Beauty in Style
-    </div>
+    <div class="copy">© <span id="yr"></span> Executive Interior Design. All rights reserved. &middot; Beauty in Style</div>
   </div>
 </footer>
 
