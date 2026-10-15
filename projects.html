@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Projects | Executive Interior Design — Residential, Commercial & Hospitality Portfolio</title>
-<meta name="description" content="Explore Executive Interior Design projects across Kenya: residential interiors, commercial fit-outs, hospitality spaces, tiling, carpet, blinds and wall & ceiling finishes.">
-<meta name="keywords" content="interior design portfolio Kenya, residential interior projects, commercial fit-out Kenya, hospitality interior design">
+<meta name="description" content="Explore Executive Interior Design projects across Kenya: residential interiors, commercial fit-outs, hospitality spaces, flooring, tiling, wall finishes, kitchens and roofing.">
+<meta name="keywords" content="interior design portfolio Kenya, residential interior projects, commercial fit-out Kenya, hospitality interior design, flooring projects, kitchen design projects">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,109 +14,60 @@
 /* ==================== PROJECTS PAGE ==================== */
 
 /* FILTER */
-.filter-bar{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;
-  margin-top:48px}
-.filter-btn{
-  padding:11px 24px;border-radius:999px;font-size:13.5px;font-weight:700;
-  background:#fff;border:1px solid var(--line);color:var(--navy);
-  transition:all .3s var(--ease);letter-spacing:.3px;
-}
+.filter-bar{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:48px}
+.filter-btn{padding:11px 24px;border-radius:999px;font-size:13.5px;font-weight:700;background:#fff;border:1px solid var(--line);color:var(--navy);transition:all .3s var(--ease);letter-spacing:.3px;cursor:pointer;font-family:inherit}
 .filter-btn:hover{border-color:var(--navy);transform:translateY(-2px)}
-.filter-btn.active{background:var(--navy);color:#fff;border-color:var(--navy);
-  box-shadow:0 10px 24px -10px rgba(11,42,91,.5)}
+.filter-btn.active{background:var(--navy);color:#fff;border-color:var(--navy);box-shadow:0 10px 24px -10px rgba(11,42,91,.5)}
 
-/* MASONRY-LIKE GRID */
-.projects-masonry{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px;
-}
-.proj{
-  position:relative;border-radius:16px;overflow:hidden;cursor:pointer;
-  background:var(--navy);aspect-ratio:4/5;
-  transition:opacity .5s var(--ease),transform .5s var(--ease);
-}
+/* MASONRY GRID */
+.projects-masonry{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+.proj{position:relative;border-radius:16px;overflow:hidden;cursor:pointer;background:var(--navy);aspect-ratio:4/5;transition:opacity .5s var(--ease),transform .5s var(--ease)}
 .proj.tall{grid-row:span 2;aspect-ratio:4/7}
 .proj.wide{grid-column:span 2;aspect-ratio:16/9}
 .proj.hide{display:none}
-.proj img{width:100%;height:100%;object-fit:cover;
-  transition:transform 1s var(--ease-out)}
+.proj img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease-out)}
 .proj:hover img{transform:scale(1.09)}
-.proj-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(to top,rgba(11,42,91,.96) 0%,
-    rgba(11,42,91,.55) 40%,transparent 75%);
-  display:flex;flex-direction:column;justify-content:flex-end;
-  padding:30px;color:#fff;
-}
-.proj-cat{font-size:10.5px;font-weight:800;letter-spacing:3px;
-  text-transform:uppercase;color:var(--orange);margin-bottom:10px;display:block}
+.proj-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(11,42,91,.96) 0%,rgba(11,42,91,.55) 40%,transparent 75%);display:flex;flex-direction:column;justify-content:flex-end;padding:30px;color:#fff}
+.proj-cat{font-size:10.5px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:10px;display:block}
 .proj h3{color:#fff;font-size:20px;font-weight:800;line-height:1.3;margin-bottom:8px}
-.proj .proj-desc{font-size:13.4px;color:rgba(255,255,255,.8);line-height:1.6;
-  max-height:0;overflow:hidden;opacity:0;
-  transition:all .45s var(--ease-out)}
+.proj .proj-desc{font-size:13.4px;color:rgba(255,255,255,.8);line-height:1.6;max-height:0;overflow:hidden;opacity:0;transition:all .45s var(--ease-out)}
 .proj:hover .proj-desc{max-height:120px;opacity:1;margin-top:4px}
-.proj-cta{
-  display:inline-flex;align-items:center;gap:8px;margin-top:16px;
-  font-size:11.5px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;
-  color:var(--orange);
-  opacity:0;transform:translateY(10px);
-  transition:all .4s var(--ease) .1s;
-}
+.proj-cta{display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-size:11.5px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--orange);opacity:0;transform:translateY(10px);transition:all .4s var(--ease) .1s}
 .proj:hover .proj-cta{opacity:1;transform:none}
 .proj-cta::after{content:'→';transition:transform .3s var(--ease)}
 .proj:hover .proj-cta::after{transform:translateX(6px)}
 
+/* CASE HIGHLIGHT */
+.case-highlight{display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:center;padding:80px 0}
+.case-media{border-radius:18px;overflow:hidden;position:relative;box-shadow:0 44px 80px -44px rgba(11,42,91,.5);aspect-ratio:4/3}
+.case-media img{width:100%;height:100%;object-fit:cover}
+.case-tag{position:absolute;top:22px;left:22px;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);padding:9px 18px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--navy)}
+.case-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:32px 0;padding:26px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.case-meta div{text-align:left}
+.case-meta strong{display:block;font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--navy);line-height:1;margin-bottom:6px}
+.case-meta span{font-size:11.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+
 /* CATEGORY SECTIONS */
 .cat-section{padding:80px 0;border-bottom:1px solid var(--line)}
 .cat-section:last-of-type{border-bottom:none}
-.cat-head{display:flex;justify-content:space-between;align-items:flex-end;
-  gap:30px;flex-wrap:wrap;margin-bottom:0}
+.cat-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;margin-bottom:0}
 .cat-head h2{margin-bottom:8px}
-.cat-count{font-family:'Playfair Display',serif;font-size:64px;font-weight:700;
-  color:var(--orange);line-height:1;opacity:.35}
-
-/* CASE HIGHLIGHT */
-.case-highlight{
-  display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:center;
-  padding:80px 0;
-}
-.case-media{border-radius:18px;overflow:hidden;position:relative;
-  box-shadow:0 44px 80px -44px rgba(11,42,91,.5);aspect-ratio:4/3}
-.case-media img{width:100%;height:100%;object-fit:cover}
-.case-tag{position:absolute;top:22px;left:22px;
-  background:rgba(255,255,255,.96);backdrop-filter:blur(10px);
-  padding:9px 18px;border-radius:999px;font-size:11px;font-weight:800;
-  letter-spacing:2.5px;text-transform:uppercase;color:var(--navy)}
-.case-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
-  margin:32px 0;padding:26px 0;border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line)}
-.case-meta div{text-align:left}
-.case-meta strong{display:block;font-family:'Playfair Display',serif;
-  font-size:24px;font-weight:700;color:var(--navy);line-height:1;margin-bottom:6px}
-.case-meta span{font-size:11.5px;font-weight:700;letter-spacing:2px;
-  text-transform:uppercase;color:var(--muted)}
+.cat-count{font-family:'Playfair Display',serif;font-size:64px;font-weight:700;color:var(--orange);line-height:1;opacity:.35}
 
 /* GALLERY STRIP */
 .gallery-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:50px}
-.gallery-strip a{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:1;
-  background:var(--navy)}
-.gallery-strip img{width:100%;height:100%;object-fit:cover;
-  transition:transform .8s var(--ease-out)}
+.gallery-strip a{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:1;background:var(--navy);display:block}
+.gallery-strip img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease-out)}
 .gallery-strip a:hover img{transform:scale(1.1)}
-.gallery-strip::after{content:'';display:block}
 
 /* CTA */
 .cta-section{padding:0 22px 96px}
-.cta-band{max-width:var(--max);margin:0 auto;border-radius:20px;
-  background:linear-gradient(115deg,var(--navy) 0%,var(--red) 100%);
-  color:#fff;text-align:center;padding:80px 34px;position:relative;overflow:hidden}
-.cta-band::before{content:'';position:absolute;inset:0;opacity:.1;
-  background:url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1600&q=80') center/cover;
-  mix-blend-mode:overlay}
+.cta-band{max-width:var(--max);margin:0 auto;border-radius:20px;background:linear-gradient(115deg,var(--navy) 0%,var(--red) 100%);color:#fff;text-align:center;padding:80px 34px;position:relative;overflow:hidden}
+.cta-band::before{content:'';position:absolute;inset:0;opacity:.12;background:url('project-livingroom.jpg') center/cover;mix-blend-mode:overlay}
 .cta-band > *{position:relative;z-index:1}
 .cta-band h2{color:#fff;font-family:'Playfair Display',serif;margin-bottom:14px}
 .cta-band p{color:rgba(255,255,255,.88);max-width:600px;margin:0 auto 34px;font-size:16.5px}
 
-/* RESPONSIVE */
 @media(max-width:1024px){
   .projects-masonry{grid-template-columns:repeat(2,1fr)}
   .proj.wide{grid-column:span 2}
@@ -134,7 +85,6 @@
 </head>
 <body>
 
-<!-- ==================== HEADER ==================== -->
 <header id="site-header">
   <div class="wrap header-inner">
     <a href="index.html" class="logo-link" aria-label="Executive Interior Design Home">
@@ -162,7 +112,6 @@
   </div>
 </header>
 
-<!-- ==================== MOBILE MENU ==================== -->
 <div class="mobile-menu" id="mobileMenu">
   <button class="mobile-close" id="mobileClose" aria-label="Close menu">×</button>
   <nav>
@@ -180,7 +129,6 @@
   </div>
 </div>
 
-<!-- ==================== PAGE HERO ==================== -->
 <section class="page-hero">
   <div class="wrap">
     <div class="breadcrumb">
@@ -191,24 +139,17 @@
   </div>
 </section>
 
-<!-- ==================== FEATURED CASE ==================== -->
 <section>
   <div class="wrap">
     <div class="case-highlight">
       <div class="case-media reveal">
-        <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1200&q=85&auto=format&fit=crop" alt="Featured residential interior project with warm neutral palette">
+        <img src="project-livingroom.jpg" alt="Featured residential sitting room interior project">
         <span class="case-tag">Featured Project</span>
       </div>
       <div>
-        <span class="eyebrow reveal">Residential · Nairobi</span>
+        <span class="eyebrow reveal">Residential · Kenya</span>
         <h2 class="reveal reveal-d1">A warm, layered family home.</h2>
-        <p class="lead reveal reveal-d2">
-          A full residential interior concept combining space planning, colour
-          direction and coordinated finishes. The brief was for a home that
-          felt warm and lived-in while staying visually refined — achieved
-          through layered lighting, considered furniture placement and a
-          soft, neutral palette.
-        </p>
+        <p class="lead reveal reveal-d2">A full residential interior concept combining space planning, colour direction and coordinated finishes. The brief was for a home that felt warm and lived-in while staying visually refined — achieved through layered lighting, considered furniture placement and a soft, neutral palette.</p>
         <div class="case-meta reveal reveal-d3">
           <div><strong>Residential</strong><span>Category</span></div>
           <div><strong>Full Interior</strong><span>Scope</span></div>
@@ -220,7 +161,6 @@
   </div>
 </section>
 
-<!-- ==================== PROJECTS GRID + FILTER ==================== -->
 <section class="section-soft">
   <div class="wrap">
     <div class="reveal" style="text-align:center;max-width:720px;margin:0 auto">
@@ -240,10 +180,10 @@
     <div class="projects-masonry" id="projectGrid">
 
       <div class="proj tall reveal" data-cat="residential">
-        <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=900&q=85&auto=format&fit=crop" alt="Warm residential living room with layered lighting" loading="lazy">
+        <img src="project-livingroom.jpg" alt="Warm residential sitting room with layered lighting" loading="lazy">
         <div class="proj-overlay">
           <span class="proj-cat">Residential</span>
-          <h3>Modern Living Room</h3>
+          <h3>Modern Sitting Room</h3>
           <p class="proj-desc">Layered lighting, warm neutrals and considered furniture placement.</p>
           <span class="proj-cta">View Project</span>
         </div>
@@ -270,10 +210,10 @@
       </div>
 
       <div class="proj reveal" data-cat="residential">
-        <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=900&q=85&auto=format&fit=crop" alt="Refined bedroom interior design" loading="lazy">
+        <img src="service-residential.jpg" alt="Refined residential interior design" loading="lazy">
         <div class="proj-overlay">
           <span class="proj-cat">Residential</span>
-          <h3>Master Bedroom Suite</h3>
+          <h3>Residential Interior</h3>
           <p class="proj-desc">Quiet palette, layered textiles and soft lighting.</p>
           <span class="proj-cta">View Project</span>
         </div>
@@ -290,20 +230,20 @@
       </div>
 
       <div class="proj reveal reveal-d2" data-cat="finishing">
-        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=900&q=85&auto=format&fit=crop" alt="Coordinated tiling detail on floors and walls" loading="lazy">
+        <img src="service-flooring.jpg" alt="Coordinated flooring solutions — tiles and finishes" loading="lazy">
         <div class="proj-overlay">
           <span class="proj-cat">Finishing</span>
-          <h3>Coordinated Tiling</h3>
-          <p class="proj-desc">Tile selection and layout for floors, walls and feature areas.</p>
+          <h3>Flooring Solutions</h3>
+          <p class="proj-desc">Tile, timber and carpet selection coordinated across the space.</p>
           <span class="proj-cta">View Project</span>
         </div>
       </div>
 
       <div class="proj reveal" data-cat="residential">
-        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=900&q=85&auto=format&fit=crop" alt="Design-led kitchen with coordinated finishes" loading="lazy">
+        <img src="service-kitchen.jpg" alt="Design-led kitchen with coordinated finishes and fittings" loading="lazy">
         <div class="proj-overlay">
           <span class="proj-cat">Residential</span>
-          <h3>Kitchen Redesign</h3>
+          <h3>Kitchen Design</h3>
           <p class="proj-desc">Design-led selections for cabinetry, surfaces and fittings.</p>
           <span class="proj-cta">View Project</span>
         </div>
@@ -330,27 +270,27 @@
       </div>
 
       <div class="proj reveal" data-cat="finishing">
-        <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=900&q=85&auto=format&fit=crop" alt="Decorative wall and ceiling finishes" loading="lazy">
+        <img src="service-wall.jpg" alt="Wall finishes and decorative solutions — feature wall" loading="lazy">
         <div class="proj-overlay">
           <span class="proj-cat">Finishing</span>
-          <h3>Wall &amp; Ceiling Finishes</h3>
+          <h3>Wall Finishes</h3>
           <p class="proj-desc">Feature walls, gypsum concepts and decorative treatments.</p>
           <span class="proj-cta">View Project</span>
         </div>
       </div>
 
       <div class="proj reveal reveal-d1" data-cat="finishing">
-        <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=900&q=85&auto=format&fit=crop" alt="Wall-to-wall carpet installation" loading="lazy">
+        <img src="service-roofing.jpg" alt="Roofing solutions and roofing finishes" loading="lazy">
         <div class="proj-overlay">
           <span class="proj-cat">Finishing</span>
-          <h3>Wall-to-Wall Carpet</h3>
-          <p class="proj-desc">Comfort, durability and acoustic performance underfoot.</p>
+          <h3>Roofing Solutions</h3>
+          <p class="proj-desc">Roofing systems and finishes coordinated with the interior.</p>
           <span class="proj-cta">View Project</span>
         </div>
       </div>
 
       <div class="proj reveal reveal-d2" data-cat="residential">
-        <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=900&q=85&auto=format&fit=crop" alt="Complete residential interior concept" loading="lazy">
+        <img src="service-residential.jpg" alt="Complete residential interior concept" loading="lazy">
         <div class="proj-overlay">
           <span class="proj-cat">Residential</span>
           <h3>Complete Home Concept</h3>
@@ -363,7 +303,6 @@
   </div>
 </section>
 
-<!-- ==================== CATEGORY SECTIONS ==================== -->
 <section>
   <div class="wrap">
     <div class="cat-section">
@@ -374,10 +313,7 @@
         </div>
         <div class="cat-count">01</div>
       </div>
-      <p class="lead reveal reveal-d1" style="margin-top:20px">
-        Living rooms, bedrooms, kitchens and bathrooms — designed around lifestyle
-        and taste, and finished with coordinated materials that last.
-      </p>
+      <p class="lead reveal reveal-d1" style="margin-top:20px">Living rooms, bedrooms, kitchens and bathrooms — designed around lifestyle and taste, and finished with coordinated materials that last.</p>
     </div>
 
     <div class="cat-section">
@@ -388,10 +324,7 @@
         </div>
         <div class="cat-count">02</div>
       </div>
-      <p class="lead reveal reveal-d1" style="margin-top:20px">
-        Workspaces and customer-facing environments designed to support brand
-        identity, customer experience and productivity.
-      </p>
+      <p class="lead reveal reveal-d1" style="margin-top:20px">Workspaces and customer-facing environments designed to support brand identity, customer experience and productivity.</p>
     </div>
 
     <div class="cat-section">
@@ -402,35 +335,28 @@
         </div>
         <div class="cat-count">03</div>
       </div>
-      <p class="lead reveal reveal-d1" style="margin-top:20px">
-        Arrival moments, dining rooms and guest spaces designed for atmosphere,
-        durability and a strong sense of place.
-      </p>
+      <p class="lead reveal reveal-d1" style="margin-top:20px">Arrival moments, dining rooms and guest spaces designed for atmosphere, durability and a strong sense of place.</p>
     </div>
 
     <div class="cat-section">
       <div class="cat-head reveal">
         <div>
           <span class="eyebrow">Finishing</span>
-          <h2 style="margin-bottom:0">Tiling, carpet, blinds, wall &amp; ceiling</h2>
+          <h2 style="margin-bottom:0">Flooring, wall finishes and roofing</h2>
         </div>
         <div class="cat-count">04</div>
       </div>
-      <p class="lead reveal reveal-d1" style="margin-top:20px">
-        The details that complete a space — coordinated selections and
-        professional finishing across every surface.
-      </p>
+      <p class="lead reveal reveal-d1" style="margin-top:20px">The details that complete a space — coordinated selections and professional finishing across every surface.</p>
       <div class="gallery-strip reveal reveal-d2">
-        <a href="services.html"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80&auto=format&fit=crop" alt="Tile detail" loading="lazy"></a>
-        <a href="services.html"><img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&q=80&auto=format&fit=crop" alt="Carpet detail" loading="lazy"></a>
-        <a href="services.html"><img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=600&q=80&auto=format&fit=crop" alt="Blinds detail" loading="lazy"></a>
-        <a href="services.html"><img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=600&q=80&auto=format&fit=crop" alt="Wall and ceiling finish detail" loading="lazy"></a>
+        <a href="services.html"><img src="service-flooring.jpg" alt="Flooring detail" loading="lazy"></a>
+        <a href="services.html"><img src="service-wall.jpg" alt="Wall finish detail" loading="lazy"></a>
+        <a href="services.html"><img src="service-kitchen.jpg" alt="Kitchen detail" loading="lazy"></a>
+        <a href="services.html"><img src="service-roofing.jpg" alt="Roofing detail" loading="lazy"></a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ==================== CTA ==================== -->
 <section class="cta-section">
   <div class="cta-band reveal">
     <h2>Your space could be next.</h2>
@@ -439,7 +365,6 @@
   </div>
 </section>
 
-<!-- ==================== FOOTER ==================== -->
 <footer>
   <div class="wrap">
     <div class="foot">
@@ -461,26 +386,25 @@
       <div>
         <h4>SERVICES</h4>
         <ul>
-          <li><a href="services.html">Interior Design</a></li>
-          <li><a href="services.html">Residential Interiors</a></li>
-          <li><a href="services.html">Commercial Interiors</a></li>
-          <li><a href="services.html">Tiling &amp; Carpet</a></li>
-          <li><a href="services.html">Wall &amp; Ceiling Finishes</a></li>
+          <li><a href="services.html">Flooring Solutions</a></li>
+          <li><a href="services.html">Blinds &amp; Window Treatments</a></li>
+          <li><a href="services.html">Tiling &amp; Surface Finishes</a></li>
+          <li><a href="services.html">Wall Finishes</a></li>
+          <li><a href="services.html">Kitchen Design</a></li>
+          <li><a href="services.html">Roofing Solutions</a></li>
         </ul>
       </div>
       <div>
         <h4>CONTACT</h4>
         <ul>
-          <li>Daniel Owiro — CEO</li>
+          <li>Executive Interior Design — Kenya</li>
           <li><a href="tel:+254781038041">+254 781 038 041</a></li>
           <li><a href="mailto:executiveinteriordesign@gmail.com">executiveinteriordesign@gmail.com</a></li>
           <li>Kenya</li>
         </ul>
       </div>
     </div>
-    <div class="copy">
-      © <span id="yr"></span> Executive Interior Design. All rights reserved. &middot; Beauty in Style
-    </div>
+    <div class="copy">© <span id="yr"></span> Executive Interior Design. All rights reserved. &middot; Beauty in Style</div>
   </div>
 </footer>
 
