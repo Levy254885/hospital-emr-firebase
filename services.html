@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Services | Executive Interior Design — Flooring, Blinds, Tiling, Wall Finishes, Kitchens & Roofing in Kenya</title>
-<meta name="description" content="Executive Interior Design services: flooring solutions, blinds and window treatments, tiling and surface finishes, wall finishes and decorative solutions, kitchen design and roofing solutions in Kenya.">
-<meta name="keywords" content="flooring solutions Kenya, blinds Nairobi, tiling Kenya, wall finishes, decorative solutions, kitchen design Kenya, roofing solutions Kenya">
+<title>Services | Executive Interior Design — Flooring, Blinds, Tiling, Wall Finishes, Kitchens, Roofing & Pools in Kenya</title>
+<meta name="description" content="Executive Interior Design services: flooring, blinds and window treatments, tiling and surface finishes, wall finishes, kitchen design, roofing and swimming pool solutions in Kenya.">
+<meta name="keywords" content="flooring solutions Kenya, blinds Nairobi, tiling Kenya, wall finishes, kitchen design Kenya, roofing solutions Kenya, swimming pool solutions Kenya">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -13,18 +13,20 @@
 <style>
 /* ==================== SERVICES PAGE ==================== */
 
-/* SERVICE INDEX */
-.svc-index{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:56px;background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden}
-.svc-index-item{padding:38px 26px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);transition:all .35s var(--ease);position:relative;text-align:center}
-.svc-index-item:nth-child(3n){border-right:none}
-.svc-index-item:nth-child(n+4){border-bottom:none}
+/* SERVICE INDEX — 7 items */
+.svc-index{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:56px;background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.svc-index-item{padding:38px 24px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);transition:all .35s var(--ease);position:relative;text-align:center}
+.svc-index-item:nth-child(4n){border-right:none}
+.svc-index-item:nth-child(n+4){border-bottom:1px solid var(--line)}
+.svc-index-item:nth-child(n+8){border-bottom:none}
+.svc-index-item:nth-child(8){border-right:none}
 .svc-index-item:hover{background:var(--navy);color:#fff}
 .svc-index-item:hover .idx-num{color:var(--orange)}
 .svc-index-item:hover h4{color:#fff}
 .svc-index-item:hover p{color:rgba(255,255,255,.75)}
-.idx-num{font-family:'Playfair Display',serif;font-size:34px;font-weight:700;color:var(--orange);line-height:1;margin-bottom:12px;display:block;transition:color .3s var(--ease)}
-.svc-index-item h4{color:var(--navy);font-size:14.6px;font-weight:800;margin-bottom:6px;transition:color .3s var(--ease);line-height:1.35}
-.svc-index-item p{color:var(--muted);font-size:12.6px;transition:color .3s var(--ease)}
+.idx-num{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--orange);line-height:1;margin-bottom:12px;display:block;transition:color .3s var(--ease)}
+.svc-index-item h4{color:var(--navy);font-size:14.2px;font-weight:800;margin-bottom:6px;transition:color .3s var(--ease);line-height:1.35}
+.svc-index-item p{color:var(--muted);font-size:12.4px;transition:color .3s var(--ease)}
 
 /* SERVICE BLOCKS */
 .service-block{display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:center;padding:70px 0;border-bottom:1px solid var(--line)}
@@ -88,10 +90,10 @@
   .service-block.reverse .sb-media{order:0}
   .service-block.reverse .sb-copy{order:0}
   .svc-index{grid-template-columns:repeat(2,1fr)}
-  .svc-index-item:nth-child(3n){border-right:1px solid var(--line)}
+  .svc-index-item:nth-child(4n){border-right:1px solid var(--line)}
   .svc-index-item:nth-child(2n){border-right:none}
   .svc-index-item:nth-child(n+4){border-bottom:1px solid var(--line)}
-  .svc-index-item:nth-child(n+5){border-bottom:none}
+  .svc-index-item:nth-child(n+7){border-bottom:none}
   .addon-grid,.modes{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:640px){
@@ -155,7 +157,7 @@
       <a href="index.html">Home</a><span>/</span><span>Services</span>
     </div>
     <h1>Design services &amp; finishing solutions.</h1>
-    <p>From flooring and blinds to tiling, wall finishes, kitchen design and roofing — delivered as individual assignments or as a complete interior solution.</p>
+    <p>From flooring and blinds to tiling, wall finishes, kitchen design, roofing and swimming pool solutions — delivered as individual assignments or as a complete interior solution.</p>
   </div>
 </section>
 
@@ -188,15 +190,20 @@
         <h4>Wall Finishes &amp; Decorative Solutions</h4>
         <p>Feature walls, treatments, gypsum</p>
       </div>
-      <div class="svc-index-item reveal reveal-d4">
+      <div class="svc-index-item reveal">
         <span class="idx-num">05</span>
         <h4>Kitchen Design</h4>
         <p>Design-led kitchen solutions</p>
       </div>
-      <div class="svc-index-item reveal reveal-d4">
+      <div class="svc-index-item reveal reveal-d1">
         <span class="idx-num">06</span>
         <h4>Roofing Solutions</h4>
         <p>Roofing systems &amp; finishes</p>
+      </div>
+      <div class="svc-index-item reveal reveal-d2">
+        <span class="idx-num">07</span>
+        <h4>Swimming Pool Solutions</h4>
+        <p>Pools, finishes, surrounds</p>
       </div>
     </div>
   </div>
@@ -337,6 +344,28 @@
       </div>
     </div>
 
+    <!-- 07 SWIMMING POOL -->
+    <div class="service-block">
+      <div class="sb-media reveal">
+        <img src="service-pool.jpg" alt="Swimming pool solutions — pool design, finishes and surrounds">
+        <span class="sb-tag">Service 07</span>
+      </div>
+      <div class="sb-copy">
+        <span class="sb-num">07</span>
+        <h3>Swimming Pool Solutions</h3>
+        <p class="sb-lead">Swimming pool solutions coordinated with the surrounding interior and exterior — pool finishes, surrounds and detailing that make the pool feel like a considered part of the space.</p>
+        <ul class="sb-features">
+          <li>Pool design coordination</li>
+          <li>Pool finishes &amp; tiling</li>
+          <li>Pool surrounds &amp; decking</li>
+          <li>Waterline detailing</li>
+          <li>Material coordination</li>
+          <li>Project coordination</li>
+        </ul>
+        <a href="contact.html" class="btn">Discuss Pool Solutions</a>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -395,7 +424,7 @@
       <div class="mode reveal">
         <span class="mode-label">Single Service</span>
         <h3>One Service Line</h3>
-        <p class="mode-desc">Ideal when you already have a design direction and need one element delivered well — flooring, blinds, tiling or similar.</p>
+        <p class="mode-desc">Ideal when you already have a design direction and need one element delivered well — flooring, blinds, tiling, pool finishes or similar.</p>
         <ul>
           <li>Focused on a single scope</li>
           <li>Fast turnaround</li>
@@ -444,11 +473,15 @@
       </div>
       <div class="faq-item reveal reveal-d1">
         <button class="faq-q" type="button">Can I hire you for just one service?</button>
-        <div class="faq-a"><p>Yes. Each of our six service lines can be delivered individually. Many clients start with a single service — like flooring, tiling or wall finishes — and expand from there.</p></div>
+        <div class="faq-a"><p>Yes. Each of our seven service lines can be delivered individually. Many clients start with a single service — like flooring, tiling or wall finishes — and expand from there.</p></div>
       </div>
       <div class="faq-item reveal reveal-d2">
         <button class="faq-q" type="button">Do you handle both design and installation?</button>
-        <div class="faq-a"><p>We handle design, specification and coordination of implementation. For finishing work such as flooring, tiling, blinds, wall finishes and roofing, we coordinate the trades and supervise quality through to handover.</p></div>
+        <div class="faq-a"><p>We handle design, specification and coordination of implementation. For finishing work such as flooring, tiling, blinds, wall finishes, roofing and pool finishes, we coordinate the trades and supervise quality through to handover.</p></div>
+      </div>
+      <div class="faq-item reveal reveal-d3">
+        <button class="faq-q" type="button">Do you offer swimming pool solutions?</button>
+        <div class="faq-a"><p>Yes. We coordinate pool finishes, surrounds, waterline detailing and material selection so the pool integrates with the surrounding interior and exterior design.</p></div>
       </div>
       <div class="faq-item reveal reveal-d3">
         <button class="faq-q" type="button">How do we start a project with you?</button>
@@ -497,6 +530,7 @@
           <li><a href="services.html">Wall Finishes</a></li>
           <li><a href="services.html">Kitchen Design</a></li>
           <li><a href="services.html">Roofing Solutions</a></li>
+          <li><a href="services.html">Swimming Pool Solutions</a></li>
         </ul>
       </div>
       <div>
