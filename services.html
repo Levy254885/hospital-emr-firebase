@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Services | Executive Interior Design — Interior, Tiling, Carpet & Blinds in Kenya</title>
-<meta name="description" content="Executive Interior Design services: interior design & space planning, residential and commercial interiors, tiling, wall-to-wall carpet, blinds, kitchen & bathroom solutions, wall & ceiling finishes.">
-<meta name="keywords" content="interior design services Kenya, space planning, tiling Kenya, wall to wall carpet, blinds Kenya, gypsum ceilings, kitchen bathroom design Kenya">
+<title>Services | Executive Interior Design — Flooring, Blinds, Tiling, Wall Finishes, Kitchens & Roofing in Kenya</title>
+<meta name="description" content="Executive Interior Design services: flooring solutions, blinds and window treatments, tiling and surface finishes, wall finishes and decorative solutions, kitchen design and roofing solutions in Kenya.">
+<meta name="keywords" content="flooring solutions Kenya, blinds Nairobi, tiling Kenya, wall finishes, decorative solutions, kitchen design Kenya, roofing solutions Kenya">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -13,126 +13,91 @@
 <style>
 /* ==================== SERVICES PAGE ==================== */
 
-/* SERVICE BLOCKS */
-.service-block{
-  display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:center;
-  padding:70px 0;border-bottom:1px solid var(--line);
-}
-.service-block:last-child{border-bottom:none}
-.service-block.reverse{grid-template-columns:1fr 1.1fr}
-.service-block.reverse .sb-media{order:2}
-.service-block.reverse .sb-copy{order:1}
-.sb-media{position:relative;border-radius:18px;overflow:hidden;
-  box-shadow:0 40px 80px -44px rgba(11,42,91,.5);aspect-ratio:4/3}
-.sb-media img{width:100%;height:100%;object-fit:cover;
-  transition:transform .9s var(--ease-out)}
-.service-block:hover .sb-media img{transform:scale(1.06)}
-.sb-tag{position:absolute;top:22px;left:22px;background:rgba(255,255,255,.96);
-  backdrop-filter:blur(10px);padding:9px 18px;border-radius:999px;
-  font-size:11px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;
-  color:var(--navy)}
-.sb-num{font-family:'Playfair Display',serif;font-size:56px;font-weight:700;
-  color:var(--orange);line-height:1;margin-bottom:14px;display:block}
-.sb-copy h3{font-family:'Playfair Display',serif;font-size:clamp(24px,2.6vw,32px);
-  color:var(--navy);margin-bottom:16px;line-height:1.2;font-weight:700}
-.sb-copy .sb-lead{color:var(--muted);font-size:15.8px;line-height:1.75;margin-bottom:24px}
-.sb-features{display:grid;grid-template-columns:1fr 1fr;gap:12px 26px;margin-bottom:28px}
-.sb-features li{display:flex;gap:10px;align-items:flex-start;
-  color:var(--ink);font-size:14.2px;line-height:1.55}
-.sb-features li::before{content:'—';color:var(--red);font-weight:800;flex-shrink:0}
-
 /* SERVICE INDEX */
-.svc-index{display:grid;grid-template-columns:repeat(4,1fr);gap:0;
-  margin-top:56px;background:#fff;border:1px solid var(--line);
-  border-radius:18px;overflow:hidden}
-.svc-index-item{padding:32px 24px;border-right:1px solid var(--line);
-  transition:all .35s var(--ease);position:relative;text-align:center}
-.svc-index-item:last-child{border-right:none}
+.svc-index{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:56px;background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.svc-index-item{padding:38px 26px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);transition:all .35s var(--ease);position:relative;text-align:center}
+.svc-index-item:nth-child(3n){border-right:none}
+.svc-index-item:nth-child(n+4){border-bottom:none}
 .svc-index-item:hover{background:var(--navy);color:#fff}
 .svc-index-item:hover .idx-num{color:var(--orange)}
 .svc-index-item:hover h4{color:#fff}
 .svc-index-item:hover p{color:rgba(255,255,255,.75)}
-.idx-num{font-family:'Playfair Display',serif;font-size:34px;font-weight:700;
-  color:var(--orange);line-height:1;margin-bottom:12px;display:block;
-  transition:color .3s var(--ease)}
-.svc-index-item h4{color:var(--navy);font-size:14.6px;font-weight:800;
-  margin-bottom:6px;transition:color .3s var(--ease);line-height:1.35}
+.idx-num{font-family:'Playfair Display',serif;font-size:34px;font-weight:700;color:var(--orange);line-height:1;margin-bottom:12px;display:block;transition:color .3s var(--ease)}
+.svc-index-item h4{color:var(--navy);font-size:14.6px;font-weight:800;margin-bottom:6px;transition:color .3s var(--ease);line-height:1.35}
 .svc-index-item p{color:var(--muted);font-size:12.6px;transition:color .3s var(--ease)}
 
-/* ADD-ON GRID */
+/* SERVICE BLOCKS */
+.service-block{display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:center;padding:70px 0;border-bottom:1px solid var(--line)}
+.service-block:last-child{border-bottom:none}
+.service-block.reverse{grid-template-columns:1fr 1.1fr}
+.service-block.reverse .sb-media{order:2}
+.service-block.reverse .sb-copy{order:1}
+.sb-media{position:relative;border-radius:18px;overflow:hidden;box-shadow:0 40px 80px -44px rgba(11,42,91,.5);aspect-ratio:4/3}
+.sb-media img{width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease-out)}
+.service-block:hover .sb-media img{transform:scale(1.06)}
+.sb-tag{position:absolute;top:22px;left:22px;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);padding:9px 18px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--navy)}
+.sb-num{font-family:'Playfair Display',serif;font-size:56px;font-weight:700;color:var(--orange);line-height:1;margin-bottom:14px;display:block}
+.sb-copy h3{font-family:'Playfair Display',serif;font-size:clamp(24px,2.6vw,32px);color:var(--navy);margin-bottom:16px;line-height:1.2;font-weight:700}
+.sb-copy .sb-lead{color:var(--muted);font-size:15.8px;line-height:1.75;margin-bottom:24px}
+.sb-features{display:grid;grid-template-columns:1fr 1fr;gap:12px 26px;margin-bottom:28px}
+.sb-features li{display:flex;gap:10px;align-items:flex-start;color:var(--ink);font-size:14.2px;line-height:1.55}
+.sb-features li::before{content:'—';color:var(--red);font-weight:800;flex-shrink:0}
+
+/* ADD-ONS */
 .addon-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
-.addon{
-  background:#fff;border:1px solid var(--line);border-radius:16px;
-  padding:34px 28px;transition:all .4s var(--ease);position:relative;overflow:hidden;
-}
-.addon::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,var(--red),var(--orange));
-  transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease-out)}
+.addon{background:#fff;border:1px solid var(--line);border-radius:16px;padding:34px 28px;transition:all .4s var(--ease);position:relative;overflow:hidden}
+.addon::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),var(--orange));transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease-out)}
 .addon:hover::before{transform:scaleX(1)}
-.addon:hover{transform:translateY(-8px);border-color:transparent;
-  box-shadow:0 28px 56px -30px rgba(11,42,91,.42)}
-.addon .num{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;
-  color:var(--orange);line-height:1;margin-bottom:14px;display:block}
+.addon:hover{transform:translateY(-8px);border-color:transparent;box-shadow:0 28px 56px -30px rgba(11,42,91,.42)}
+.addon .num{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:var(--orange);line-height:1;margin-bottom:14px;display:block}
 .addon h4{color:var(--navy);font-size:16.5px;font-weight:800;margin-bottom:10px}
 .addon p{color:var(--muted);font-size:14.2px;line-height:1.65}
 
-/* PRICING / ENGAGEMENT MODES */
+/* ENGAGEMENT MODES */
 .modes{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
-.mode{background:#fff;border:1px solid var(--line);border-radius:18px;
-  padding:42px 32px;transition:all .45s var(--ease);position:relative}
-.mode:hover{transform:translateY(-8px);border-color:var(--navy);
-  box-shadow:0 32px 60px -32px rgba(11,42,91,.4)}
-.mode .mode-label{font-size:11.5px;font-weight:800;letter-spacing:3px;
-  text-transform:uppercase;color:var(--red);margin-bottom:14px;display:block}
-.mode h3{font-family:'Playfair Display',serif;font-size:24px;color:var(--navy);
-  margin-bottom:14px}
+.mode{background:#fff;border:1px solid var(--line);border-radius:18px;padding:42px 32px;transition:all .45s var(--ease);position:relative}
+.mode:hover{transform:translateY(-8px);border-color:var(--navy);box-shadow:0 32px 60px -32px rgba(11,42,91,.4)}
+.mode .mode-label{font-size:11.5px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:14px;display:block}
+.mode h3{font-family:'Playfair Display',serif;font-size:24px;color:var(--navy);margin-bottom:14px}
 .mode .mode-desc{color:var(--muted);font-size:14.6px;line-height:1.7;margin-bottom:22px}
 .mode ul{display:grid;gap:10px;padding-top:20px;border-top:1px solid var(--line)}
-.mode ul li{display:flex;gap:10px;align-items:flex-start;
-  color:var(--ink);font-size:13.8px;line-height:1.55}
+.mode ul li{display:flex;gap:10px;align-items:flex-start;color:var(--ink);font-size:13.8px;line-height:1.55}
 .mode ul li::before{content:'✓';color:var(--red);font-weight:900;flex-shrink:0}
 
 /* FAQ */
 .faq{margin-top:56px;max-width:900px;margin-left:auto;margin-right:auto}
-.faq-item{background:#fff;border:1px solid var(--line);border-radius:14px;
-  margin-bottom:14px;overflow:hidden;transition:all .3s var(--ease)}
+.faq-item{background:#fff;border:1px solid var(--line);border-radius:14px;margin-bottom:14px;overflow:hidden;transition:all .3s var(--ease)}
 .faq-item.open{border-color:var(--navy);box-shadow:0 16px 34px -22px rgba(11,42,91,.35)}
-.faq-q{width:100%;text-align:left;padding:24px 28px;font-size:16px;
-  font-weight:700;color:var(--navy);display:flex;justify-content:space-between;
-  align-items:center;gap:20px;font-family:inherit}
-.faq-q::after{content:'+';font-size:24px;color:var(--red);
-  transition:transform .3s var(--ease);font-weight:300}
+.faq-q{width:100%;text-align:left;padding:24px 28px;font-size:16px;font-weight:700;color:var(--navy);display:flex;justify-content:space-between;align-items:center;gap:20px;font-family:inherit;background:none;border:none;cursor:pointer}
+.faq-q::after{content:'+';font-size:24px;color:var(--red);transition:transform .3s var(--ease);font-weight:300}
 .faq-item.open .faq-q::after{transform:rotate(45deg)}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .45s var(--ease-out);
-  padding:0 28px}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .45s var(--ease-out);padding:0 28px}
 .faq-item.open .faq-a{max-height:340px;padding:0 28px 26px}
 .faq-a p{color:var(--muted);font-size:14.6px;line-height:1.75}
 
 /* CTA */
 .cta-section{padding:0 22px 96px}
-.cta-band{max-width:var(--max);margin:0 auto;border-radius:20px;
-  background:linear-gradient(115deg,var(--red) 0%,var(--navy) 100%);
-  color:#fff;text-align:center;padding:80px 34px;position:relative;overflow:hidden}
-.cta-band::before{content:'';position:absolute;inset:0;opacity:.1;
-  background:url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1600&q=80') center/cover;
-  mix-blend-mode:overlay}
+.cta-band{max-width:var(--max);margin:0 auto;border-radius:20px;background:linear-gradient(115deg,var(--red) 0%,var(--navy) 100%);color:#fff;text-align:center;padding:80px 34px;position:relative;overflow:hidden}
+.cta-band::before{content:'';position:absolute;inset:0;opacity:.12;background:url('service-flooring.jpg') center/cover;mix-blend-mode:overlay}
 .cta-band > *{position:relative;z-index:1}
 .cta-band h2{color:#fff;font-family:'Playfair Display',serif;margin-bottom:14px}
 .cta-band p{color:rgba(255,255,255,.88);max-width:600px;margin:0 auto 34px;font-size:16.5px}
 
-/* RESPONSIVE */
 @media(max-width:1024px){
   .service-block,.service-block.reverse{grid-template-columns:1fr;gap:38px}
   .service-block.reverse .sb-media{order:0}
   .service-block.reverse .sb-copy{order:0}
   .svc-index{grid-template-columns:repeat(2,1fr)}
+  .svc-index-item:nth-child(3n){border-right:1px solid var(--line)}
   .svc-index-item:nth-child(2n){border-right:none}
-  .svc-index-item{border-bottom:1px solid var(--line)}
+  .svc-index-item:nth-child(n+4){border-bottom:1px solid var(--line)}
+  .svc-index-item:nth-child(n+5){border-bottom:none}
   .addon-grid,.modes{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:640px){
   .svc-index,.addon-grid,.modes{grid-template-columns:1fr}
-  .svc-index-item{border-right:none}
+  .svc-index-item{border-right:none !important;border-bottom:1px solid var(--line) !important}
+  .svc-index-item:last-child{border-bottom:none !important}
   .sb-features{grid-template-columns:1fr}
   .service-block{padding:56px 0}
 }
@@ -140,7 +105,6 @@
 </head>
 <body>
 
-<!-- ==================== HEADER ==================== -->
 <header id="site-header">
   <div class="wrap header-inner">
     <a href="index.html" class="logo-link" aria-label="Executive Interior Design Home">
@@ -168,7 +132,6 @@
   </div>
 </header>
 
-<!-- ==================== MOBILE MENU ==================== -->
 <div class="mobile-menu" id="mobileMenu">
   <button class="mobile-close" id="mobileClose" aria-label="Close menu">×</button>
   <nav>
@@ -186,255 +149,197 @@
   </div>
 </div>
 
-<!-- ==================== PAGE HERO ==================== -->
 <section class="page-hero">
   <div class="wrap">
     <div class="breadcrumb">
       <a href="index.html">Home</a><span>/</span><span>Services</span>
     </div>
-    <h1>Interior design &amp; finishing — under one roof.</h1>
-    <p>From concept development and space planning to tiling, carpet, blinds and wall &amp; ceiling finishes — delivered as individual assignments or as a complete interior solution.</p>
+    <h1>Design services &amp; finishing solutions.</h1>
+    <p>From flooring and blinds to tiling, wall finishes, kitchen design and roofing — delivered as individual assignments or as a complete interior solution.</p>
   </div>
 </section>
 
-<!-- ==================== SERVICE INDEX ==================== -->
 <section>
   <div class="wrap">
     <div class="reveal" style="text-align:center;max-width:720px;margin:0 auto">
-      <span class="eyebrow">Eight Service Lines</span>
-      <h2>A complete interior offering</h2>
+      <span class="eyebrow">Our Services</span>
+      <h2>A complete finishing offering</h2>
       <p class="lead" style="margin:0 auto">Each service can stand alone, or be coordinated with the others for a single, unified result.</p>
     </div>
 
     <div class="svc-index">
       <div class="svc-index-item reveal">
         <span class="idx-num">01</span>
-        <h4>Interior Design &amp; Space Planning</h4>
-        <p>Concepts, mood boards, layouts</p>
+        <h4>Flooring Solutions</h4>
+        <p>Tiles, carpet, timber, vinyl</p>
       </div>
       <div class="svc-index-item reveal reveal-d1">
         <span class="idx-num">02</span>
-        <h4>Residential Interiors</h4>
-        <p>Homes, apartments, villas</p>
-      </div>
-      <div class="svc-index-item reveal reveal-d2">
-        <span class="idx-num">03</span>
-        <h4>Commercial Interiors</h4>
-        <p>Offices, retail, showrooms</p>
-      </div>
-      <div class="svc-index-item reveal reveal-d3">
-        <span class="idx-num">04</span>
-        <h4>Tiling</h4>
-        <p>Floors, walls, feature areas</p>
-      </div>
-      <div class="svc-index-item reveal">
-        <span class="idx-num">05</span>
-        <h4>Wall-to-Wall Carpet</h4>
-        <p>Comfort, durability, acoustics</p>
-      </div>
-      <div class="svc-index-item reveal reveal-d1">
-        <span class="idx-num">06</span>
-        <h4>Blinds</h4>
+        <h4>Blinds &amp; Window Treatments</h4>
         <p>Privacy, light control, finish</p>
       </div>
       <div class="svc-index-item reveal reveal-d2">
-        <span class="idx-num">07</span>
-        <h4>Kitchen &amp; Bathroom</h4>
-        <p>Design-led selections</p>
+        <span class="idx-num">03</span>
+        <h4>Tiling &amp; Surface Finishes</h4>
+        <p>Floors, walls, feature areas</p>
       </div>
       <div class="svc-index-item reveal reveal-d3">
-        <span class="idx-num">08</span>
-        <h4>Wall &amp; Ceiling Finishes</h4>
-        <p>Gypsum, feature walls, treatments</p>
+        <span class="idx-num">04</span>
+        <h4>Wall Finishes &amp; Decorative Solutions</h4>
+        <p>Feature walls, treatments, gypsum</p>
+      </div>
+      <div class="svc-index-item reveal reveal-d4">
+        <span class="idx-num">05</span>
+        <h4>Kitchen Design</h4>
+        <p>Design-led kitchen solutions</p>
+      </div>
+      <div class="svc-index-item reveal reveal-d4">
+        <span class="idx-num">06</span>
+        <h4>Roofing Solutions</h4>
+        <p>Roofing systems &amp; finishes</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ==================== SERVICE BLOCKS ==================== -->
 <section class="section-soft">
   <div class="wrap">
 
-    <!-- 01 -->
+    <!-- 01 FLOORING -->
     <div class="service-block">
       <div class="sb-media reveal">
-        <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1200&q=85&auto=format&fit=crop" alt="Interior design and space planning mood board in a finished living room">
+        <img src="service-flooring.jpg" alt="Flooring solutions — tiles, carpet and timber finishes">
         <span class="sb-tag">Service 01</span>
       </div>
       <div class="sb-copy">
         <span class="sb-num">01</span>
-        <h3>Interior Design &amp; Space Planning</h3>
-        <p class="sb-lead">Concept development, space planning, mood boards, colour direction, furniture layouts and design detailing — the foundation of a coherent, beautiful and functional space.</p>
+        <h3>Flooring Solutions</h3>
+        <p class="sb-lead">Complete flooring solutions across tiles, wall-to-wall carpet, timber, vinyl and other finishes — selected for comfort, durability, acoustics and visual appeal.</p>
         <ul class="sb-features">
-          <li>Concept development</li>
-          <li>Space planning</li>
-          <li>Mood boards</li>
-          <li>Colour direction</li>
-          <li>Furniture layouts</li>
-          <li>Design detailing</li>
+          <li>Tile flooring</li>
+          <li>Wall-to-wall carpet</li>
+          <li>Timber &amp; laminate</li>
+          <li>Vinyl flooring</li>
+          <li>Acoustic performance</li>
+          <li>Coordinated selection</li>
         </ul>
-        <a href="contact.html" class="btn">Discuss This Service</a>
+        <a href="contact.html" class="btn">Discuss Flooring</a>
       </div>
     </div>
 
-    <!-- 02 -->
+    <!-- 02 BLINDS -->
     <div class="service-block reverse">
       <div class="sb-media reveal">
-        <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1200&q=85&auto=format&fit=crop" alt="Warm residential living room with layered textures and natural light">
+        <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=1200&q=85&auto=format&fit=crop" alt="Blinds and window treatments providing light control">
         <span class="sb-tag">Service 02</span>
       </div>
       <div class="sb-copy">
         <span class="sb-num">02</span>
-        <h3>Residential Interiors</h3>
-        <p class="sb-lead">Living rooms, bedrooms, kitchens, bathrooms and complete home interior concepts designed around lifestyle and taste — spaces that support the way you actually live.</p>
+        <h3>Blinds &amp; Window Treatments</h3>
+        <p class="sb-lead">Stylish and practical blind solutions designed to provide privacy, light control and a finished look — the detail that completes a window and frames a room.</p>
         <ul class="sb-features">
-          <li>Living rooms</li>
-          <li>Bedrooms</li>
-          <li>Kitchens</li>
-          <li>Bathrooms</li>
-          <li>Full home concepts</li>
-          <li>Lifestyle-led design</li>
+          <li>Privacy control</li>
+          <li>Light management</li>
+          <li>Finished look</li>
+          <li>Stylish options</li>
+          <li>Room-by-room design</li>
+          <li>Practical installation</li>
         </ul>
-        <a href="contact.html" class="btn">Design My Home</a>
+        <a href="contact.html" class="btn">Choose Blinds</a>
       </div>
     </div>
 
-    <!-- 03 -->
+    <!-- 03 TILING -->
     <div class="service-block">
       <div class="sb-media reveal">
-        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=85&auto=format&fit=crop" alt="Contemporary office fit-out with brand-led interior design">
+        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=85&auto=format&fit=crop" alt="Tiling and surface finishes on floors and walls">
         <span class="sb-tag">Service 03</span>
       </div>
       <div class="sb-copy">
         <span class="sb-num">03</span>
-        <h3>Commercial Interiors</h3>
-        <p class="sb-lead">Office, retail, showroom and business environments designed to support brand identity, customer experience and productivity — where the interior works as hard as your team does.</p>
-        <ul class="sb-features">
-          <li>Offices</li>
-          <li>Retail spaces</li>
-          <li>Showrooms</li>
-          <li>Boardrooms</li>
-          <li>Brand-led design</li>
-          <li>Productivity-focused</li>
-        </ul>
-        <a href="contact.html" class="btn">Fit Out My Space</a>
-      </div>
-    </div>
-
-    <!-- 04 -->
-    <div class="service-block reverse">
-      <div class="sb-media reveal">
-        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=85&auto=format&fit=crop" alt="Coordinated tile installation on floors and walls in a modern interior">
-        <span class="sb-tag">Service 04</span>
-      </div>
-      <div class="sb-copy">
-        <span class="sb-num">04</span>
-        <h3>Tiling</h3>
-        <p class="sb-lead">Professional tile selection and coordinated tiling solutions for floors, walls, bathrooms, kitchens and feature areas — where material choice and layout work together.</p>
+        <h3>Tiling &amp; Surface Finishes</h3>
+        <p class="sb-lead">Professional tile selection and coordinated tiling solutions for floors, walls, bathrooms, kitchens and feature areas — where material and layout work together.</p>
         <ul class="sb-features">
           <li>Floor tiling</li>
           <li>Wall tiling</li>
           <li>Bathroom tiling</li>
           <li>Kitchen tiling</li>
           <li>Feature areas</li>
-          <li>Coordinated selection</li>
+          <li>Surface coordination</li>
         </ul>
         <a href="contact.html" class="btn">Plan Tiling</a>
       </div>
     </div>
 
-    <!-- 05 -->
+    <!-- 04 WALL FINISHES -->
+    <div class="service-block reverse">
+      <div class="sb-media reveal">
+        <img src="service-wall.jpg" alt="Wall finishes and decorative solutions — feature walls and gypsum">
+        <span class="sb-tag">Service 04</span>
+      </div>
+      <div class="sb-copy">
+        <span class="sb-num">04</span>
+        <h3>Wall Finishes &amp; Decorative Solutions</h3>
+        <p class="sb-lead">Decorative wall treatments, gypsum concepts, feature walls and finishing details that add character and identity to a space — the layers that make an interior feel considered.</p>
+        <ul class="sb-features">
+          <li>Feature walls</li>
+          <li>Decorative treatments</li>
+          <li>Gypsum concepts</li>
+          <li>Wall panelling</li>
+          <li>Ceiling finishes</li>
+          <li>Detail finishing</li>
+        </ul>
+        <a href="contact.html" class="btn">Discuss Wall Finishes</a>
+      </div>
+    </div>
+
+    <!-- 05 KITCHEN DESIGN -->
     <div class="service-block">
       <div class="sb-media reveal">
-        <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1200&q=85&auto=format&fit=crop" alt="Wall-to-wall carpet in a bright, comfortable interior space">
+        <img src="service-kitchen.jpg" alt="Design-led kitchen with coordinated finishes and fittings">
         <span class="sb-tag">Service 05</span>
       </div>
       <div class="sb-copy">
         <span class="sb-num">05</span>
-        <h3>Wall-to-Wall Carpet</h3>
-        <p class="sb-lead">Wall-to-wall carpet solutions selected for comfort, durability, acoustic performance and visual appeal — ideal for homes, offices and hospitality environments.</p>
+        <h3>Kitchen Design</h3>
+        <p class="sb-lead">Design-led kitchen solutions — cabinetry, surfaces, fittings and coordinated finishes shaped around how the space is actually used.</p>
         <ul class="sb-features">
-          <li>Comfort underfoot</li>
-          <li>Durability</li>
-          <li>Acoustic performance</li>
-          <li>Visual appeal</li>
-          <li>Home &amp; office</li>
-          <li>Hospitality-ready</li>
+          <li>Kitchen layout</li>
+          <li>Cabinetry design</li>
+          <li>Worktop surfaces</li>
+          <li>Fittings &amp; fixtures</li>
+          <li>Material coordination</li>
+          <li>Detailed specification</li>
         </ul>
-        <a href="contact.html" class="btn">Explore Carpet</a>
+        <a href="contact.html" class="btn">Design My Kitchen</a>
       </div>
     </div>
 
-    <!-- 06 -->
+    <!-- 06 ROOFING -->
     <div class="service-block reverse">
       <div class="sb-media reveal">
-        <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=1200&q=85&auto=format&fit=crop" alt="Modern interior with stylish blinds providing light control">
+        <img src="service-roofing.jpg" alt="Roofing solutions and roofing finishes">
         <span class="sb-tag">Service 06</span>
       </div>
       <div class="sb-copy">
         <span class="sb-num">06</span>
-        <h3>Blinds</h3>
-        <p class="sb-lead">Stylish and practical blind solutions designed to provide privacy, light control and a finished look — the detail that completes a window.</p>
+        <h3>Roofing Solutions</h3>
+        <p class="sb-lead">Roofing solutions and roofing finishes coordinated with the rest of the project — so the exterior detail matches the quality inside.</p>
         <ul class="sb-features">
-          <li>Privacy</li>
-          <li>Light control</li>
-          <li>Finished look</li>
-          <li>Stylish options</li>
-          <li>Practical design</li>
-          <li>Room-by-room</li>
-        </ul>
-        <a href="contact.html" class="btn">Choose Blinds</a>
-      </div>
-    </div>
-
-    <!-- 07 -->
-    <div class="service-block">
-      <div class="sb-media reveal">
-        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&q=85&auto=format&fit=crop" alt="Design-led kitchen with coordinated finishes and sanitary fittings">
-        <span class="sb-tag">Service 07</span>
-      </div>
-      <div class="sb-copy">
-        <span class="sb-num">07</span>
-        <h3>Kitchen &amp; Bathroom Solutions</h3>
-        <p class="sb-lead">Design-led selections and coordination for kitchens, bathrooms, sanitary fittings and related interior finishes — where function and finish meet.</p>
-        <ul class="sb-features">
-          <li>Kitchen selections</li>
-          <li>Bathroom design</li>
-          <li>Sanitary fittings</li>
-          <li>Related finishes</li>
+          <li>Roofing systems</li>
+          <li>Roof finishes</li>
           <li>Material coordination</li>
-          <li>Detailed specification</li>
+          <li>Project coordination</li>
+          <li>Quality workmanship</li>
+          <li>Detail finishing</li>
         </ul>
-        <a href="contact.html" class="btn">Plan Kitchen &amp; Bath</a>
-      </div>
-    </div>
-
-    <!-- 08 -->
-    <div class="service-block reverse">
-      <div class="sb-media reveal">
-        <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1200&q=85&auto=format&fit=crop" alt="Decorative wall and gypsum ceiling finishes in a refined interior">
-        <span class="sb-tag">Service 08</span>
-      </div>
-      <div class="sb-copy">
-        <span class="sb-num">08</span>
-        <h3>Wall &amp; Ceiling Finishes</h3>
-        <p class="sb-lead">Decorative wall treatments, gypsum concepts, feature walls, ceilings and finishing details that add character to spaces — the layers that give an interior its identity.</p>
-        <ul class="sb-features">
-          <li>Decorative wall treatments</li>
-          <li>Gypsum concepts</li>
-          <li>Feature walls</li>
-          <li>Ceiling design</li>
-          <li>Finishing details</li>
-          <li>Character &amp; identity</li>
-        </ul>
-        <a href="contact.html" class="btn">Discuss Finishes</a>
+        <a href="contact.html" class="btn">Discuss Roofing</a>
       </div>
     </div>
 
   </div>
 </section>
 
-<!-- ==================== ADD-ONS ==================== -->
 <section>
   <div class="wrap">
     <div class="reveal" style="text-align:center;max-width:720px;margin:0 auto">
@@ -478,7 +383,6 @@
   </div>
 </section>
 
-<!-- ==================== ENGAGEMENT MODES ==================== -->
 <section class="section-soft">
   <div class="wrap">
     <div class="reveal" style="text-align:center;max-width:720px;margin:0 auto">
@@ -491,7 +395,7 @@
       <div class="mode reveal">
         <span class="mode-label">Single Service</span>
         <h3>One Service Line</h3>
-        <p class="mode-desc">Ideal when you already have a design direction and need one element delivered well — tiling, carpet, blinds, or similar.</p>
+        <p class="mode-desc">Ideal when you already have a design direction and need one element delivered well — flooring, blinds, tiling or similar.</p>
         <ul>
           <li>Focused on a single scope</li>
           <li>Fast turnaround</li>
@@ -502,7 +406,7 @@
       <div class="mode reveal reveal-d1" style="border-color:var(--navy);box-shadow:0 24px 48px -28px rgba(11,42,91,.4)">
         <span class="mode-label">Most Popular</span>
         <h3>Design &amp; Finishing Package</h3>
-        <p class="mode-desc">Design concept plus coordinated finishing — the complete interior solution for homes, offices and hospitality spaces.</p>
+        <p class="mode-desc">Concept plus coordinated finishing — the complete interior solution for homes, offices and hospitality spaces.</p>
         <ul>
           <li>Concept &amp; space planning</li>
           <li>Full material specification</li>
@@ -526,7 +430,6 @@
   </div>
 </section>
 
-<!-- ==================== FAQ ==================== -->
 <section>
   <div class="wrap">
     <div class="reveal" style="text-align:center;max-width:720px;margin:0 auto">
@@ -541,11 +444,11 @@
       </div>
       <div class="faq-item reveal reveal-d1">
         <button class="faq-q" type="button">Can I hire you for just one service?</button>
-        <div class="faq-a"><p>Yes. Each of our eight service lines can be delivered individually. Many clients start with a single service — like tiling or wall &amp; ceiling finishes — and expand from there.</p></div>
+        <div class="faq-a"><p>Yes. Each of our six service lines can be delivered individually. Many clients start with a single service — like flooring, tiling or wall finishes — and expand from there.</p></div>
       </div>
       <div class="faq-item reveal reveal-d2">
         <button class="faq-q" type="button">Do you handle both design and installation?</button>
-        <div class="faq-a"><p>We handle design, specification and coordination of implementation. For finishing work such as tiling, carpet, blinds and gypsum, we coordinate the trades and supervise quality through to handover.</p></div>
+        <div class="faq-a"><p>We handle design, specification and coordination of implementation. For finishing work such as flooring, tiling, blinds, wall finishes and roofing, we coordinate the trades and supervise quality through to handover.</p></div>
       </div>
       <div class="faq-item reveal reveal-d3">
         <button class="faq-q" type="button">How do we start a project with you?</button>
@@ -559,7 +462,6 @@
   </div>
 </section>
 
-<!-- ==================== CTA ==================== -->
 <section class="cta-section">
   <div class="cta-band reveal">
     <h2>Which service do you need?</h2>
@@ -568,7 +470,6 @@
   </div>
 </section>
 
-<!-- ==================== FOOTER ==================== -->
 <footer>
   <div class="wrap">
     <div class="foot">
@@ -590,26 +491,25 @@
       <div>
         <h4>SERVICES</h4>
         <ul>
-          <li><a href="services.html">Interior Design</a></li>
-          <li><a href="services.html">Residential Interiors</a></li>
-          <li><a href="services.html">Commercial Interiors</a></li>
-          <li><a href="services.html">Tiling &amp; Carpet</a></li>
-          <li><a href="services.html">Wall &amp; Ceiling Finishes</a></li>
+          <li><a href="services.html">Flooring Solutions</a></li>
+          <li><a href="services.html">Blinds &amp; Window Treatments</a></li>
+          <li><a href="services.html">Tiling &amp; Surface Finishes</a></li>
+          <li><a href="services.html">Wall Finishes</a></li>
+          <li><a href="services.html">Kitchen Design</a></li>
+          <li><a href="services.html">Roofing Solutions</a></li>
         </ul>
       </div>
       <div>
         <h4>CONTACT</h4>
         <ul>
-          <li>Daniel Owiro — CEO</li>
+          <li>Executive Interior Design — Kenya</li>
           <li><a href="tel:+254781038041">+254 781 038 041</a></li>
           <li><a href="mailto:executiveinteriordesign@gmail.com">executiveinteriordesign@gmail.com</a></li>
           <li>Kenya</li>
         </ul>
       </div>
     </div>
-    <div class="copy">
-      © <span id="yr"></span> Executive Interior Design. All rights reserved. &middot; Beauty in Style
-    </div>
+    <div class="copy">© <span id="yr"></span> Executive Interior Design. All rights reserved. &middot; Beauty in Style</div>
   </div>
 </footer>
 
@@ -617,8 +517,6 @@
 
 <script>
 document.getElementById('yr').textContent = new Date().getFullYear();
-
-/* FAQ accordion */
 document.querySelectorAll('.faq-q').forEach(btn=>{
   btn.addEventListener('click',()=>{
     const item = btn.parentElement;
