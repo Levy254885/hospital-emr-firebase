@@ -4,268 +4,131 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Executive Interior Design | Beauty in Style — Kenya Interior Designers</title>
-<meta name="description" content="Executive Interior Design is a Kenya-based interior design and finishing brand creating refined, functional and distinctive spaces for homes, offices, retail and hospitality.">
-<meta name="keywords" content="interior design Kenya, interior designers Nairobi, home interiors Kenya, commercial fit-out Kenya, tiling, blinds, wall to wall carpet, gypsum ceilings">
-<meta name="author" content="Executive Interior Design">
+<meta name="description" content="Executive Interior Design is a Kenya-based interior design and finishing brand delivering flooring, blinds, tiling, wall finishes, kitchen design and roofing solutions.">
+<meta name="keywords" content="interior design Kenya, flooring solutions Kenya, blinds Nairobi, tiling Kenya, wall finishes, kitchen design Kenya, roofing solutions Kenya">
 <meta property="og:title" content="Executive Interior Design | Beauty in Style">
 <meta property="og:description" content="Refined, functional and distinctive interiors across Kenya.">
-<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="shared.css">
 <style>
-/* ============ HOMEPAGE-SPECIFIC STYLES ============ */
-
-/* HERO */
-.hero{
-  position:relative;min-height:100vh;display:flex;align-items:center;
-  color:#fff;overflow:hidden;isolation:isolate;
-}
-.hero-bg{
-  position:absolute;inset:0;z-index:-2;
-  background:url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1920&q=85&auto=format&fit=crop') center/cover no-repeat;
-  animation:slowZoom 22s ease-in-out infinite alternate;
-}
-.hero-overlay{
-  position:absolute;inset:0;z-index:-1;
-  background:
-    linear-gradient(115deg, rgba(11,42,91,.94) 0%, rgba(11,42,91,.82) 45%, rgba(200,16,46,.62) 100%),
-    radial-gradient(circle at 78% 22%, rgba(243,156,18,.28), transparent 58%);
-}
+/* ============ HOMEPAGE STYLES ============ */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;color:#fff;overflow:hidden;isolation:isolate}
+.hero-bg{position:absolute;inset:0;z-index:-2;background:url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1920&q=85&auto=format&fit=crop') center/cover no-repeat;animation:slowZoom 22s ease-in-out infinite alternate}
+.hero-overlay{position:absolute;inset:0;z-index:-1;background:linear-gradient(115deg,rgba(11,42,91,.94) 0%,rgba(11,42,91,.82) 45%,rgba(200,16,46,.62) 100%),radial-gradient(circle at 78% 22%,rgba(243,156,18,.28),transparent 58%)}
 .hero-inner{max-width:var(--max);margin:0 auto;padding:140px 22px 100px;width:100%}
-.hero-tag{
-  display:inline-flex;align-items:center;gap:10px;
-  font-size:11.5px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;
-  color:var(--orange);margin-bottom:22px;
-}
+.hero-tag{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:var(--orange);margin-bottom:22px}
 .hero-tag::before{content:'';width:38px;height:1px;background:var(--orange);display:block}
-.hero h1{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(38px,6vw,72px);line-height:1.05;font-weight:700;
-  max-width:900px;letter-spacing:-1px;
-}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(38px,6vw,72px);line-height:1.05;font-weight:700;max-width:900px;letter-spacing:-1px}
 .hero h1 em{font-style:italic;color:var(--orange);font-weight:600}
-.hero-lede{
-  margin-top:26px;max-width:620px;font-size:17px;line-height:1.7;
-  color:rgba(255,255,255,.88);font-weight:300;
-}
+.hero-lede{margin-top:26px;max-width:620px;font-size:17px;line-height:1.7;color:rgba(255,255,255,.88);font-weight:300}
 .hero-actions{margin-top:42px;display:flex;gap:16px;flex-wrap:wrap}
-.hero-scroll{
-  position:absolute;bottom:38px;left:50%;transform:translateX(-50%);
-  display:flex;flex-direction:column;align-items:center;gap:10px;
-  font-size:10.5px;letter-spacing:3px;text-transform:uppercase;
-  color:rgba(255,255,255,.7);
-}
-.hero-scroll span:last-child{
-  width:1px;height:44px;background:linear-gradient(to bottom,var(--orange),transparent);
-  animation:scrollPulse 2s ease-in-out infinite;
-}
+.hero-scroll{position:absolute;bottom:38px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;font-size:10.5px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.7)}
+.hero-scroll span:last-child{width:1px;height:44px;background:linear-gradient(to bottom,var(--orange),transparent);animation:scrollPulse 2s ease-in-out infinite}
 @keyframes scrollPulse{0%,100%{transform:scaleY(.4);opacity:.4}50%{transform:scaleY(1);opacity:1}}
 @keyframes slowZoom{from{transform:scale(1)}to{transform:scale(1.1)}}
 @keyframes heroFade{from{opacity:0;transform:translateY(44px)}to{opacity:1;transform:none}}
 .hero-anim{opacity:0;animation:heroFade 1.1s cubic-bezier(.22,1,.36,1) forwards}
-.hero-anim-1{animation-delay:.2s}
-.hero-anim-2{animation-delay:.45s}
-.hero-anim-3{animation-delay:.7s}
-.hero-anim-4{animation-delay:.95s}
+.hero-anim-1{animation-delay:.2s}.hero-anim-2{animation-delay:.45s}.hero-anim-3{animation-delay:.7s}.hero-anim-4{animation-delay:.95s}
 
-/* MARQUEE STRIP */
-.marquee{
-  background:var(--navy);color:#fff;padding:22px 0;overflow:hidden;
-  border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08);
-}
-.marquee-track{
-  display:flex;gap:60px;white-space:nowrap;
-  animation:marqueeScroll 32s linear infinite;
-}
-.marquee-track span{
-  font-size:13px;font-weight:600;letter-spacing:3px;text-transform:uppercase;
-  color:rgba(255,255,255,.6);display:flex;align-items:center;gap:60px;
-}
+.marquee{background:var(--navy);color:#fff;padding:22px 0;overflow:hidden;border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08)}
+.marquee-track{display:flex;gap:60px;white-space:nowrap;animation:marqueeScroll 32s linear infinite}
+.marquee-track span{font-size:13px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.6);display:flex;align-items:center;gap:60px}
 .marquee-track span::after{content:'◆';color:var(--orange);font-size:9px}
 @keyframes marqueeScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-/* INTRO SPLIT */
 .intro{display:grid;grid-template-columns:1fr 1.1fr;gap:72px;align-items:center}
 .intro-media{position:relative}
-.intro-media img{
-  width:100%;border-radius:18px;aspect-ratio:4/5;object-fit:cover;
-  box-shadow:0 40px 80px -40px rgba(11,42,91,.5);
-}
-.intro-media::after{
-  content:'';position:absolute;inset:auto -26px -26px auto;
-  width:180px;height:180px;border:2px solid var(--orange);border-radius:18px;z-index:-1;
-}
-.intro-badge{
-  position:absolute;top:24px;left:-26px;background:var(--red);color:#fff;
-  padding:16px 22px;border-radius:12px;font-weight:800;font-size:12px;
-  letter-spacing:2px;text-transform:uppercase;box-shadow:0 16px 34px -14px rgba(200,16,46,.6);
-}
+.intro-media img{width:100%;border-radius:18px;aspect-ratio:4/5;object-fit:cover;box-shadow:0 40px 80px -40px rgba(11,42,91,.5)}
+.intro-media::after{content:'';position:absolute;inset:auto -26px -26px auto;width:180px;height:180px;border:2px solid var(--orange);border-radius:18px;z-index:-1}
+.intro-badge{position:absolute;top:24px;left:-26px;background:var(--red);color:#fff;padding:16px 22px;border-radius:12px;font-weight:800;font-size:12px;letter-spacing:2px;text-transform:uppercase;box-shadow:0 16px 34px -14px rgba(200,16,46,.6)}
 .intro-badge strong{display:block;font-size:26px;letter-spacing:0;margin-bottom:2px}
 .pillars{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:38px}
-.pillar{
-  padding:22px;border:1px solid var(--line);border-radius:12px;
-  transition:all .35s cubic-bezier(.4,0,.2,1);background:#fff;
-}
+.pillar{padding:22px;border:1px solid var(--line);border-radius:12px;transition:all .35s cubic-bezier(.4,0,.2,1);background:#fff}
 .pillar:hover{border-color:var(--navy);transform:translateY(-4px);box-shadow:0 16px 32px -20px rgba(11,42,91,.35)}
 .pillar h4{color:var(--navy);font-size:14.5px;font-weight:800;margin-bottom:6px;letter-spacing:.3px}
 .pillar p{color:var(--muted);font-size:13.4px;line-height:1.55}
 
-/* SERVICES PREVIEW */
 .services-preview{background:var(--soft)}
-.svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:56px;
-  background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden}
-.svc-cell{
-  padding:40px 28px;border-right:1px solid var(--line);
-  transition:all .4s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden;
-}
-.svc-cell:last-child{border-right:none}
-.svc-cell::before{
-  content:'';position:absolute;bottom:0;left:0;width:100%;height:3px;
-  background:linear-gradient(90deg,var(--red),var(--orange));
-  transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.4,0,.2,1);
-}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:56px;background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.svc-cell{padding:40px 28px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);transition:all .4s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden}
+.svc-cell:nth-child(3n){border-right:none}
+.svc-cell:nth-child(n+4){border-bottom:none}
+.svc-cell::before{content:'';position:absolute;bottom:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,var(--red),var(--orange));transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.4,0,.2,1)}
 .svc-cell:hover::before{transform:scaleX(1)}
 .svc-cell:hover{background:linear-gradient(180deg,#fff 0%,#fdf6f0 100%)}
-.svc-num{
-  font-family:'Playfair Display',serif;font-size:36px;font-weight:700;
-  color:var(--orange);line-height:1;margin-bottom:14px;display:block;
-}
+.svc-num{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--orange);line-height:1;margin-bottom:14px;display:block}
 .svc-cell h3{color:var(--navy);font-size:16.5px;font-weight:800;margin-bottom:10px;line-height:1.35}
 .svc-cell p{color:var(--muted);font-size:13.6px;line-height:1.6}
 
-/* FEATURED PROJECTS */
 .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
-.project{
-  position:relative;border-radius:16px;overflow:hidden;cursor:pointer;
-  aspect-ratio:4/5;background:var(--navy);
-}
-.project img{width:100%;height:100%;object-fit:cover;
-  transition:transform .8s cubic-bezier(.22,1,.36,1)}
+.project{position:relative;border-radius:16px;overflow:hidden;cursor:pointer;aspect-ratio:4/5;background:var(--navy)}
+.project img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.22,1,.36,1)}
 .project:hover img{transform:scale(1.08)}
-.project-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(to top,rgba(11,42,91,.95) 0%,rgba(11,42,91,.4) 45%,transparent 75%);
-  display:flex;flex-direction:column;justify-content:flex-end;
-  padding:30px;color:#fff;
-}
-.project-overlay .cat{
-  font-size:10.5px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
-  color:var(--orange);margin-bottom:10px;
-}
+.project-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(11,42,91,.95) 0%,rgba(11,42,91,.4) 45%,transparent 75%);display:flex;flex-direction:column;justify-content:flex-end;padding:30px;color:#fff}
+.project-overlay .cat{font-size:10.5px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:10px}
 .project-overlay h3{font-size:19px;font-weight:800;line-height:1.3;margin-bottom:8px}
-.project-overlay p{font-size:13px;color:rgba(255,255,255,.75);opacity:0;transform:translateY(10px);
-  transition:all .4s ease .1s;max-height:0;overflow:hidden}
+.project-overlay p{font-size:13px;color:rgba(255,255,255,.75);opacity:0;transform:translateY(10px);transition:all .4s ease .1s;max-height:0;overflow:hidden}
 .project:hover .project-overlay p{opacity:1;transform:none;max-height:80px}
-.project-cta{
-  margin-top:14px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
-  color:var(--orange);display:flex;align-items:center;gap:8px;
-  opacity:0;transform:translateY(8px);transition:all .4s ease .18s;
-}
+.project-cta{margin-top:14px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--orange);display:flex;align-items:center;gap:8px;opacity:0;transform:translateY(8px);transition:all .4s ease .18s}
 .project:hover .project-cta{opacity:1;transform:none}
 .project-cta::after{content:'→';transition:transform .3s}
 .project:hover .project-cta::after{transform:translateX(5px)}
 
-/* STATS */
 .stats{background:var(--navy);color:#fff;position:relative;overflow:hidden}
-.stats::before{
-  content:'';position:absolute;top:-50%;right:-10%;width:600px;height:600px;
-  background:radial-gradient(circle,rgba(243,156,18,.15),transparent 70%);
-}
+.stats::before{content:'';position:absolute;top:-50%;right:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(243,156,18,.15),transparent 70%)}
 .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;position:relative;z-index:1}
 .stat{text-align:center}
-.stat-num{
-  font-family:'Playfair Display',serif;font-size:60px;font-weight:700;
-  line-height:1;color:#fff;margin-bottom:14px;
-}
+.stat-num{font-family:'Playfair Display',serif;font-size:60px;font-weight:700;line-height:1;color:#fff;margin-bottom:14px}
 .stat-num em{font-style:normal;color:var(--orange)}
 .stat-label{font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.6)}
 
-/* PROCESS */
 .process-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:22px;margin-top:60px;position:relative}
-.process-grid::before{
-  content:'';position:absolute;top:32px;left:6%;right:6%;height:1px;
-  background:repeating-linear-gradient(90deg,var(--line) 0 8px,transparent 8px 16px);
-  z-index:0;
-}
-.process-step{
-  position:relative;z-index:1;background:#fff;padding:0 14px;text-align:center;
-}
-.process-dot{
-  width:64px;height:64px;margin:0 auto 22px;border-radius:50%;
-  background:#fff;border:2px solid var(--line);
-  display:grid;place-items:center;
-  font-family:'Playfair Display',serif;font-weight:700;font-size:19px;color:var(--navy);
-  transition:all .4s cubic-bezier(.4,0,.2,1);
-}
-.process-step:hover .process-dot{
-  background:var(--navy);color:#fff;border-color:var(--navy);
-  transform:scale(1.08);box-shadow:0 14px 30px -12px rgba(11,42,91,.5);
-}
+.process-grid::before{content:'';position:absolute;top:32px;left:6%;right:6%;height:1px;background:repeating-linear-gradient(90deg,var(--line) 0 8px,transparent 8px 16px);z-index:0}
+.process-step{position:relative;z-index:1;background:#fff;padding:0 14px;text-align:center}
+.process-dot{width:64px;height:64px;margin:0 auto 22px;border-radius:50%;background:#fff;border:2px solid var(--line);display:grid;place-items:center;font-family:'Playfair Display',serif;font-weight:700;font-size:19px;color:var(--navy);transition:all .4s cubic-bezier(.4,0,.2,1)}
+.process-step:hover .process-dot{background:var(--navy);color:#fff;border-color:var(--navy);transform:scale(1.08);box-shadow:0 14px 30px -12px rgba(11,42,91,.5)}
 .process-step h4{color:var(--navy);font-size:15.5px;font-weight:800;margin-bottom:8px}
 .process-step p{color:var(--muted);font-size:13.3px;line-height:1.55}
 
-/* TESTIMONIALS */
 .testi-wrap{background:var(--soft)}
-.testi-track{
-  display:flex;gap:26px;overflow-x:auto;scroll-snap-type:x mandatory;
-  padding:16px 4px 34px;margin-top:50px;scrollbar-width:thin;
-}
+.testi-track{display:flex;gap:26px;overflow-x:auto;scroll-snap-type:x mandatory;padding:16px 4px 34px;margin-top:50px;scrollbar-width:thin}
 .testi-track::-webkit-scrollbar{height:6px}
 .testi-track::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px}
-.testi{
-  flex:0 0 380px;scroll-snap-align:start;background:#fff;
-  border:1px solid var(--line);border-radius:16px;padding:34px 30px;
-  transition:all .35s cubic-bezier(.4,0,.2,1);
-}
+.testi{flex:0 0 380px;scroll-snap-align:start;background:#fff;border:1px solid var(--line);border-radius:16px;padding:34px 30px;transition:all .35s cubic-bezier(.4,0,.2,1)}
 .testi:hover{transform:translateY(-6px);box-shadow:0 24px 48px -28px rgba(11,42,91,.4)}
-.testi-quote{font-family:'Playfair Display',serif;font-size:44px;line-height:1;
-  color:var(--orange);margin-bottom:8px;height:30px;overflow:hidden}
+.testi-quote{font-family:'Playfair Display',serif;font-size:44px;line-height:1;color:var(--orange);margin-bottom:8px;height:30px;overflow:hidden}
 .testi p{color:var(--ink);font-size:15px;line-height:1.7;margin-bottom:22px}
-.testi-author{display:flex;align-items:center;gap:14px;
-  padding-top:20px;border-top:1px solid var(--line)}
-.testi-avatar{
-  width:46px;height:46px;border-radius:50%;background:var(--navy);color:#fff;
-  display:grid;place-items:center;font-weight:800;font-size:16px;flex-shrink:0;
-}
+.testi-author{display:flex;align-items:center;gap:14px;padding-top:20px;border-top:1px solid var(--line)}
+.testi-avatar{width:46px;height:46px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:800;font-size:16px;flex-shrink:0}
 .testi-author strong{display:block;color:var(--navy);font-size:14.5px}
 .testi-author span{color:var(--muted);font-size:12.5px}
 
-/* CTA BAND */
 .cta-section{padding:0 22px 96px}
-.cta-band{
-  max-width:var(--max);margin:0 auto;border-radius:20px;overflow:hidden;
-  background:linear-gradient(115deg,var(--red) 0%,var(--navy) 100%);
-  color:#fff;text-align:center;padding:80px 34px;position:relative;
-}
-.cta-band::before{
-  content:'';position:absolute;inset:0;
-  background:url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1600&q=80') center/cover;
-  opacity:.1;mix-blend-mode:overlay;
-}
+.cta-band{max-width:var(--max);margin:0 auto;border-radius:20px;overflow:hidden;background:linear-gradient(115deg,var(--red) 0%,var(--navy) 100%);color:#fff;text-align:center;padding:80px 34px;position:relative}
+.cta-band::before{content:'';position:absolute;inset:0;background:url('service-residential.jpg') center/cover;opacity:.12;mix-blend-mode:overlay}
 .cta-band > *{position:relative;z-index:1}
 .cta-band h2{color:#fff;font-family:'Playfair Display',serif;margin-bottom:14px}
 .cta-band p{color:rgba(255,255,255,.88);max-width:600px;margin:0 auto 34px;font-size:16.5px}
 
-/* NEWSLETTER */
 .newsletter{background:var(--navy);color:#fff;padding:70px 0}
 .newsletter-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
 .newsletter h3{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;margin-bottom:12px}
 .newsletter p{color:rgba(255,255,255,.75);font-size:15px}
 .newsletter-form{display:flex;gap:12px}
-.newsletter-form input{flex:1;background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.15);color:#fff}
+.newsletter-form input{flex:1;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#fff}
 .newsletter-form input::placeholder{color:rgba(255,255,255,.5)}
 .newsletter-form input:focus{border-color:var(--orange);background:rgba(255,255,255,.12);box-shadow:none}
 
-/* RESPONSIVE */
 @media(max-width:1024px){
   .intro{grid-template-columns:1fr;gap:48px}
   .intro-media img{aspect-ratio:16/10}
   .svc-grid{grid-template-columns:repeat(2,1fr)}
-  .svc-cell:nth-child(2){border-right:none}
-  .svc-cell:nth-child(1),.svc-cell:nth-child(2){border-bottom:1px solid var(--line)}
+  .svc-cell:nth-child(3n){border-right:1px solid var(--line)}
+  .svc-cell:nth-child(2n){border-right:none}
+  .svc-cell:nth-child(n+4){border-bottom:1px solid var(--line)}
+  .svc-cell:nth-child(n+5){border-bottom:none}
   .projects-grid{grid-template-columns:repeat(2,1fr)}
   .stats-row{grid-template-columns:repeat(2,1fr);gap:50px 30px}
   .process-grid{grid-template-columns:repeat(2,1fr);gap:34px}
@@ -275,8 +138,8 @@
 @media(max-width:640px){
   .hero-inner{padding:110px 22px 90px}
   .svc-grid{grid-template-columns:1fr}
-  .svc-cell{border-right:none;border-bottom:1px solid var(--line)}
-  .svc-cell:last-child{border-bottom:none}
+  .svc-cell{border-right:none !important;border-bottom:1px solid var(--line) !important}
+  .svc-cell:last-child{border-bottom:none !important}
   .projects-grid{grid-template-columns:1fr}
   .process-grid{grid-template-columns:1fr}
   .pillars{grid-template-columns:1fr}
@@ -287,7 +150,6 @@
 </head>
 <body>
 
-<!-- ==================== HEADER ==================== -->
 <header id="site-header">
   <div class="wrap header-inner">
     <a href="index.html" class="logo-link" aria-label="Executive Interior Design Home">
@@ -303,7 +165,7 @@
       </ul>
     </nav>
     <div class="header-actions">
-      <a href="tel:+254781038041" class="header-phone" aria-label="Call us">
+      <a href="tel:+254781038041" class="header-phone">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         <span>+254 781 038 041</span>
       </a>
@@ -315,7 +177,6 @@
   </div>
 </header>
 
-<!-- ==================== MOBILE MENU ==================== -->
 <div class="mobile-menu" id="mobileMenu">
   <button class="mobile-close" id="mobileClose" aria-label="Close menu">×</button>
   <nav>
@@ -333,132 +194,106 @@
   </div>
 </div>
 
-<!-- ==================== HERO ==================== -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
   <div class="hero-inner">
     <div class="hero-tag hero-anim hero-anim-1">Kenya · Interior Design & Finishing</div>
-    <h1 class="hero-anim hero-anim-2">
-      Refined spaces.<br>
-      <em>Beauty in Style.</em>
-    </h1>
-    <p class="hero-lede hero-anim hero-anim-3">
-      Executive Interior Design transforms residential, commercial and hospitality
-      environments into beautiful, practical and memorable spaces — from first
-      concept to the final finishing detail.
-    </p>
+    <h1 class="hero-anim hero-anim-2">Refined spaces.<br><em>Beauty in Style.</em></h1>
+    <p class="hero-lede hero-anim hero-anim-3">Executive Interior Design transforms residential, commercial and hospitality environments into beautiful, practical and memorable spaces — from flooring and tiling to blinds, wall finishes, kitchens and roofing.</p>
     <div class="hero-actions hero-anim hero-anim-4">
       <a href="projects.html" class="btn btn-orange">View Our Work</a>
       <a href="services.html" class="btn btn-ghost">Explore Services</a>
     </div>
   </div>
-  <div class="hero-scroll">
-    <span>Scroll</span>
-    <span></span>
-  </div>
+  <div class="hero-scroll"><span>Scroll</span><span></span></div>
 </section>
 
-<!-- ==================== MARQUEE ==================== -->
 <div class="marquee" aria-hidden="true">
   <div class="marquee-track">
-    <span>Interior Design</span>
-    <span>Space Planning</span>
+    <span>Flooring Solutions</span>
+    <span>Blinds & Window Treatments</span>
+    <span>Tiling & Surface Finishes</span>
+    <span>Wall Finishes</span>
+    <span>Decorative Solutions</span>
+    <span>Kitchen Design</span>
+    <span>Roofing Solutions</span>
     <span>Residential Interiors</span>
-    <span>Commercial Fit-Outs</span>
-    <span>Tiling</span>
-    <span>Wall-to-Wall Carpet</span>
-    <span>Blinds</span>
-    <span>Kitchen & Bathroom</span>
-    <span>Wall & Ceiling Finishes</span>
+    <span>Commercial Interiors</span>
     <span>Hospitality Design</span>
-    <span>Interior Design</span>
-    <span>Space Planning</span>
+    <span>Flooring Solutions</span>
+    <span>Blinds & Window Treatments</span>
+    <span>Tiling & Surface Finishes</span>
+    <span>Wall Finishes</span>
+    <span>Decorative Solutions</span>
+    <span>Kitchen Design</span>
+    <span>Roofing Solutions</span>
     <span>Residential Interiors</span>
-    <span>Commercial Fit-Outs</span>
-    <span>Tiling</span>
-    <span>Wall-to-Wall Carpet</span>
-    <span>Blinds</span>
-    <span>Kitchen & Bathroom</span>
-    <span>Wall & Ceiling Finishes</span>
+    <span>Commercial Interiors</span>
     <span>Hospitality Design</span>
   </div>
 </div>
 
-<!-- ==================== INTRO SPLIT ==================== -->
 <section id="about-intro">
   <div class="wrap intro">
     <div class="intro-media reveal">
       <span class="intro-badge"><strong>EID</strong> Kenya</span>
-      <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=900&q=85&auto=format&fit=crop" alt="Elegant residential living room interior by Executive Interior Design" loading="lazy">
+      <img src="service-residential.jpg" alt="Elegant residential sitting room interior by Executive Interior Design">
     </div>
     <div class="intro-copy">
       <span class="eyebrow reveal">Company Overview</span>
       <h2 class="reveal reveal-d1">Design thinking, careful materials, professional delivery.</h2>
-      <p class="lead reveal reveal-d2">
-        Executive Interior Design (EID) is a Kenya-based interior design brand
-        dedicated to transforming residential, commercial and hospitality
-        environments into beautiful, practical and memorable spaces.
-      </p>
-      <p class="lead reveal reveal-d2" style="margin-top:16px">
-        We combine creative design thinking, careful material selection and
-        professional project coordination — so every space reflects the people
-        who use it and delivers lasting value.
-      </p>
+      <p class="lead reveal reveal-d2">Executive Interior Design (EID) is a Kenya-based interior design brand dedicated to transforming residential, commercial and hospitality environments into beautiful, practical and memorable spaces.</p>
+      <p class="lead reveal reveal-d2" style="margin-top:16px">We combine creative design thinking, careful material selection and professional project coordination — so every space reflects the people who use it and delivers lasting value.</p>
       <div class="pillars reveal reveal-d3">
-        <div class="pillar">
-          <h4>Design Excellence</h4>
-          <p>Creative concepts built around taste, space, lifestyle and function.</p>
-        </div>
-        <div class="pillar">
-          <h4>Quality &amp; Detail</h4>
-          <p>Focus on finishes, proportions, materials and workmanship.</p>
-        </div>
-        <div class="pillar">
-          <h4>Client Focus</h4>
-          <p>Clear communication and a collaborative approach from start to finish.</p>
-        </div>
-        <div class="pillar">
-          <h4>Value Creation</h4>
-          <p>Refined looks that keep practicality, durability and budget in view.</p>
-        </div>
+        <div class="pillar"><h4>Design Excellence</h4><p>Creative concepts built around taste, space, lifestyle and function.</p></div>
+        <div class="pillar"><h4>Quality &amp; Detail</h4><p>Focus on finishes, proportions, materials and workmanship.</p></div>
+        <div class="pillar"><h4>Client Focus</h4><p>Clear communication and a collaborative approach from start to finish.</p></div>
+        <div class="pillar"><h4>Value Creation</h4><p>Refined looks that keep practicality, durability and budget in view.</p></div>
       </div>
       <a href="about.html" class="btn reveal reveal-d3" style="margin-top:38px">More About EID</a>
     </div>
   </div>
 </section>
 
-<!-- ==================== SERVICES PREVIEW ==================== -->
 <section class="services-preview">
   <div class="wrap">
     <div class="reveal" style="text-align:center;max-width:720px;margin:0 auto">
       <span class="eyebrow">Our Services</span>
-      <h2>Integrated interior design &amp; finishing solutions</h2>
-      <p class="lead" style="margin:0 auto">
-        Delivered as individual assignments or coordinated as a complete interior solution.
-      </p>
+      <h2>Design services &amp; finishing solutions</h2>
+      <p class="lead" style="margin:0 auto">Delivered as individual assignments or coordinated as a complete interior solution.</p>
     </div>
 
     <div class="svc-grid reveal reveal-d1">
       <div class="svc-cell">
         <span class="svc-num">01</span>
-        <h3>Interior Design &amp; Space Planning</h3>
-        <p>Concept development, mood boards, colour direction, furniture layouts and detailing.</p>
+        <h3>Flooring Solutions</h3>
+        <p>Tiles, wall-to-wall carpet, timber and vinyl — selected for comfort, durability and finish.</p>
       </div>
       <div class="svc-cell">
         <span class="svc-num">02</span>
-        <h3>Residential &amp; Commercial</h3>
-        <p>Homes, apartments, offices, retail and hospitality interiors designed around real life.</p>
+        <h3>Blinds &amp; Window Treatments</h3>
+        <p>Practical, stylish blinds that deliver privacy, light control and a finished look.</p>
       </div>
       <div class="svc-cell">
         <span class="svc-num">03</span>
-        <h3>Finishing Solutions</h3>
-        <p>Tiling, wall-to-wall carpet, blinds, kitchen and bathroom coordination.</p>
+        <h3>Tiling &amp; Surface Finishes</h3>
+        <p>Coordinated tiling for floors, walls, bathrooms, kitchens and feature areas.</p>
       </div>
       <div class="svc-cell">
         <span class="svc-num">04</span>
-        <h3>Wall &amp; Ceiling Finishes</h3>
-        <p>Decorative treatments, gypsum concepts, feature walls and finishing detail.</p>
+        <h3>Wall Finishes &amp; Decorative Solutions</h3>
+        <p>Feature walls, gypsum concepts, decorative treatments and finishing detail.</p>
+      </div>
+      <div class="svc-cell">
+        <span class="svc-num">05</span>
+        <h3>Kitchen Design</h3>
+        <p>Design-led kitchen layouts, cabinetry, surfaces and coordinated fittings.</p>
+      </div>
+      <div class="svc-cell">
+        <span class="svc-num">06</span>
+        <h3>Roofing Solutions</h3>
+        <p>Roofing systems and finishes coordinated with the rest of the project.</p>
       </div>
     </div>
 
@@ -468,7 +303,6 @@
   </div>
 </section>
 
-<!-- ==================== FEATURED PROJECTS ==================== -->
 <section id="featured">
   <div class="wrap">
     <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap" class="reveal">
@@ -481,29 +315,29 @@
 
     <div class="projects-grid">
       <a href="projects.html" class="project reveal">
-        <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=900&q=85&auto=format&fit=crop" alt="Contemporary residential living room interior" loading="lazy">
+        <img src="service-residential.jpg" alt="Contemporary residential sitting room interior" loading="lazy">
         <div class="project-overlay">
           <span class="cat">Residential</span>
-          <h3>Modern Living Room</h3>
+          <h3>Modern Sitting Room</h3>
           <p>Warm neutrals, layered lighting and custom furniture placement.</p>
           <span class="project-cta">View Project</span>
         </div>
       </a>
       <a href="projects.html" class="project reveal reveal-d1">
-        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=85&auto=format&fit=crop" alt="Corporate office interior design" loading="lazy">
+        <img src="service-kitchen.jpg" alt="Design-led kitchen with coordinated finishes" loading="lazy">
         <div class="project-overlay">
-          <span class="cat">Commercial</span>
-          <h3>Corporate Office Fit-Out</h3>
-          <p>Brand-led workspace designed for focus and collaboration.</p>
+          <span class="cat">Residential</span>
+          <h3>Kitchen Design</h3>
+          <p>Design-led cabinetry, surfaces and coordinated fittings.</p>
           <span class="project-cta">View Project</span>
         </div>
       </a>
       <a href="projects.html" class="project reveal reveal-d2">
-        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=900&q=85&auto=format&fit=crop" alt="Boutique hotel lobby interior" loading="lazy">
+        <img src="service-wall.jpg" alt="Decorative wall finishes and feature wall" loading="lazy">
         <div class="project-overlay">
-          <span class="cat">Hospitality</span>
-          <h3>Boutique Hotel Lobby</h3>
-          <p>Elegant arrivals moment with coordinated finishes throughout.</p>
+          <span class="cat">Finishing</span>
+          <h3>Wall Finishes</h3>
+          <p>Feature walls and decorative treatments that add character.</p>
           <span class="project-cta">View Project</span>
         </div>
       </a>
@@ -511,73 +345,35 @@
   </div>
 </section>
 
-<!-- ==================== STATS ==================== -->
 <section class="stats">
   <div class="wrap">
     <div class="stats-row">
-      <div class="stat reveal">
-        <div class="stat-num"><span data-count="8">0</span><em>+</em></div>
-        <div class="stat-label">Service Lines</div>
-      </div>
-      <div class="stat reveal reveal-d1">
-        <div class="stat-num"><span data-count="6">0</span></div>
-        <div class="stat-label">Markets Served</div>
-      </div>
-      <div class="stat reveal reveal-d2">
-        <div class="stat-num"><span data-count="5">0</span></div>
-        <div class="stat-label">Core Values</div>
-      </div>
-      <div class="stat reveal reveal-d3">
-        <div class="stat-num"><span data-count="100">0</span><em>%</em></div>
-        <div class="stat-label">Client Focus</div>
-      </div>
+      <div class="stat reveal"><div class="stat-num"><span data-count="6">0</span></div><div class="stat-label">Service Lines</div></div>
+      <div class="stat reveal reveal-d1"><div class="stat-num"><span data-count="6">0</span></div><div class="stat-label">Markets Served</div></div>
+      <div class="stat reveal reveal-d2"><div class="stat-num"><span data-count="5">0</span></div><div class="stat-label">Core Values</div></div>
+      <div class="stat reveal reveal-d3"><div class="stat-num"><span data-count="100">0</span><em>%</em></div><div class="stat-label">Client Focus</div></div>
     </div>
   </div>
 </section>
 
-<!-- ==================== PROCESS ==================== -->
 <section>
   <div class="wrap">
     <div class="reveal" style="text-align:center;max-width:720px;margin:0 auto">
       <span class="eyebrow">Our Approach</span>
       <h2>From first conversation to final handover</h2>
-      <p class="lead" style="margin:0 auto">
-        A clear, structured process that keeps design intent, quality and
-        communication on track at every stage.
-      </p>
+      <p class="lead" style="margin:0 auto">A clear, structured process that keeps design intent, quality and communication on track at every stage.</p>
     </div>
 
     <div class="process-grid">
-      <div class="process-step reveal">
-        <div class="process-dot">01</div>
-        <h4>Consultation</h4>
-        <p>Needs, taste, budget and intended use of the space.</p>
-      </div>
-      <div class="process-step reveal reveal-d1">
-        <div class="process-dot">02</div>
-        <h4>Concept</h4>
-        <p>Design direction, colour palette and visual language.</p>
-      </div>
-      <div class="process-step reveal reveal-d2">
-        <div class="process-dot">03</div>
-        <h4>Specification</h4>
-        <p>Finishes, products and details supporting the concept.</p>
-      </div>
-      <div class="process-step reveal reveal-d3">
-        <div class="process-dot">04</div>
-        <h4>Execution</h4>
-        <p>Implementation and finishing with attention to quality.</p>
-      </div>
-      <div class="process-step reveal reveal-d3">
-        <div class="process-dot">05</div>
-        <h4>Handover</h4>
-        <p>Review and confirmation that the design intent is met.</p>
-      </div>
+      <div class="process-step reveal"><div class="process-dot">01</div><h4>Consultation</h4><p>Needs, taste, budget and intended use of the space.</p></div>
+      <div class="process-step reveal reveal-d1"><div class="process-dot">02</div><h4>Concept</h4><p>Design direction, colour palette and visual language.</p></div>
+      <div class="process-step reveal reveal-d2"><div class="process-dot">03</div><h4>Specification</h4><p>Finishes, products and details supporting the concept.</p></div>
+      <div class="process-step reveal reveal-d3"><div class="process-dot">04</div><h4>Execution</h4><p>Implementation and finishing with attention to quality.</p></div>
+      <div class="process-step reveal reveal-d3"><div class="process-dot">05</div><h4>Handover</h4><p>Review and confirmation that the design intent is met.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ==================== TESTIMONIALS ==================== -->
 <section class="testi-wrap">
   <div class="wrap">
     <div class="reveal">
@@ -588,32 +384,22 @@
       <div class="testi">
         <div class="testi-quote">&ldquo;</div>
         <p>They listened carefully and translated our ideas into a home that actually works for our family. The finishes are beautiful and the coordination was smooth throughout.</p>
-        <div class="testi-author">
-          <div class="testi-avatar">AM</div>
-          <div><strong>Residential Client</strong><span>Nairobi</span></div>
-        </div>
+        <div class="testi-author"><div class="testi-avatar">AM</div><div><strong>Residential Client</strong><span>Nairobi</span></div></div>
       </div>
       <div class="testi">
         <div class="testi-quote">&ldquo;</div>
         <p>Our office fit-out was delivered with real attention to brand and function. Staff and visitors noticed the difference immediately.</p>
-        <div class="testi-author">
-          <div class="testi-avatar">JK</div>
-          <div><strong>Commercial Client</strong><span>Westlands</span></div>
-        </div>
+        <div class="testi-author"><div class="testi-avatar">JK</div><div><strong>Commercial Client</strong><span>Westlands</span></div></div>
       </div>
       <div class="testi">
         <div class="testi-quote">&ldquo;</div>
-        <p>Professional communication from consultation to handover. The wall and ceiling finishes gave the space exactly the character we wanted.</p>
-        <div class="testi-author">
-          <div class="testi-avatar">SW</div>
-          <div><strong>Hospitality Client</strong><span>Kenya</span></div>
-        </div>
+        <p>Professional communication from consultation to handover. The wall finishes gave the space exactly the character we wanted.</p>
+        <div class="testi-author"><div class="testi-avatar">SW</div><div><strong>Hospitality Client</strong><span>Kenya</span></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ==================== CTA ==================== -->
 <section class="cta-section">
   <div class="cta-band reveal">
     <h2>Ready to transform your space?</h2>
@@ -622,7 +408,6 @@
   </div>
 </section>
 
-<!-- ==================== NEWSLETTER ==================== -->
 <section class="newsletter">
   <div class="wrap newsletter-inner">
     <div>
@@ -636,7 +421,6 @@
   </div>
 </section>
 
-<!-- ==================== FOOTER ==================== -->
 <footer>
   <div class="wrap">
     <div class="foot">
@@ -658,35 +442,31 @@
       <div>
         <h4>SERVICES</h4>
         <ul>
-          <li><a href="services.html">Interior Design</a></li>
-          <li><a href="services.html">Residential Interiors</a></li>
-          <li><a href="services.html">Commercial Interiors</a></li>
-          <li><a href="services.html">Tiling &amp; Carpet</a></li>
-          <li><a href="services.html">Wall &amp; Ceiling Finishes</a></li>
+          <li><a href="services.html">Flooring Solutions</a></li>
+          <li><a href="services.html">Blinds &amp; Window Treatments</a></li>
+          <li><a href="services.html">Tiling &amp; Surface Finishes</a></li>
+          <li><a href="services.html">Wall Finishes</a></li>
+          <li><a href="services.html">Kitchen Design</a></li>
+          <li><a href="services.html">Roofing Solutions</a></li>
         </ul>
       </div>
       <div>
         <h4>CONTACT</h4>
         <ul>
-          <li>Daniel Owiro — CEO</li>
+          <li>Executive Interior Design — Kenya</li>
           <li><a href="tel:+254781038041">+254 781 038 041</a></li>
           <li><a href="mailto:executiveinteriordesign@gmail.com">executiveinteriordesign@gmail.com</a></li>
           <li>Kenya</li>
         </ul>
       </div>
     </div>
-    <div class="copy">
-      © <span id="yr"></span> Executive Interior Design. All rights reserved. &middot; Beauty in Style
-    </div>
+    <div class="copy">© <span id="yr"></span> Executive Interior Design. All rights reserved. &middot; Beauty in Style</div>
   </div>
 </footer>
 
-<!-- Back to top -->
 <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
 
-<script>
-document.getElementById('yr').textContent = new Date().getFullYear();
-</script>
+<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
 <script src="shared.js"></script>
 </body>
 </html>
