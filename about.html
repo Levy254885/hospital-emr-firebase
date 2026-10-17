@@ -13,9 +13,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="shared.css">
 <style>
-/* ==================== ABOUT PAGE ==================== */
-
-/* STORY SPLIT */
 .story{display:grid;grid-template-columns:1.05fr 1fr;gap:70px;align-items:center}
 .story-media{position:relative}
 .story-media img{width:100%;border-radius:18px;aspect-ratio:4/5;object-fit:cover;box-shadow:0 44px 80px -44px rgba(11,42,91,.55)}
@@ -23,7 +20,6 @@
 .story-media .badge{position:absolute;bottom:26px;right:-22px;background:var(--navy);color:#fff;padding:20px 26px;border-radius:14px;font-weight:800;letter-spacing:2px;font-size:11px;text-transform:uppercase;box-shadow:0 20px 40px -18px rgba(11,42,91,.6)}
 .story-media .badge strong{display:block;font-family:'Playfair Display',serif;font-size:30px;letter-spacing:0;margin-bottom:3px}
 
-/* VISION MISSION */
 .vm{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:56px}
 .vm-card{position:relative;padding:44px 36px;border-radius:18px;overflow:hidden;color:#fff;transition:transform .45s var(--ease)}
 .vm-card:hover{transform:translateY(-6px)}
@@ -38,7 +34,6 @@
 .vm-card h3{color:#fff;font-family:'Playfair Display',serif;font-size:26px;font-weight:700;margin-bottom:14px}
 .vm-card p{color:rgba(255,255,255,.88);font-size:15.4px;line-height:1.7}
 
-/* VALUES */
 .values-list{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:56px;background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden}
 .value-item{padding:38px 26px;border-right:1px solid var(--line);transition:background .35s var(--ease);position:relative}
 .value-item:last-child{border-right:none}
@@ -47,7 +42,6 @@
 .value-item h4{color:var(--navy);font-size:15.5px;font-weight:800;margin-bottom:10px}
 .value-item p{color:var(--muted);font-size:13.4px;line-height:1.6}
 
-/* LEADERSHIP (text-only, no photo, no name) */
 .leader-text{max-width:860px;margin:0 auto;text-align:left}
 .leader-text h2{font-family:'Playfair Display',serif}
 .why-list{display:grid;gap:16px;margin-top:30px}
@@ -57,10 +51,9 @@
 .leader-contact{margin-top:44px;padding:34px 38px;background:#fff;border:1px solid var(--line);border-radius:16px;border-left:4px solid var(--red)}
 .leader-contact h4{color:var(--navy);font-size:13px;letter-spacing:2.5px;text-transform:uppercase;font-weight:800;margin-bottom:18px}
 .leader-contact p{color:var(--muted);font-size:15.6px;line-height:2.1}
-.leader-contact a{color:var(--navy);font-weight:600;transition:color .25s}
+.leader-contact a{color:var(--navy);font-weight:600;transition:color .25s;word-break:break-word}
 .leader-contact a:hover{color:var(--red)}
 
-/* TIMELINE */
 .timeline{margin-top:70px;position:relative;padding-left:40px}
 .timeline::before{content:'';position:absolute;left:14px;top:8px;bottom:8px;width:2px;background:linear-gradient(to bottom,var(--red) 0%,var(--orange) 50%,var(--navy) 100%);border-radius:2px}
 .tl-item{position:relative;padding:0 0 46px 34px}
@@ -71,7 +64,6 @@
 .tl-item h4{color:var(--navy);font-size:17px;font-weight:800;margin-bottom:6px}
 .tl-item p{color:var(--muted);font-size:14.4px;line-height:1.65}
 
-/* APPROACH */
 .approach-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:22px;margin-top:56px;position:relative}
 .approach-step{background:#fff;border:1px solid var(--line);border-radius:16px;padding:32px 22px;position:relative;transition:all .4s var(--ease);overflow:hidden}
 .approach-step:hover{transform:translateY(-6px);border-color:transparent;box-shadow:0 24px 48px -28px rgba(11,42,91,.42)}
@@ -79,7 +71,6 @@
 .approach-step h4{color:var(--navy);font-size:16px;font-weight:800;margin-bottom:8px}
 .approach-step p{color:var(--muted);font-size:13.4px;line-height:1.6}
 
-/* CTA */
 .cta-section{padding:0 22px 96px}
 .cta-band{max-width:var(--max);margin:0 auto;border-radius:20px;background:linear-gradient(115deg,var(--red) 0%,var(--navy) 100%);color:#fff;text-align:center;padding:80px 34px;position:relative;overflow:hidden}
 .cta-band::before{content:'';position:absolute;inset:0;opacity:.12;background:url('service-residential.jpg') center/cover;mix-blend-mode:overlay}
@@ -146,7 +137,7 @@
   </nav>
   <div class="mobile-contact">
     <p><strong>Office:</strong> <a href="tel:+254781038041">+254 781 038 041</a></p>
-    <p><strong>Email:</strong> <a href="mailto:executiveinteriordesign@gmail.com">executiveinteriordesign@gmail.com</a></p>
+    <p><strong>Email:</strong> <a href="mailto:executiveinteriordesign44@gmail.com">executiveinteriordesign44@gmail.com</a></p>
   </div>
 </div>
 
@@ -171,7 +162,7 @@
       <h2 class="reveal reveal-d1">Interiors that reflect the people who use them.</h2>
       <p class="lead reveal reveal-d2">Executive Interior Design (EID) is a Kenya-based interior design brand dedicated to transforming residential, commercial and hospitality environments into beautiful, practical and memorable spaces.</p>
       <p class="lead reveal reveal-d2" style="margin-top:16px">Our approach combines creative design thinking, careful material selection and professional project coordination — because we believe an exceptional interior should do more than look good. It should reflect the personality of its users, support the way people live and work, and deliver lasting value.</p>
-      <p class="lead reveal reveal-d3" style="margin-top:16px">From concept development to finishing details — flooring, tiling, blinds, wall finishes, kitchens and roofing — we bring style, functionality and attention to detail into every project under the promise captured in our tagline: <em style="color:var(--red);font-style:italic">Beauty in Style</em>.</p>
+      <p class="lead reveal reveal-d3" style="margin-top:16px">From concept development to finishing details — flooring, tiling, blinds, wall finishes, kitchens, roofing and swimming pool solutions — we bring style, functionality and attention to detail into every project under the promise captured in our tagline: <em style="color:var(--red);font-style:italic">Beauty in Style</em>.</p>
       <div class="reveal reveal-d3" style="margin-top:38px;display:flex;gap:14px;flex-wrap:wrap">
         <a href="services.html" class="btn">Our Services</a>
         <a href="projects.html" class="btn btn-outline">See Projects</a>
@@ -260,7 +251,7 @@
         <h4>Contact the Office</h4>
         <p>
           <strong>Phone:</strong> <a href="tel:+254781038041">+254 781 038 041</a><br>
-          <strong>Email:</strong> <a href="mailto:executiveinteriordesign@gmail.com">executiveinteriordesign@gmail.com</a><br>
+          <strong>Email:</strong> <a href="mailto:executiveinteriordesign44@gmail.com">executiveinteriordesign44@gmail.com</a><br>
           <strong>Location:</strong> Kenya
         </p>
       </div>
@@ -290,7 +281,7 @@
       <div class="tl-item reveal reveal-d2">
         <span class="yr">Coordinated Delivery</span>
         <h4>Finishing solutions under one roof</h4>
-        <p>Flooring, blinds and window treatments, tiling, wall finishes, kitchen design and roofing solutions are integrated into a single, coherent offer.</p>
+        <p>Flooring, blinds and window treatments, tiling, wall finishes, kitchen design, roofing and swimming pool solutions are integrated into a single, coherent offer.</p>
       </div>
       <div class="tl-item reveal reveal-d3">
         <span class="yr">Today &amp; Beyond</span>
@@ -354,6 +345,7 @@
           <li><a href="services.html">Wall Finishes</a></li>
           <li><a href="services.html">Kitchen Design</a></li>
           <li><a href="services.html">Roofing Solutions</a></li>
+          <li><a href="services.html">Swimming Pool Solutions</a></li>
         </ul>
       </div>
       <div>
@@ -361,7 +353,7 @@
         <ul>
           <li>Executive Interior Design — Kenya</li>
           <li><a href="tel:+254781038041">+254 781 038 041</a></li>
-          <li><a href="mailto:executiveinteriordesign@gmail.com">executiveinteriordesign@gmail.com</a></li>
+          <li><a href="mailto:executiveinteriordesign44@gmail.com">executiveinteriordesign44@gmail.com</a></li>
           <li>Kenya</li>
         </ul>
       </div>
