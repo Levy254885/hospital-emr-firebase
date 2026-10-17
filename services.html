@@ -11,15 +11,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="shared.css">
 <style>
-/* ==================== SERVICES PAGE ==================== */
-
-/* SERVICE INDEX — 7 items */
 .svc-index{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:56px;background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden}
 .svc-index-item{padding:38px 24px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);transition:all .35s var(--ease);position:relative;text-align:center}
 .svc-index-item:nth-child(4n){border-right:none}
-.svc-index-item:nth-child(n+4){border-bottom:1px solid var(--line)}
-.svc-index-item:nth-child(n+8){border-bottom:none}
-.svc-index-item:nth-child(8){border-right:none}
+.svc-index-item:nth-child(n+7){border-bottom:none}
 .svc-index-item:hover{background:var(--navy);color:#fff}
 .svc-index-item:hover .idx-num{color:var(--orange)}
 .svc-index-item:hover h4{color:#fff}
@@ -28,7 +23,6 @@
 .svc-index-item h4{color:var(--navy);font-size:14.2px;font-weight:800;margin-bottom:6px;transition:color .3s var(--ease);line-height:1.35}
 .svc-index-item p{color:var(--muted);font-size:12.4px;transition:color .3s var(--ease)}
 
-/* SERVICE BLOCKS */
 .service-block{display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:center;padding:70px 0;border-bottom:1px solid var(--line)}
 .service-block:last-child{border-bottom:none}
 .service-block.reverse{grid-template-columns:1fr 1.1fr}
@@ -45,7 +39,6 @@
 .sb-features li{display:flex;gap:10px;align-items:flex-start;color:var(--ink);font-size:14.2px;line-height:1.55}
 .sb-features li::before{content:'—';color:var(--red);font-weight:800;flex-shrink:0}
 
-/* ADD-ONS */
 .addon-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
 .addon{background:#fff;border:1px solid var(--line);border-radius:16px;padding:34px 28px;transition:all .4s var(--ease);position:relative;overflow:hidden}
 .addon::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),var(--orange));transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease-out)}
@@ -55,7 +48,6 @@
 .addon h4{color:var(--navy);font-size:16.5px;font-weight:800;margin-bottom:10px}
 .addon p{color:var(--muted);font-size:14.2px;line-height:1.65}
 
-/* ENGAGEMENT MODES */
 .modes{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
 .mode{background:#fff;border:1px solid var(--line);border-radius:18px;padding:42px 32px;transition:all .45s var(--ease);position:relative}
 .mode:hover{transform:translateY(-8px);border-color:var(--navy);box-shadow:0 32px 60px -32px rgba(11,42,91,.4)}
@@ -66,7 +58,6 @@
 .mode ul li{display:flex;gap:10px;align-items:flex-start;color:var(--ink);font-size:13.8px;line-height:1.55}
 .mode ul li::before{content:'✓';color:var(--red);font-weight:900;flex-shrink:0}
 
-/* FAQ */
 .faq{margin-top:56px;max-width:900px;margin-left:auto;margin-right:auto}
 .faq-item{background:#fff;border:1px solid var(--line);border-radius:14px;margin-bottom:14px;overflow:hidden;transition:all .3s var(--ease)}
 .faq-item.open{border-color:var(--navy);box-shadow:0 16px 34px -22px rgba(11,42,91,.35)}
@@ -76,8 +67,8 @@
 .faq-a{max-height:0;overflow:hidden;transition:max-height .45s var(--ease-out);padding:0 28px}
 .faq-item.open .faq-a{max-height:340px;padding:0 28px 26px}
 .faq-a p{color:var(--muted);font-size:14.6px;line-height:1.75}
+.faq-a a{word-break:break-word}
 
-/* CTA */
 .cta-section{padding:0 22px 96px}
 .cta-band{max-width:var(--max);margin:0 auto;border-radius:20px;background:linear-gradient(115deg,var(--red) 0%,var(--navy) 100%);color:#fff;text-align:center;padding:80px 34px;position:relative;overflow:hidden}
 .cta-band::before{content:'';position:absolute;inset:0;opacity:.12;background:url('service-flooring.jpg') center/cover;mix-blend-mode:overlay}
@@ -92,8 +83,8 @@
   .svc-index{grid-template-columns:repeat(2,1fr)}
   .svc-index-item:nth-child(4n){border-right:1px solid var(--line)}
   .svc-index-item:nth-child(2n){border-right:none}
-  .svc-index-item:nth-child(n+4){border-bottom:1px solid var(--line)}
-  .svc-index-item:nth-child(n+7){border-bottom:none}
+  .svc-index-item:nth-child(n+7){border-bottom:1px solid var(--line)}
+  .svc-index-item:nth-child(n+8){border-bottom:none}
   .addon-grid,.modes{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:640px){
@@ -147,7 +138,7 @@
   </nav>
   <div class="mobile-contact">
     <p><strong>Office:</strong> <a href="tel:+254781038041">+254 781 038 041</a></p>
-    <p><strong>Email:</strong> <a href="mailto:executiveinteriordesign@gmail.com">executiveinteriordesign@gmail.com</a></p>
+    <p><strong>Email:</strong> <a href="mailto:executiveinteriordesign44@gmail.com">executiveinteriordesign44@gmail.com</a></p>
   </div>
 </div>
 
@@ -212,7 +203,6 @@
 <section class="section-soft">
   <div class="wrap">
 
-    <!-- 01 FLOORING -->
     <div class="service-block">
       <div class="sb-media reveal">
         <img src="service-flooring.jpg" alt="Flooring solutions — tiles, carpet and timber finishes">
@@ -234,7 +224,6 @@
       </div>
     </div>
 
-    <!-- 02 BLINDS -->
     <div class="service-block reverse">
       <div class="sb-media reveal">
         <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=1200&q=85&auto=format&fit=crop" alt="Blinds and window treatments providing light control">
@@ -256,7 +245,6 @@
       </div>
     </div>
 
-    <!-- 03 TILING -->
     <div class="service-block">
       <div class="sb-media reveal">
         <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=85&auto=format&fit=crop" alt="Tiling and surface finishes on floors and walls">
@@ -278,7 +266,6 @@
       </div>
     </div>
 
-    <!-- 04 WALL FINISHES -->
     <div class="service-block reverse">
       <div class="sb-media reveal">
         <img src="service-wall.jpg" alt="Wall finishes and decorative solutions — feature walls and gypsum">
@@ -300,7 +287,6 @@
       </div>
     </div>
 
-    <!-- 05 KITCHEN DESIGN -->
     <div class="service-block">
       <div class="sb-media reveal">
         <img src="service-kitchen.jpg" alt="Design-led kitchen with coordinated finishes and fittings">
@@ -322,7 +308,6 @@
       </div>
     </div>
 
-    <!-- 06 ROOFING -->
     <div class="service-block reverse">
       <div class="sb-media reveal">
         <img src="service-roofing.jpg" alt="Roofing solutions and roofing finishes">
@@ -344,7 +329,6 @@
       </div>
     </div>
 
-    <!-- 07 SWIMMING POOL -->
     <div class="service-block">
       <div class="sb-media reveal">
         <img src="service-pool.jpg" alt="Swimming pool solutions — pool design, finishes and surrounds">
@@ -485,7 +469,7 @@
       </div>
       <div class="faq-item reveal reveal-d3">
         <button class="faq-q" type="button">How do we start a project with you?</button>
-        <div class="faq-a"><p>It begins with a consultation. We discuss your needs, taste, budget and the intended use of the space. From there we develop a concept, specify finishes and coordinate execution through to handover. Reach us at <a href="tel:+254781038041" style="color:var(--red);font-weight:600">+254 781 038 041</a> or email <a href="mailto:executiveinteriordesign@gmail.com" style="color:var(--red);font-weight:600">executiveinteriordesign@gmail.com</a>.</p></div>
+        <div class="faq-a"><p>It begins with a consultation. We discuss your needs, taste, budget and the intended use of the space. From there we develop a concept, specify finishes and coordinate execution through to handover. Reach us at <a href="tel:+254781038041" style="color:var(--red);font-weight:600">+254 781 038 041</a> or email <a href="mailto:executiveinteriordesign44@gmail.com" style="color:var(--red);font-weight:600">executiveinteriordesign44@gmail.com</a>.</p></div>
       </div>
       <div class="faq-item reveal reveal-d4">
         <button class="faq-q" type="button">Do you work with budgets of all sizes?</button>
@@ -538,7 +522,7 @@
         <ul>
           <li>Executive Interior Design — Kenya</li>
           <li><a href="tel:+254781038041">+254 781 038 041</a></li>
-          <li><a href="mailto:executiveinteriordesign@gmail.com">executiveinteriordesign@gmail.com</a></li>
+          <li><a href="mailto:executiveinteriordesign44@gmail.com">executiveinteriordesign44@gmail.com</a></li>
           <li>Kenya</li>
         </ul>
       </div>
